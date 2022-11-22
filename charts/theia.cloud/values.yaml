@@ -155,3 +155,15 @@ ingress:
   # This is only required when the issued certificate by the cert-manager misses a
   # common-name
   theiaCloudCommonName: false
+
+operatorrole:
+  name: operator-api-access
+
+servicerole:
+  name: service-api-access
+
+issuerprod:
+  name: letsencrypt-prod
+
+issuerstaging:
+  name: theia-cloud-selfsigned-issuer
