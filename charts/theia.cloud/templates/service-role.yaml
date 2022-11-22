@@ -1,7 +1,9 @@
+{{- if not (lookup "rbac.authorization.k8s.io/v1" "ClusterRole" "" .Values.servicerole.name) }}
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: service-api-access
+  name: {{ .Values.servicerole.name }}
   namespace: {{ .Release.Namespace }}
 rules:
   -
@@ -16,13 +18,15 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: service-api-access
+  name: {{ .Values.servicerole.name }}
   namespace: {{ .Release.Namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: service-api-access
+  name: {{ .Values.servicerole.name }}
 subjects:
 - kind: ServiceAccount
   name: service-api-service-account
   namespace: {{ .Release.Namespace }}
+
+{{- end }}
