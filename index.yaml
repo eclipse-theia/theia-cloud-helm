@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   theia-cloud:
   - apiVersion: v2
+    appVersion: 0.7.2
+    created: "2022-11-22T14:40:32.630148518Z"
+    description: A Helm chart for Theia.cloud
+    digest: f37d51ed2145c1a7f6ea11d6535c2e2c1c5d383c2f20bd2d9e7c79b14d25677c
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.7.2/theia-cloud-0.7.2.tgz
+    version: 0.7.2
+  - apiVersion: v2
     appVersion: 0.7.1
     created: "2022-11-22T11:27:23.893341768Z"
     description: A Helm chart for Theia.cloud
@@ -21,4 +31,15 @@ entries:
     urls:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.7.0/theia-cloud-0.7.0.tgz
     version: 0.7.0
+  theia-cloud-base:
+  - apiVersion: v2
+    appVersion: 0.7.2
+    created: "2022-11-22T14:40:32.814482828Z"
+    description: Theia-cloud base chart
+    digest: 6895cae5293212aef5ccb69c02744b9dffaee3f0e241ba83db3456754c2a1967
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
+    version: 0.7.2
 generated: "2022-11-21T15:10:44.924864365Z"
