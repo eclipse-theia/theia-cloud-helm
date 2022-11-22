@@ -13,16 +13,29 @@ image:
   timeoutLimit: "30"
 
 hosts:
-  service: service.192.168.39.3.nip.io
+   # Use paths configures that all services should run on the same host but on different paths.
+  # true uses paths
+  # false uses an explicit host for each service
+  usePaths: true
+
+  # Only needed when usePaths == true. Contains the baseHost and paths for all services
+  paths:
+    # baseHost configures the host for all services when usePaths == true. Otherwise the explicit host definitions of the services are used.
+    baseHost: 192.168.39.6.nip.io
+    service: servicex
+    landing: trynow
+    instance: instances
+
+  # service: service.192.168.39.6.nip.io
   serviceProtocol: https
-  landing: theia.cloud.192.168.39.3.nip.io
-  instance: ws.192.168.39.3.nip.io
+  # landing: theia-cloud.io.192.168.39.6.nip.io
+  # instance: ws.192.168.39.6.nip.io
 
 landingPage:
-  image: theiacloud/theia-cloud-landing-page:0.8.0.MS7
+  image: theia-cloud-try-now-page:paths-1
   # imagePullSecret: pullsecret
   appDefinition: "theia-cloud-demo"
-  ephemeralStorage: false
+  ephemeralStorage: true
   # additionalApps: 
   #   coffee-editor:
   #     label: "Coffee Editor"
@@ -30,15 +43,15 @@ landingPage:
   #     label: "CDT.cloud Blueprint"
 
 keycloak:
-  enable: true
-  authUrl: "https://keycloak.192.168.39.3.nip.io/auth/"
+  enable: false
+  authUrl: "https://keycloak.192.168.39.6.nip.io/auth/"
   realm: "TheiaCloud"
   clientId: "theia-cloud"
   clientSecret: "publicbutoauth2proxywantsasecret"
   cookieSecret: "OQINaROshtE9TcZkNAm5Zs2Pv3xaWytBmc5W7sPX7ws="
 
 operator:
-  image: theiacloud/theia-cloud-operator:0.8.0.MS7
+  image: theia-cloud-operator:osw-paths-0
   # imagePullSecret: pullsecret
   eagerStart: false
   cloudProvider: "K8S"

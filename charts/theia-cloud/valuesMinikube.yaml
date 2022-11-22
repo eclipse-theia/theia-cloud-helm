@@ -1,13 +1,13 @@
 app:
   id: asdfghjkl
-  name: CDT.cloud Blueprint
-  logo: cdtcloud.svg
+  name: Theia Blueprint
+  logo: theiablueprint.svg
 
 issuer:
   email: mmorlock@example.com
 
 image:
-  name: theiacloud/cdt-blueprint
+  name: theiacloud/theia-cloud-demo:0.8.0.MS7
   pullSecret: ""
   timeoutStrategy: "FIXEDTIME"
   timeoutLimit: "30"
@@ -15,31 +15,39 @@ image:
 hosts:
   service: service.192.168.39.3.nip.io
   serviceProtocol: https
-  landing: theia.cloud.192.168.39.3.nip.io
+  landing: theia-cloud.io.192.168.39.3.nip.io
   instance: ws.192.168.39.3.nip.io
 
 landingPage:
   image: theiacloud/theia-cloud-landing-page:0.8.0.MS7
+  # imagePullSecret: pullsecret
   appDefinition: "theia-cloud-demo"
+  ephemeralStorage: false
+  # additionalApps: 
+  #   coffee-editor:
+  #     label: "Coffee Editor"
+  #   cdt-cloud-demo:
+  #     label: "CDT.cloud Blueprint"
 
 keycloak:
-  enable: false
+  enable: true
   authUrl: "https://keycloak.192.168.39.3.nip.io/auth/"
   realm: "TheiaCloud"
   clientId: "theia-cloud"
-  clientSecret: "zpF6PUpM3RmfVecInloasXTjn1yc88Dp"
+  clientSecret: "publicbutoauth2proxywantsasecret"
   cookieSecret: "OQINaROshtE9TcZkNAm5Zs2Pv3xaWytBmc5W7sPX7ws="
 
 operator:
   image: theiacloud/theia-cloud-operator:0.8.0.MS7
+  # imagePullSecret: pullsecret
   eagerStart: false
-  ephemeralStorage: true
   cloudProvider: "K8S"
   bandwidthLimiter: "K8SANNOTATION"
   sessionsPerUser: "1"
 
 service:
   image: theiacloud/theia-cloud-service:0.8.0.MS7
+  # imagePullSecret: pullsecret
 
 ingress:
   instanceName: "theia-cloud-demo-ws-ingress"

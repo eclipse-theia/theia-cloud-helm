@@ -9,7 +9,7 @@ rules:
   -
     apiGroups:
       - ""
-      - theia.cloud
+      - theia-cloud.io
     resources:
       - sessions
       - workspaces

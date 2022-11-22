@@ -34,23 +34,6 @@ image:
 
 # You may adjust the hostname below.
 hosts:
-
-  # Use paths configures that all services should run on the same host but on different paths.
-  # true uses paths
-  # false uses an explicit host for each service
-  usePaths: false
-
-  # Only needed when usePaths == true. Contains the baseHost and paths for all services
-  paths:
-    # baseHost configures the host for all services when usePaths == true. Otherwise the explicit host definitions of the services are used.
-    baseHost: 192.168.39.173.nip.io
-    # path of the REST service
-    service: servicex
-    # path of the landing page
-    landing: trynow
-    # path for deployed instances
-    instance: instances
-
   # hostname of the REST-API
   service: service.192.168.39.173.nip.io
 
@@ -64,7 +47,7 @@ hosts:
   useServicePortInHostname: false
 
   # hostname of the landing page
-  landing: theia.cloud.192.168.39.173.nip.io
+  landing: theia-cloud.io.192.168.39.173.nip.io
 
   # hostname for the launched Theia-applications
   instance: ws.192.168.39.173.nip.io
@@ -149,7 +132,7 @@ operator:
   # Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
 
-# Values of the Theia.cloud REST service
+# Values of the Theia-cloud REST service
 service:
   # The image to use
   image: theiacloud/theia-cloud-service:0.8.0.MS7
@@ -161,7 +144,7 @@ service:
 ingress:
   # The name of the ingress which will be updated to publish new theia application.
   # If this is not existing it will be created.
-  # You may chose to set the ingress up yourself and point theia.cloud to the ingress via
+  # You may chose to set the ingress up yourself and point theia-cloud.io to the ingress via
   # the name
   instanceName: "theia-cloud-demo-ws-ingress"
 

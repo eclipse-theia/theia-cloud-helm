@@ -1,4 +1,4 @@
-apiVersion: theia.cloud/v3beta
+apiVersion: theia-cloud.io/v3beta
 kind: AppDefinition
 metadata:
   name: theia-cloud-demo
