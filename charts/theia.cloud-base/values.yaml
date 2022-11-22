@@ -47,7 +47,7 @@ hosts:
   useServicePortInHostname: false
 
   # hostname of the landing page
-  landing: theia.cloud.192.168.39.173.nip.io
+  landing: theia-cloud.io.192.168.39.173.nip.io
 
   # hostname for the launched Theia-applications
   instance: ws.192.168.39.173.nip.io
@@ -132,7 +132,7 @@ operator:
   # Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
 
-# Values of the Theia.cloud REST service
+# Values of the Theia-cloud REST service
 service:
   # The image to use
   image: theiacloud/theia-cloud-service:0.8.0.MS7
@@ -144,7 +144,7 @@ service:
 ingress:
   # The name of the ingress which will be updated to publish new theia application.
   # If this is not existing it will be created.
-  # You may chose to set the ingress up yourself and point theia.cloud to the ingress via
+  # You may chose to set the ingress up yourself and point theia-cloud.io to the ingress via
   # the name
   instanceName: "theia-cloud-demo-ws-ingress"
 

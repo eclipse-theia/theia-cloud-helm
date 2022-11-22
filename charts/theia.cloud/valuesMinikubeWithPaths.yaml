@@ -28,7 +28,7 @@ hosts:
 
   # service: service.192.168.39.6.nip.io
   serviceProtocol: https
-  # landing: theia.cloud.192.168.39.6.nip.io
+  # landing: theia-cloud.io.192.168.39.6.nip.io
   # instance: ws.192.168.39.6.nip.io
 
 landingPage:

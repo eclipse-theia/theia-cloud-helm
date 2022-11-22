@@ -15,7 +15,7 @@ image:
 hosts:
   service: service.34.159.89.224.nip.io
   serviceProtocol: https
-  landing: theia.cloud.34.159.89.224.nip.io
+  landing: theia-cloud.io.34.159.89.224.nip.io
   instance: ws.34.159.89.224.nip.io
 
 landingPage:
