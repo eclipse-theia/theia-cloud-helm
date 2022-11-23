@@ -4,7 +4,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ .Values.operatorrole.name }}
-  namespace: {{ .Release.Namespace }}
 rules:
   -
     apiGroups:
@@ -25,19 +24,5 @@ rules:
       - configmaps
       - deployments
     verbs: ["list", "create", "watch", "get", "patch", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: {{ .Values.operatorrole.name }}
-  namespace: {{ .Release.Namespace }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ .Values.operatorrole.name }}
-subjects:
-- kind: ServiceAccount
-  name: operator-api-service-account
-  namespace: {{ .Release.Namespace }}
 
 {{- end }}
