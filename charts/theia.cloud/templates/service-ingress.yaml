@@ -7,9 +7,9 @@ metadata:
     {{- if not .Values.hosts.usePaths }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     acme.cert-manager.io/http01-edit-in-place: "true"
+    {{- end }}
     {{- if .Values.ingress.theiaCloudCommonName }}
     cert-manager.io/common-name: "Theia.Cloud"
-    {{- end }}
     {{- end }}
     nginx.ingress.kubernetes.io/rewrite-target: /service$1
   namespace: {{ .Release.Namespace }}
