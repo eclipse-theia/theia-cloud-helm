@@ -10,6 +10,7 @@ rules:
       - ""
       - theia.cloud
     resources:
+      - appdefinitions
       - sessions
       - workspaces
     verbs: ["list", "create", "watch", "get", "patch", "delete"]
