@@ -11,7 +11,7 @@ spec:
     singular: appdefinition
   scope: Namespaced
   versions:
-    - name : v3beta
+    - name : v4beta
       served: true
       storage: true
       schema:
@@ -28,6 +28,55 @@ spec:
                 imagePullPolicy:
                   type: string
                   enum: ["Always", "IfNotPresent", "Never"]
+                pullSecret:
+                  type: string
+                uid:
+                  type: integer
+                port:
+                  type: integer
+                host:
+                  type: string
+                ingressname:
+                  type: string
+                minInstances:
+                  type: integer
+                maxInstances:
+                  type: integer
+                timeout:
+                  type: object
+                  properties:
+                    strategy: 
+                      type: string
+                    limit: 
+                      type: integer
+                requestsMemory:
+                  type: string
+                requestsCpu:
+                  type: string
+                limitsMemory:
+                  type: string
+                limitsCpu:
+                  type: string
+                downlinkLimit:
+                  type: integer
+                uplinkLimit:
+                  type: integer
+                mountPath:
+                  type: string
+    - name : v3beta
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                image:
+                  type: string
                 pullSecret:
                   type: string
                 uid:
