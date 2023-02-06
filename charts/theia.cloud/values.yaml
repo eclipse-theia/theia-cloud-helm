@@ -16,7 +16,7 @@ app:
   name: Theia Blueprint
 
   # The logo of the application that should be displayed on the landing pages
-  logo: theiablueprint.svg
+  logo: logos/theiablueprint.svg
 
 # Values related to certificates/Cert-manager
 issuer:
