@@ -46,6 +46,10 @@ spec:
           - "--instancesPath"
           - "{{ tpl (.Values.hosts.paths.instance | toString) . }}"
           {{- end }}
+          - "--storageClassName"
+          - "{{ tpl (.Values.operator.storageClassName | toString) . }}"
+          - "--requestedStorage"
+          - "{{ tpl (.Values.operator.requestedStorage | toString) . }}"
           {{- if .Values.monitor.enable }}
           - "--enableMonitor"
           {{- if .Values.monitor.activityTracker.enable }}
