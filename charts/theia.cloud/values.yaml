@@ -154,9 +154,9 @@ operator:
   # Currently only false is fully supported.
   eagerStart: false
 
-  # Select your cloude provider. Possible values:
-  # - K8S   Plain Kubernetes
-  # - GKE   Google Kubernetes Engine
+  # Select your cloud provider. Possible values:
+  # - K8S      Plain Kubernetes
+  # - MINIKUBE Local deployment on Minikube
   cloudProvider: "K8S"
 
   # Whether Theia Cloud shall limit network speed. This might not be fully supported
@@ -171,6 +171,16 @@ operator:
 
   # Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
+
+  # The name of the storage class for persistent volume claims for workspaces.
+  # This storage class must be present on the cluster.
+  # Most cloud providers offer a default storage class without additional configuration.
+  storageClassName: "default"
+
+  # The amount of requested storage for each persistent volume claim (PVC) for workspaces.
+  # This is directly passed to created PVCs and must be a valid Kubernetes quantity.
+  # See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+  requestedStorage: "250Mi"
 
 # Values of the Theia.cloud REST service
 service:
