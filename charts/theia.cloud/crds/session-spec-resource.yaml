@@ -11,9 +11,35 @@ spec:
     singular: session
   scope: Namespaced
   versions:
-    - name : v2beta
+    - name : v3beta
       served: true
       storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                workspace:
+                  type: string
+                appDefinition: # cached from workspace
+                  type: string
+                user: # cached from workspace
+                  type: string
+                url:
+                  type: string
+                error:
+                  type: string
+                sessionSecret:
+                  type: string
+                lastActivity:
+                  type: integer
+    - name : v2beta
+      served: true
+      storage: false
       schema:
         openAPIV3Schema:
           type: object
@@ -55,4 +81,3 @@ spec:
                   type: string
                 error:
                   type: string
-                  

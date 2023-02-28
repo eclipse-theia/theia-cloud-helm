@@ -46,6 +46,14 @@ spec:
           - "--instancesPath"
           - "{{ tpl (.Values.hosts.paths.instance | toString) . }}"
           {{- end }}
+          {{- if .Values.monitor.enable }}
+          - "--enableMonitor"
+          {{- if .Values.monitor.activityTracker.enable }}
+          - "--enableActivityTracker"
+          - "--monitorInterval"
+          - "{{ tpl (.Values.monitor.activityTracker.interval | toString) . }}"
+          {{- end }}
+          {{- end }}
       {{- if .Values.operator.imagePullSecret }}
       imagePullSecrets:
         - name: {{ tpl (.Values.operator.imagePullSecret | toString) . }}

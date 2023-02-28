@@ -63,6 +63,15 @@ spec:
                   type: integer
                 mountPath:
                   type: string
+                monitor:
+                  type: object
+                  properties:
+                    timeoutAfter:
+                      type: integer
+                    notifyAfter:
+                      type: integer
+                    port:
+                      type: integer
     - name : v3beta
       served: true
       storage: false
