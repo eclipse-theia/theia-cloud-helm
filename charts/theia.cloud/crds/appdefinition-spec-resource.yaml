@@ -11,7 +11,7 @@ spec:
     singular: appdefinition
   scope: Namespaced
   versions:
-    - name : v4beta
+    - name: v5beta
       served: true
       storage: true
       schema:
@@ -45,9 +45,9 @@ spec:
                 timeout:
                   type: object
                   properties:
-                    strategy: 
+                    strategy:
                       type: string
-                    limit: 
+                    limit:
                       type: integer
                 requestsMemory:
                   type: string
@@ -75,7 +75,59 @@ spec:
                           type: integer
                         notifyAfter:
                           type: integer
-    - name : v3beta
+    - name: v4beta
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                image:
+                  type: string
+                imagePullPolicy:
+                  type: string
+                  enum: ["Always", "IfNotPresent", "Never"]
+                pullSecret:
+                  type: string
+                uid:
+                  type: integer
+                port:
+                  type: integer
+                host:
+                  type: string
+                ingressname:
+                  type: string
+                minInstances:
+                  type: integer
+                maxInstances:
+                  type: integer
+                timeout:
+                  type: object
+                  properties:
+                    strategy:
+                      type: string
+                    limit:
+                      type: integer
+                requestsMemory:
+                  type: string
+                requestsCpu:
+                  type: string
+                limitsMemory:
+                  type: string
+                limitsCpu:
+                  type: string
+                downlinkLimit:
+                  type: integer
+                uplinkLimit:
+                  type: integer
+                mountPath:
+                  type: string
+    - name: v3beta
       served: true
       storage: false
       schema:
@@ -106,9 +158,9 @@ spec:
                 timeout:
                   type: object
                   properties:
-                    strategy: 
+                    strategy:
                       type: string
-                    limit: 
+                    limit:
                       type: integer
                 requestsMemory:
                   type: string
@@ -124,7 +176,7 @@ spec:
                   type: integer
                 mountPath:
                   type: string
-    - name : v2beta
+    - name: v2beta
       served: true
       storage: false
       schema:
@@ -168,7 +220,7 @@ spec:
                   type: integer
                 mountPath:
                   type: string
-    - name : v1beta
+    - name: v1beta
       served: true
       storage: false
       schema:
@@ -208,4 +260,3 @@ spec:
                   type: integer
                 uplinkLimit:
                   type: integer
-                  
