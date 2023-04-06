@@ -221,3 +221,9 @@ issuerprod:
 
 issuerstaging:
   name: theia-cloud-selfsigned-issuer
+
+monitor:
+  enable: false
+  activityTracker:
+    enable: true
+    interval: 1
