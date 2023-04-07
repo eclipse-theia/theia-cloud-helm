@@ -4,7 +4,7 @@
 # - Always
 # - IfNotPresent
 # - Never
-imagePullPolicy: IfNotPresent
+imagePullPolicy: Always
 
 # General information about the deployed app
 app:
@@ -185,7 +185,7 @@ operator:
 # Values of the Theia.cloud REST service
 service:
   # The image to use
-  image: theia-cloud-service-envvar
+  image: theiacloud/theia-cloud-service:0.8.0.MS8
 
   # Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
