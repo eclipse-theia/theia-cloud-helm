@@ -23,7 +23,15 @@ spec:
         image: {{ tpl (.Values.operator.image | toString) . }}
         imagePullPolicy: {{ if .Values.operator.imagePullPolicy }}{{ tpl (.Values.operator.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
         args:
-          {{ if .Values.keycloak.enable }}- "--keycloak"{{ end }}
+          {{- if .Values.keycloak.enable }}
+          - "--keycloak"
+          - "--keycloakURL"
+          - "{{ tpl (.Values.keycloak.authUrl | toString) . }}"
+          - "--keycloakRealm"
+          - "{{ tpl (.Values.keycloak.realm | toString) . }}"
+          - "--keycloakClientId"
+          - "{{ tpl (.Values.keycloak.clientId | toString) . }}"
+          {{- end }}
           {{ if .Values.operator.eagerStart }}- "--eagerStart"{{ end }}
           - "--cloudProvider"
           - {{ tpl (.Values.operator.cloudProvider | toString) . }}
