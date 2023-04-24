@@ -11,9 +11,47 @@ spec:
     singular: session
   scope: Namespaced
   versions:
-    - name : v3beta
+    - name : v4beta
       served: true
       storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                workspace:
+                  type: string
+                appDefinition: # cached from workspace
+                  type: string
+                user: # cached from workspace
+                  type: string
+                url:
+                  type: string
+                error:
+                  type: string
+                sessionSecret:
+                  type: string
+                lastActivity:
+                  type: integer
+                envVars:
+                  type: object
+                  additionalProperties:
+                    x-kubernetes-int-or-string: true
+                envVarsFromConfigMaps:
+                  type: array
+                  items:
+                    type: string
+                envVarsFromSecrets:
+                  type: array
+                  items:
+                    type: string
+    - name : v3beta
+      served: true
+      storage: false
       schema:
         openAPIV3Schema:
           type: object
