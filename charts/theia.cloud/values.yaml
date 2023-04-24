@@ -26,7 +26,7 @@ issuer:
 # Docker image of the main application
 image:
   # The name of docker image to be used
-  name: theiacloud/theia-cloud-demo:0.8.0.MS8
+  name: theiacloud/theia-cloud-demo:0.8.0.MS9
 
   # Optional: Override the imagePullPolicy for the main application's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -38,7 +38,6 @@ image:
   # Configures how sessions will be stopped. This defines the strategy and the limit in minutes and will override any specification from an appDefinition.
   # Possible values for strategy:
   # - FIXEDTIME   Sessions will be stopped after a fixed limit
-  # - INACTIVITY  Sessions will be stopped after user inactivity limit
   timeoutStrategy: "FIXEDTIME"
 
   # Limit in minutes
@@ -46,7 +45,6 @@ image:
 
 # You may adjust the hostname below.
 hosts:
-
   # Use paths configures that all services should run on the same host but on different paths.
   # true uses paths
   # false uses an explicit host for each service
@@ -84,7 +82,7 @@ hosts:
 # Values related to the landing page
 landingPage:
   # the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:0.8.0.MS8
+  image: theiacloud/theia-cloud-landing-page:0.8.0.MS9
 
   # Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -100,10 +98,10 @@ landingPage:
   # Set to false if you want to use persisted storage.
   ephemeralStorage: true
 
-  # The page may show these additional apps in a drop down. This is a map. 
+  # The page may show these additional apps in a drop down. This is a map.
   # The key maps to the app definition name
   # The value is the label that is supposed to be shown in the UI
-  additionalApps: 
+  additionalApps:
     # different-app-definition:
     #   label: "Different App Definition"
     # further-app-definition:
@@ -138,7 +136,7 @@ keycloak:
 # Values related to the operator
 operator:
   # The operator image
-  image: theiacloud/theia-cloud-operator:0.8.0.MS8
+  image: theiacloud/theia-cloud-operator:0.8.0.MS9
 
   # Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -167,7 +165,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.8.0.MS8
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.8.0.MS9
 
   # Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -185,7 +183,7 @@ operator:
 # Values of the Theia.cloud REST service
 service:
   # The image to use
-  image: theiacloud/theia-cloud-service:0.8.0.MS8
+  image: theiacloud/theia-cloud-service:0.8.0.MS9
 
   # Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -222,8 +220,21 @@ issuerprod:
 issuerstaging:
   name: theia-cloud-selfsigned-issuer
 
+# Values to influence the monitor
 monitor:
-  enable: false
+  # Should the monitor be enabled
+  enable: true
+  # At which port the monitor extension is available
+  # Choose the same as the application port for the theia extension
+  port: 3000
+  # Values to influence the activityTracker module
   activityTracker:
+    # Should the activityTracker module be enabled
     enable: true
+    # Minutes between re-ping by the operator
     interval: 1
+    # Minutes of inactivity that lead to pod shutdown
+    timeoutAfter: 30
+    # Minutes of inactivity that lead to a warning displayed to the user
+    # Make greater than timeoutAfter to disable
+    notifyAfter: 25

@@ -1,4 +1,4 @@
-apiVersion: theia.cloud/v4beta
+apiVersion: theia.cloud/v5beta
 kind: AppDefinition
 metadata:
   name: theia-cloud-demo
@@ -27,7 +27,12 @@ spec:
   downlinkLimit: 30000
   uplinkLimit: 30000
   mountPath: "/home/project/persisted"
+  {{- if .Values.monitor.enable }}
   monitor:
-    timeoutAfter: 30
-    notifyAfter: 25
-    port: 8081
+    port: {{ tpl (.Values.monitor.port | toString) . }}
+    {{- if .Values.monitor.activityTracker.enable }}
+    activityTracker:
+      timeoutAfter: {{ tpl (.Values.monitor.activityTracker.timeoutAfter | toString) .  }}
+      notifyAfter: {{ tpl (.Values.monitor.activityTracker.notifyAfter | toString) .  }}
+    {{- end }}
+  {{- end }}
