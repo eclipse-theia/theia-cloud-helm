@@ -32,6 +32,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.8.0-MS8v1/theia-cloud-0.8.0-MS8v1.tgz
     version: 0.8.0-MS8v1
   - apiVersion: v2
+    appVersion: 0.8.0-MS10
+    created: "2023-05-10T09:20:19.6894903Z"
+    description: A Helm chart for Theia.cloud
+    digest: 8fbd69136eb4650bf31cb7cab0c5ba567ca5bae87aa9b3083053bebcae3aa025
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.8.0-MS10v1/theia-cloud-0.8.0-MS10v1.tgz
+    version: 0.8.0-MS10v1
+  - apiVersion: v2
     appVersion: 0.7.8
     created: "2023-01-03T13:46:49.431028529Z"
     description: A Helm chart for Theia.cloud
@@ -152,6 +162,16 @@ entries:
     urls:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.8.0-MS8v1/theia-cloud-base-0.8.0-MS8v1.tgz
     version: 0.8.0-MS8v1
+  - apiVersion: v2
+    appVersion: 0.8.0-MS10
+    created: "2023-05-10T09:20:19.83454951Z"
+    description: Theia-cloud base chart
+    digest: 29ef3e0e75c2761556d10e42736a708b04712fed448b16df789107344ae27b58
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.8.0-MS10v1/theia-cloud-base-0.8.0-MS10v1.tgz
+    version: 0.8.0-MS10v1
   - apiVersion: v2
     appVersion: 0.7.8
     created: "2023-01-03T13:46:49.582655984Z"
