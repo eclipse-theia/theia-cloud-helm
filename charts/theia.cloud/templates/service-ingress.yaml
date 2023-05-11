@@ -5,6 +5,9 @@ metadata:
   name: service-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    {{- if not .Values.hosts.tls }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    {{- end }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     {{- if .Values.ingress.theiaCloudCommonName }}
     cert-manager.io/common-name: "Theia.Cloud"
@@ -12,10 +15,12 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /service$1
   namespace: {{ .Release.Namespace }}
 spec:
+  {{- if .Values.hosts.tls }}
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.service | toString) . }}
     secretName: service-cert-secret
+  {{- end }}
   rules:
   - host: {{ tpl (.Values.hosts.service | toString) . }}
     http:

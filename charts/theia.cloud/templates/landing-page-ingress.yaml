@@ -5,13 +5,18 @@ metadata:
   name: landing-page-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    {{- if not .Values.hosts.tls }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    {{- end }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
   namespace: {{ .Release.Namespace }}
 spec:
+  {{- if .Values.hosts.tls }}
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.landing | toString) . }}
     secretName: landing-page-cert-secret
+  {{- end }}
   rules:
   - host: {{ tpl (.Values.hosts.landing | toString) . }}
     http:

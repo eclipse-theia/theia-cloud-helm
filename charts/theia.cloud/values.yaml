@@ -50,6 +50,10 @@ hosts:
   # false uses an explicit host for each service
   usePaths: false
 
+  # Does Theia Cloud expect TLS connections (true)
+  # or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false)
+  tls: true
+
   # Only needed when usePaths == true. Contains the baseHost and paths for all services
   paths:
     # baseHost configures the host for all services when usePaths == true. Otherwise the explicit host definitions of the services are used.
