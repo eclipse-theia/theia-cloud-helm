@@ -1,23 +1,18 @@
-{{- if not .Values.hosts.usePaths }}
+{{- if .Values.hosts.usePaths }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: service-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
-    {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia.Cloud"
-    {{- end }}
     nginx.ingress.kubernetes.io/rewrite-target: /service$1
   namespace: {{ .Release.Namespace }}
 spec:
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.service | toString) . }}
-    secretName: service-cert-secret
+    - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
   rules:
-  - host: {{ tpl (.Values.hosts.service | toString) . }}
+  - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
     http:
       paths:
       - backend:
@@ -25,6 +20,6 @@ spec:
             name: service-service
             port:
               number: {{ tpl (.Values.hosts.servicePort | toString) . }}
-        path: /service($|(/.*))
+        path: /{{ tpl (.Values.hosts.paths.service | toString) . }}/service($|(/.*))
         pathType: ImplementationSpecific
 {{- end }}
