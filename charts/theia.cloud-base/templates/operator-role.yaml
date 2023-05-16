@@ -26,5 +26,6 @@ rules:
       - configmaps
       - deployments
       - leases
+      - secrets
     verbs: ["list", "create", "watch", "get", "patch", "delete", "update"]
     
