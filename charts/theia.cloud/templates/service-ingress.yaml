@@ -13,13 +13,15 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /service$1
   namespace: {{ .Release.Namespace }}
 spec:
+  {{- if eq .Values.hosts.serviceProtocol "https" }}
   tls:
   - hosts:
-  {{- if .Values.hosts.usePaths }}
+    {{- if .Values.hosts.usePaths }}
     - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
-  {{- else }}
+    {{- else }}
     - {{ tpl (.Values.hosts.service | toString) . }}
     secretName: service-cert-secret
+    {{- end }}
   {{- end }}
   rules:
   {{- if .Values.hosts.usePaths }}
