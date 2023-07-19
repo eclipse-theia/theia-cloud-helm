@@ -18,6 +18,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header 'X-Forwarded-Uri' $request_uri;
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.proxyBodySize | toString) . }}
 spec:
   {{- if .Values.hosts.tls }}
   tls:
