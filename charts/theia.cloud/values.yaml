@@ -212,6 +212,10 @@ ingress:
   # common-name
   theiaCloudCommonName: false
 
+  # Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).
+  # Defaults to 1m. Setting size to 0 disables checking of client request body size.
+  proxyBodySize: 1m
+
 operatorrole:
   name: operator-api-access
 
