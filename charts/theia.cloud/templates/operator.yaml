@@ -50,9 +50,14 @@ spec:
           - "--appId"
           - {{ tpl (.Values.app.id | toString) . }}
           {{- if .Values.hosts.usePaths }}
+          - "--instancesHost"
+          - "{{ tpl (.Values.hosts.paths.baseHost | toString) . }}"
           - "--usePaths"
           - "--instancesPath"
           - "{{ tpl (.Values.hosts.paths.instance | toString) . }}"
+          {{- else }}
+          - "--instancesHost"
+          - "{{ tpl (.Values.hosts.instance | toString) . }}"
           {{- end }}
           - "--storageClassName"
           - "{{ tpl (.Values.operator.storageClassName | toString) . }}"
