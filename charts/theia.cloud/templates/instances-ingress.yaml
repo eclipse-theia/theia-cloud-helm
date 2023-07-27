@@ -5,7 +5,6 @@ metadata:
   name: {{ tpl (.Values.ingress.instanceName | toString) . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    kubernetes.io/ingress.class: nginx
     {{- if not .Values.hosts.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     {{- end }}
@@ -20,6 +19,7 @@ metadata:
       proxy_set_header 'X-Forwarded-Uri' $request_uri;
     nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.proxyBodySize | toString) . }}
 spec:
+  ingressClassName: nginx
   {{- if .Values.hosts.tls }}
   tls:
   - hosts:
