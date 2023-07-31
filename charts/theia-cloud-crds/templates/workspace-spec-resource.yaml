@@ -27,14 +27,18 @@ spec:
               properties:
                 name:
                   type: string
+                  pattern: '^[a-z0-9A-Z-_]+$'
                 label:
                   type: string
                 appDefinition: # last app definition that ran on this workspace
                   type: string
+                  pattern: '^[a-z0-9A-Z-_]+$'
                 user:          # user who created the workspace
                   type: string
                 storage:
                   type: string
+              required:
+                - user
             status:
               type: object
               properties:
@@ -56,6 +60,8 @@ spec:
                       type: string
                     message:
                       type: string
+          required:
+            - spec
     - name : v2beta
       served: true
       storage: false
