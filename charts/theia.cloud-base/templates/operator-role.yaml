@@ -12,6 +12,7 @@ rules:
       - theia.cloud
       - networking.k8s.io
       - apps
+      - coordination.k8s.io
     resources:
       - customresourcedefinitions
       - appdefinitions
@@ -23,6 +24,7 @@ rules:
       - services
       - configmaps
       - deployments
-    verbs: ["list", "create", "watch", "get", "patch", "delete"]
+      - leases
+    verbs: ["list", "create", "watch", "get", "patch", "delete", "update"]
 
 {{- end }}
