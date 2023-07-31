@@ -184,6 +184,15 @@ operator:
   # See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
   requestedStorage: "250Mi"
 
+  # Number of operator instances to create
+  replicas: 2
+
+  # Options to influence the operator's leader election
+  leaderElection:
+    leaseDuration: 6
+    renewDeadline: 4
+    retryPeriod: 1
+
 # Values of the Theia.cloud REST service
 service:
   # The image to use

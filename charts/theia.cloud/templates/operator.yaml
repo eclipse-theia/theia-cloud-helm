@@ -6,7 +6,7 @@ metadata:
     app: operator
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: 1
+  replicas: {{ tpl (.Values.operator.replicas | toString) . }}
   selector:
     matchLabels:
       app: operator
@@ -71,6 +71,12 @@ spec:
           - "{{ tpl (.Values.monitor.activityTracker.interval | toString) . }}"
           {{- end }}
           {{- end }}
+          - "--leaderLeaseDuration"
+          - "{{ tpl (.Values.operator.leaderElection.leaseDuration | toString) . }}"
+          - "--leaderRenewDeadline"
+          - "{{ tpl (.Values.operator.leaderElection.renewDeadline | toString) . }}"
+          - "--leaderRetryPeriod"
+          - "{{ tpl (.Values.operator.leaderElection.retryPeriod | toString) . }}"
       {{- if .Values.operator.imagePullSecret }}
       imagePullSecrets:
         - name: {{ tpl (.Values.operator.imagePullSecret | toString) . }}
