@@ -24,9 +24,13 @@ spec:
           properties:
             spec:
               type: object
+              x-kubernetes-validations:
+                - rule: "self.minInstances <= self.maxInstances"
+                  message: "minInstances should be less or equal than maxInstances."
               properties:
                 name:
                   type: string
+                  pattern: '^[a-z0-9A-Z-_]+$'
                 image:
                   type: string
                 imagePullPolicy:
@@ -38,10 +42,13 @@ spec:
                   type: integer
                 port:
                   type: integer
+                  minimum: 0
+                  maximum: 65535
                 ingressname:
                   type: string
                 minInstances:
                   type: integer
+                  minimum: 1
                 maxInstances:
                   type: integer
                 timeout:
@@ -49,6 +56,7 @@ spec:
                   properties:
                     strategy:
                       type: string
+                      enum: ["FIXEDTIME"]
                     limit:
                       type: integer
                 requestsMemory:
@@ -77,6 +85,14 @@ spec:
                           type: integer
                         notifyAfter:
                           type: integer
+              required:
+                - name
+                - image
+                - port
+                - minInstances
+                - maxInstances
+                - requestsCpu
+                - requestsMemory
             status:
                 type: object
                 properties:
@@ -84,6 +100,8 @@ spec:
                     type: string
                   operatorMessage:
                     type: string
+          required:
+            - spec
     - name: v7beta
       served: true
       storage: false
