@@ -1,5 +1,3 @@
-{{- if not (lookup "rbac.authorization.k8s.io/v1" "ClusterRole" "" .Values.operatorrole.name) }}
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -26,5 +24,4 @@ rules:
       - deployments
       - leases
     verbs: ["list", "create", "watch", "get", "patch", "delete", "update"]
-
-{{- end }}
+    
