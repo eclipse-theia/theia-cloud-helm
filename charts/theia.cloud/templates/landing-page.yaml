@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: landing-page
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/landing-page-config-map.yaml") . | sha256sum }}
     spec:
       automountServiceAccountToken: false
       containers:
