@@ -26,7 +26,27 @@ spec:
     - {{ tpl (.Values.hosts.instance | toString) . }}
     secretName: ws-cert-secret
   {{- end }}
+  {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
     - host: {{ tpl (.Values.hosts.instance | toString) . }}
       http:
+  {{- else }}
+  rules:
+    {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instanceName | toString) .)).spec.rules }}
+    - host: {{ .host }}
+      {{ if .http }}
+      http:
+        paths:
+          {{ with index .http.paths 0 }}
+          - path: {{ .path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .backend.service.name  }}
+                port:
+                  number: {{ .backend.service.port.number  }}
+          {{- end }}
+      {{ end }}
+    {{- end }}
+  {{- end }}
 {{- end }}
