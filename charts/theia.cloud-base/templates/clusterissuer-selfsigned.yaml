@@ -1,10 +1,7 @@
-{{- if not (lookup "cert-manager.io/v1" "ClusterIssuer" "" .Values.issuerstaging.name) }}
-
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: {{ .Values.issuerstaging.name }}
 spec:
   selfSigned: {}
-
-{{- end }}
+  
