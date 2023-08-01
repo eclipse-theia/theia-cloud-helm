@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: service
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/service-configmap.yaml") . | sha256sum }}
     spec:
       # we need to be able to create and read sessions
       automountServiceAccountToken: true
