@@ -197,6 +197,9 @@ operator:
   # When this is detected the operator instance will stop and a new operator will set up fresh watchers.
   maxWatchIdleTime: "3600000"
 
+  # Whether the operator should stop in cases where an exception is not handled
+  continueOnException: false
+
 # Values of the Theia.cloud REST service
 service:
   # The image to use
