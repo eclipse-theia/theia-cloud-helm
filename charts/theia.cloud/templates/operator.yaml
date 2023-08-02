@@ -79,6 +79,9 @@ spec:
           - "{{ tpl (.Values.operator.leaderElection.retryPeriod | toString) . }}"
           - "--maxWatchIdleTime"
           - "{{ tpl (.Values.operator.maxWatchIdleTime | toString) . }}"
+          {{- if .Values.operator.continueOnException }}
+          - "--continueOnException"
+          {{- end }}
       {{- if .Values.operator.imagePullSecret }}
       imagePullSecrets:
         - name: {{ tpl (.Values.operator.imagePullSecret | toString) . }}
