@@ -207,6 +207,29 @@ operator:
   # Whether the operator should stop in cases where an exception is not handled
   continueOnException: false
 
+  # Allows to override the operator's log4j configuration
+  logging:
+    override: false
+    config: |+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Configuration status="warn">
+        <Appenders>
+          <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+              pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+          </Console>
+        </Appenders>
+        <Loggers>
+          <Logger name="org.eclipse.theia.cloud.operator" level="info"
+            additivity="false">
+            <AppenderRef ref="Console" />
+          </Logger>
+          <Root level="warn">
+            <AppenderRef ref="Console" />
+          </Root>
+        </Loggers>
+      </Configuration>
+
 # Values of the Theia.cloud REST service
 service:
   # The image to use
