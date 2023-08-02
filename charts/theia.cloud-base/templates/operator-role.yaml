@@ -14,9 +14,12 @@ rules:
     resources:
       - customresourcedefinitions
       - appdefinitions
+      - appdefinitions/status
       - workspaces
+      - workspaces/status
       - ingresses
       - sessions
+      - sessions/status
       - persistentvolumes
       - persistentvolumeclaims
       - services
