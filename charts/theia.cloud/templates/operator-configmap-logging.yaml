@@ -1,0 +1,9 @@
+{{- if .Values.operator.logging.override }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: operator-logging-config
+  namespace: {{ .Release.Namespace }}
+data:
+  log4j2.xml: {{ tpl (.Values.operator.logging.config | toYaml | indent 1) . }}
+{{- end }}
