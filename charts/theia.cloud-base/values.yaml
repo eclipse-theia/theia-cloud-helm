@@ -1,14 +1,19 @@
 issuerprod:
+  # -- name for the let's encrypt production cluster issuer
   name: letsencrypt-prod
 
 issuerstaging:
+  # -- name for the self signed cluster issuer
   name: theia-cloud-selfsigned-issuer
 
 issuer:
+  # -- email used to issue let's encrypt certificates
   email: mmorlock@example.com
 
 operatorrole:
+  # -- name for the operator's cluster role
   name: operator-api-access
 
 servicerole:
+  # -- name for the services' cluster role
   name: service-api-access
