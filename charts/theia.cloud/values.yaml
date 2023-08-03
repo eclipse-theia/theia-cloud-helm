@@ -29,7 +29,7 @@ issuer:
 # @default -- (see details below)
 image:
   # -- The name of docker image to be used
-  name: theiacloud/theia-cloud-demo:0.8.1.OSWeek23-v3
+  name: theiacloud/theia-cloud-demo:0.8.1.OSWeek23-v4
 
   # -- Optional: Override the imagePullPolicy for the main application's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -92,7 +92,7 @@ hosts:
 # @default -- (see details below)
 landingPage:
   # -- the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:0.8.1.OSWeek23-v3
+  image: theiacloud/theia-cloud-landing-page:0.8.1.OSWeek23-v4
 
   # -- Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -154,7 +154,7 @@ keycloak:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:0.8.1.OSWeek23-v3
+  image: theiacloud/theia-cloud-operator:0.8.1.OSWeek23-v4
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -183,7 +183,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # -- If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.8.1.OSWeek23-v3
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.8.1.OSWeek23-v4
 
   # -- Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -243,7 +243,7 @@ operator:
 # @default -- (see details below)
 service:
   # -- The image to use
-  image: theiacloud/theia-cloud-service:0.8.1.OSWeek23-v3
+  image: theiacloud/theia-cloud-service:0.8.1.OSWeek23-v4
 
   # -- Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.

@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.8.1-v006](https://img.shields.io/badge/Version-0.8.1--v006-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.OSWeek23-v3](https://img.shields.io/badge/AppVersion-0.8.1.OSWeek23--v3-informational?style=flat-square)
+![Version: 0.8.1-v006](https://img.shields.io/badge/Version-0.8.1--v006-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.OSWeek23-v4](https://img.shields.io/badge/AppVersion-0.8.1.OSWeek23--v4-informational?style=flat-square)
 
 A Helm chart for Theia.cloud
 
@@ -27,7 +27,7 @@ A Helm chart for Theia.cloud
 | hosts.useServicePortInHostname | bool | `false` | whether the service port needs to be part of the service URL (default: false) |
 | image | object | (see details below) | Docker image of the main application |
 | image.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the main application's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
-| image.name | string | `"theiacloud/theia-cloud-demo:0.8.1.OSWeek23-v3"` | The name of docker image to be used |
+| image.name | string | `"theiacloud/theia-cloud-demo:0.8.1.OSWeek23-v4"` | The name of docker image to be used |
 | image.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | image.timeoutLimit | string | `"30"` | Limit in minutes |
 | image.timeoutStrategy | string | `"FIXEDTIME"` | Configures how sessions will be stopped. This defines the strategy and the limit in minutes and will override any specification from an appDefinition. Possible values for strategy: - FIXEDTIME   Sessions will be stopped after a fixed limit |
@@ -52,7 +52,7 @@ A Helm chart for Theia.cloud
 | landingPage.additionalApps | string | `nil` | The page may show these additional apps in a drop down. This is a map. The key maps to the app definition name The value is the label that is supposed to be shown in the UI  Example:  different-app-definition:   label: "Different App Definition" further-app-definition:   label: "Further App Definition" |
 | landingPage.appDefinition | string | `"theia-cloud-demo"` | the app id to launch |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
-| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:0.8.1.OSWeek23-v3"` | the landing page image to use |
+| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:0.8.1.OSWeek23-v4"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | landingPage.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | monitor | object | (see details below) | Values to influence the monitor |
@@ -68,7 +68,7 @@ A Helm chart for Theia.cloud
 | operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
 | operator.continueOnException | bool | `false` | Whether the operator should stop in cases where an exception is not handled |
 | operator.eagerStart | bool | `false` | Whether theia applications shall be started eager. This means that the application is already running without a user. When a user requests a new session, one of the already launched ones is assigned.  Currently only false is fully supported. |
-| operator.image | string | `"theiacloud/theia-cloud-operator:0.8.1.OSWeek23-v3"` | The operator image |
+| operator.image | string | `"theiacloud/theia-cloud-operator:0.8.1.OSWeek23-v4"` | The operator image |
 | operator.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the operator's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | operator.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | operator.leaderElection | object | (see details below) | Options to influence the operator's leader election |
@@ -78,10 +78,10 @@ A Helm chart for Theia.cloud
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
-| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:0.8.1.OSWeek23-v3"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
+| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:0.8.1.OSWeek23-v4"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
 | operatorrole.name | string | `"operator-api-access"` |  |
 | service | object | (see details below) | Values of the Theia.cloud REST service |
-| service.image | string | `"theiacloud/theia-cloud-service:0.8.1.OSWeek23-v3"` | The image to use |
+| service.image | string | `"theiacloud/theia-cloud-service:0.8.1.OSWeek23-v4"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | servicerole.name | string | `"service-api-access"` |  |

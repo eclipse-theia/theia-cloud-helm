@@ -1,6 +1,6 @@
 # theia-cloud-base
 
-![Version: 0.8.1-v003](https://img.shields.io/badge/Version-0.8.1--v003-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.OSWeek23-v3](https://img.shields.io/badge/AppVersion-0.8.1.OSWeek23--v3-informational?style=flat-square)
+![Version: 0.8.1-v004](https://img.shields.io/badge/Version-0.8.1--v004-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.OSWeek23-v4](https://img.shields.io/badge/AppVersion-0.8.1.OSWeek23--v4-informational?style=flat-square)
 
 Theia-cloud base chart
 

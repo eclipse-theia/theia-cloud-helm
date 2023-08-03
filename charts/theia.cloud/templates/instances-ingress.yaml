@@ -13,7 +13,7 @@ metadata:
     cert-manager.io/common-name: "Theia.Cloud"
     {{- end }}
     acme.cert-manager.io/http01-ingress-class: nginx
-    nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "132k"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header 'X-Forwarded-Uri' $request_uri;
