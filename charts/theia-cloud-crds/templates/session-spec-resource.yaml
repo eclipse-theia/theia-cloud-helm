@@ -24,9 +24,6 @@ spec:
           properties:
             spec:
               type: object
-              x-kubernetes-validations:
-                - rule: "size(self.envVars) > 0"
-                  message: "EnvVars must not be empty."
               properties:
                 name:
                   type: string
@@ -59,9 +56,9 @@ spec:
                   items:
                     type: string
               required:
+                - name
                 - user
                 - appDefinition
-                - sessionSecret
             status:
               type: object
               properties:

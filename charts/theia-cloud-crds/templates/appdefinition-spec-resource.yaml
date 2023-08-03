@@ -48,7 +48,6 @@ spec:
                   type: string
                 minInstances:
                   type: integer
-                  minimum: 1
                 maxInstances:
                   type: integer
                 timeout:
@@ -88,11 +87,15 @@ spec:
               required:
                 - name
                 - image
+                - uid
                 - port
+                - ingressname
                 - minInstances
                 - maxInstances
                 - requestsCpu
                 - requestsMemory
+                - limitsMemory
+                - limitsCpu
             status:
                 type: object
                 properties:

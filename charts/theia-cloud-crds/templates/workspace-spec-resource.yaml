@@ -38,6 +38,7 @@ spec:
                 storage:
                   type: string
               required:
+                - name
                 - user
             status:
               type: object
