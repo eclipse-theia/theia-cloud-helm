@@ -11,9 +11,58 @@ spec:
     singular: session
   scope: Namespaced
   versions:
-    - name : v5beta
+    - name : v6beta
       served: true
       storage: true
+      # subresources describes the subresources for custom resources.
+      subresources:
+        # status enables the status subresource.
+        status: {}
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                workspace:
+                  type: string
+                appDefinition: # cached from workspace
+                  type: string
+                user: # cached from workspace
+                  type: string
+                url:
+                  type: string
+                error:
+                  type: string
+                sessionSecret:
+                  type: string
+                lastActivity:
+                  type: integer
+                envVars:
+                  type: object
+                  additionalProperties:
+                    x-kubernetes-int-or-string: true
+                envVarsFromConfigMaps:
+                  type: array
+                  items:
+                    type: string
+                envVarsFromSecrets:
+                  type: array
+                  items:
+                    type: string
+            status:
+              type: object
+              properties:
+                operatorStatus:
+                  type: string
+                operatorMessage:
+                  type: string
+    - name : v5beta
+      served: true
+      storage: false
       # subresources describes the subresources for custom resources.
       subresources:
         # status enables the status subresource.
