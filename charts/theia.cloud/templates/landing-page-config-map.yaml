@@ -29,6 +29,10 @@ data:
       ],
     };
 binaryData:
-  {{ range $path, $bytes := .Files.Glob (printf "%s" .Values.app.logo)}}
+  {{- if .Values.app.logoData }}
+  {{ print "logo.svg: "}}{{ .Values.app.logoData }}
+  {{- else }}
+  {{- range $path, $bytes := .Files.Glob (printf "%s" .Values.app.logo)}}
   {{ print "logo.svg: "}}{{ $.Files.Get $path | b64enc }}
   {{ end }}
+  {{- end }}
