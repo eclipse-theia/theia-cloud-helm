@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   theia-cloud:
   - apiVersion: v2
+    appVersion: 0.8.1.OSWeek23-v3
+    created: "2023-08-30T13:01:08.492637967Z"
+    description: A Helm chart for Theia.cloud
+    digest: ca3d60a56e90519b2e95930ccf45d72c65e4da42015c31c0dae14118e4d7ec3e
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.8.1-v006/theia-cloud-0.8.1-v006.tgz
+    version: 0.8.1-v006
+  - apiVersion: v2
     appVersion: 0.8.1.OSWeek23-v1
     created: "2023-08-07T15:41:53.844704941Z"
     description: A Helm chart for Theia.cloud
@@ -193,6 +203,16 @@ entries:
     version: 0.7.0
   theia-cloud-base:
   - apiVersion: v2
+    appVersion: 0.8.1.OSWeek23-v3
+    created: "2023-08-30T13:01:08.620612064Z"
+    description: Theia-cloud base chart
+    digest: a078042c55d0bd23423e3f12ab3fefbe66dfef67ec9370b3748927ae0da4cca9
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.8.1-v003/theia-cloud-base-0.8.1-v003.tgz
+    version: 0.8.1-v003
+  - apiVersion: v2
     appVersion: 0.8.1.OSWeek23-v1
     created: "2023-08-01T07:45:25.740273791Z"
     description: Theia-cloud base chart
@@ -333,6 +353,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
     version: 0.7.2
   theia-cloud-crds:
+  - apiVersion: v2
+    appVersion: 0.8.1.OSWeek23-v3
+    created: "2023-08-30T13:01:08.767016736Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
+    digest: ed40155e92098518d15467e52a87f71f965248cf89d4d4bef32385dfb2d440bc
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.8.1-v003/theia-cloud-crds-0.8.1-v003.tgz
+    version: 0.8.1-v003
   - apiVersion: v2
     appVersion: 0.8.1.OSWeek23-v1
     created: "2023-08-01T07:45:25.891353683Z"
