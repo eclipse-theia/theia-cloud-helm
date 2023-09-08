@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.8.1-v007-MS2](https://img.shields.io/badge/Version-0.8.1--v007--MS2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.MS2](https://img.shields.io/badge/AppVersion-0.8.1.MS2-informational?style=flat-square)
+![Version: 0.8.1-v008-MS2](https://img.shields.io/badge/Version-0.8.1--v008--MS2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1.MS2](https://img.shields.io/badge/AppVersion-0.8.1.MS2-informational?style=flat-square)
 
 A Helm chart for Theia.cloud
 
@@ -69,7 +69,7 @@ A Helm chart for Theia.cloud
 | operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
 | operator.continueOnException | bool | `false` | Whether the operator should stop in cases where an exception is not handled |
 | operator.eagerStart | bool | `false` | Whether theia applications shall be started eager. This means that the application is already running without a user. When a user requests a new session, one of the already launched ones is assigned.  Currently only false is fully supported. |
-| operator.image | string | `"theiacloud/theia-cloud-operator:0.8.1.MS2"` | The operator image |
+| operator.image | string | `"theiacloud/theia-cloud-operator:0.8.1.MS2v2"` | The operator image |
 | operator.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the operator's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | operator.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | operator.leaderElection | object | (see details below) | Options to influence the operator's leader election |
