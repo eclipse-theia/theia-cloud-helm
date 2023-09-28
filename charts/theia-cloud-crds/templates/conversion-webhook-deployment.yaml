@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crd-conversion-webhook
+  labels:
+    app: crd-conversion-webhook
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crd-conversion-webhook
+  template:
+    metadata:
+      labels:
+        app: crd-conversion-webhook
+    spec:
+      containers:
+        - name: crd-conversion-webhook
+          image: {{ .Values.conversion.image }}
+          ports:
+            - name: tls
+              containerPort: 443
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/webhook/certs
+              readOnly: true
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: {{ .Values.conversion.secretName }}
