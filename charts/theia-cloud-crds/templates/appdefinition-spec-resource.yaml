@@ -2,6 +2,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: appdefinitions.theia.cloud
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ .Values.conversion.certificateName }}
 spec:
   group: theia.cloud
   names:
@@ -11,7 +13,7 @@ spec:
     singular: appdefinition
   scope: Namespaced
   versions:
-    - name: v8beta
+    - name: v1beta8
       served: true
       storage: true
       # subresources describes the subresources for custom resources.
@@ -30,7 +32,7 @@ spec:
               properties:
                 name:
                   type: string
-                  pattern: '^[a-z0-9A-Z-_]+$'
+                  pattern: "^[a-z0-9A-Z-_]+$"
                 image:
                   type: string
                 imagePullPolicy:
@@ -97,15 +99,15 @@ spec:
                 - limitsMemory
                 - limitsCpu
             status:
-                type: object
-                properties:
-                  operatorStatus:
-                    type: string
-                  operatorMessage:
-                    type: string
+              type: object
+              properties:
+                operatorStatus:
+                  type: string
+                operatorMessage:
+                  type: string
           required:
             - spec
-    - name: v7beta
+    - name: v1beta7
       served: true
       storage: false
       # subresources describes the subresources for custom resources.
@@ -172,320 +174,19 @@ spec:
                         notifyAfter:
                           type: integer
             status:
-                type: object
-                properties:
-                  operatorStatus:
-                    type: string
-                  operatorMessage:
-                    type: string
-    - name: v6beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
               type: object
               properties:
-                name:
+                operatorStatus:
                   type: string
-                image:
+                operatorMessage:
                   type: string
-                imagePullPolicy:
-                  type: string
-                  enum: ["Always", "IfNotPresent", "Never"]
-                pullSecret:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                timeout:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-                    limit:
-                      type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
-                mountPath:
-                  type: string
-                monitor:
-                  type: object
-                  properties:
-                    port:
-                      type: integer
-                    activityTracker:
-                      type: object
-                      properties:
-                        timeoutAfter:
-                          type: integer
-                        notifyAfter:
-                          type: integer
-    - name: v5beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                name:
-                  type: string
-                image:
-                  type: string
-                imagePullPolicy:
-                  type: string
-                  enum: ["Always", "IfNotPresent", "Never"]
-                pullSecret:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                host:
-                  type: string
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                timeout:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-                    limit:
-                      type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
-                mountPath:
-                  type: string
-                monitor:
-                  type: object
-                  properties:
-                    port:
-                      type: integer
-                    activityTracker:
-                      type: object
-                      properties:
-                        timeoutAfter:
-                          type: integer
-                        notifyAfter:
-                          type: integer
-    - name: v4beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                name:
-                  type: string
-                image:
-                  type: string
-                imagePullPolicy:
-                  type: string
-                  enum: ["Always", "IfNotPresent", "Never"]
-                pullSecret:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                host:
-                  type: string
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                timeout:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-                    limit:
-                      type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
-                mountPath:
-                  type: string
-    - name: v3beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                name:
-                  type: string
-                image:
-                  type: string
-                pullSecret:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                host:
-                  type: string
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                timeout:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-                    limit:
-                      type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
-                mountPath:
-                  type: string
-    - name: v2beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                name:
-                  type: string
-                image:
-                  type: string
-                pullSecret:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                host:
-                  type: string
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                killAfter:
-                  type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
-                mountPath:
-                  type: string
-    - name: v1beta
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                name:
-                  type: string
-                image:
-                  type: string
-                uid:
-                  type: integer
-                port:
-                  type: integer
-                host:
-                  type: string
-                ingressname:
-                  type: string
-                minInstances:
-                  type: integer
-                maxInstances:
-                  type: integer
-                killAfter:
-                  type: integer
-                requestsMemory:
-                  type: string
-                requestsCpu:
-                  type: string
-                limitsMemory:
-                  type: string
-                limitsCpu:
-                  type: string
-                downlinkLimit:
-                  type: integer
-                uplinkLimit:
-                  type: integer
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1"]
+      clientConfig:
+        service:
+          namespace: theiacloud
+          name: crd-conversion-webhook
+          port: 443
+          path: /convert/appdefinition
