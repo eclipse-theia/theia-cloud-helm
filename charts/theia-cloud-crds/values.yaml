@@ -1,0 +1,4 @@
+conversion:
+  certificateName: conversion-webhook-certificate
+  secretName: private-key-secret
+  image: webhook:local

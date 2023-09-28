@@ -11,7 +11,7 @@ spec:
     singular: appdefinition
   scope: Namespaced
   versions:
-    - name: v8beta
+    - name: v1beta8
       served: true
       storage: true
       # subresources describes the subresources for custom resources.
@@ -30,7 +30,7 @@ spec:
               properties:
                 name:
                   type: string
-                  pattern: '^[a-z0-9A-Z-_]+$'
+                  pattern: "^[a-z0-9A-Z-_]+$"
                 image:
                   type: string
                 imagePullPolicy:
@@ -97,15 +97,15 @@ spec:
                 - limitsMemory
                 - limitsCpu
             status:
-                type: object
-                properties:
-                  operatorStatus:
-                    type: string
-                  operatorMessage:
-                    type: string
+              type: object
+              properties:
+                operatorStatus:
+                  type: string
+                operatorMessage:
+                  type: string
           required:
             - spec
-    - name: v7beta
+    - name: v1beta7
       served: true
       storage: false
       # subresources describes the subresources for custom resources.
@@ -172,13 +172,13 @@ spec:
                         notifyAfter:
                           type: integer
             status:
-                type: object
-                properties:
-                  operatorStatus:
-                    type: string
-                  operatorMessage:
-                    type: string
-    - name: v6beta
+              type: object
+              properties:
+                operatorStatus:
+                  type: string
+                operatorMessage:
+                  type: string
+    - name: v1beta6
       served: true
       storage: false
       schema:
@@ -240,7 +240,7 @@ spec:
                           type: integer
                         notifyAfter:
                           type: integer
-    - name: v5beta
+    - name: v1beta5
       served: true
       storage: false
       schema:
@@ -304,7 +304,7 @@ spec:
                           type: integer
                         notifyAfter:
                           type: integer
-    - name: v4beta
+    - name: v1beta4
       served: true
       storage: false
       schema:
@@ -356,7 +356,7 @@ spec:
                   type: integer
                 mountPath:
                   type: string
-    - name: v3beta
+    - name: v1beta3
       served: true
       storage: false
       schema:
@@ -405,7 +405,7 @@ spec:
                   type: integer
                 mountPath:
                   type: string
-    - name: v2beta
+    - name: v1beta2
       served: true
       storage: false
       schema:
@@ -449,7 +449,7 @@ spec:
                   type: integer
                 mountPath:
                   type: string
-    - name: v1beta
+    - name: v1beta1
       served: true
       storage: false
       schema:
@@ -489,3 +489,14 @@ spec:
                   type: integer
                 uplinkLimit:
                   type: integer
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1"]
+      clientConfig:
+        service:
+          namespace: theiacloud
+          name: crd-conversion-webhook
+          port: 443
+          path: /convert/appdefinition
+        caBundle:
