@@ -2,6 +2,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: appdefinitions.theia.cloud
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ .Values.conversion.certificateName }}
 spec:
   group: theia.cloud
   names:
@@ -188,4 +190,3 @@ spec:
           name: crd-conversion-webhook
           port: 443
           path: /convert/appdefinition
-        caBundle:
