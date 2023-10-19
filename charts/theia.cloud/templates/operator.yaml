@@ -83,6 +83,10 @@ spec:
           - "{{ tpl (.Values.operator.leaderElection.retryPeriod | toString) . }}"
           - "--maxWatchIdleTime"
           - "{{ tpl (.Values.operator.maxWatchIdleTime | toString) . }}"
+          {{- if .Values.operator.oAuth2ProxyVersion }}
+          - "--oAuth2ProxyImage"
+          - "{{ tpl (.Values.operator.oAuth2ProxyVersion | toString) . }}"
+          {{- end }}
           {{- if .Values.operator.continueOnException }}
           - "--continueOnException"
           {{- end }}
