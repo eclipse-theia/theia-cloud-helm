@@ -161,7 +161,7 @@ keycloak:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:0.8.1.MS3v2
+  image: theiacloud/theia-cloud-operator:0.8.1.MS3
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
