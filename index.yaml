@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   theia-cloud:
   - apiVersion: v2
+    appVersion: 0.8.1.MS3
+    created: "2023-10-27T14:10:38.867758535Z"
+    description: A Helm chart for Theia.cloud
+    digest: 2017ee6a0fd2cf144306ab0ea1ef52b0580bb0ac7b3350c6cff86c1b70226f85
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.8.1-v009-MS3/theia-cloud-0.8.1-v009-MS3.tgz
+    version: 0.8.1-v009-MS3
+  - apiVersion: v2
     appVersion: 0.8.1.MS2
     created: "2023-09-08T09:24:59.351276441Z"
     description: A Helm chart for Theia.cloud
@@ -223,6 +233,16 @@ entries:
     version: 0.7.0
   theia-cloud-base:
   - apiVersion: v2
+    appVersion: 0.8.1.MS3
+    created: "2023-10-27T14:10:38.991817652Z"
+    description: Theia-cloud base chart
+    digest: 323b676878464f7647366641d21b0de965e4ae700a5375f26660c20e3577a9b4
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.8.1-v004-MS3/theia-cloud-base-0.8.1-v004-MS3.tgz
+    version: 0.8.1-v004-MS3
+  - apiVersion: v2
     appVersion: 0.8.1.MS2
     created: "2023-08-30T14:14:53.818476502Z"
     description: Theia-cloud base chart
@@ -383,6 +403,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
     version: 0.7.2
   theia-cloud-crds:
+  - apiVersion: v2
+    appVersion: 0.8.1.MS3
+    created: "2023-10-27T14:10:39.155537369Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
+    digest: ea191803884d9374333d662584b586ec9c773d75e5cb3c6cf14dccaf4549cd15
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.8.1-v004-MS3/theia-cloud-crds-0.8.1-v004-MS3.tgz
+    version: 0.8.1-v004-MS3
   - apiVersion: v2
     appVersion: 0.8.1.MS2
     created: "2023-08-30T14:14:53.995890286Z"
