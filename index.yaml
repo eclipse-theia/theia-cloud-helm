@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   theia-cloud:
   - apiVersion: v2
+    appVersion: 0.9.0-next
+    created: "2024-01-11T15:11:22.504647259Z"
+    description: A Helm chart for Theia.cloud
+    digest: b057269643c07d78865c1bdef415811c50576be34e6cb1234e5829e4b1cafe15
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.9.0-next.0/theia-cloud-0.9.0-next.0.tgz
+    version: 0.9.0-next.0
+  - apiVersion: v2
     appVersion: 0.8.1.MS3
     created: "2023-10-27T14:10:38.867758535Z"
     description: A Helm chart for Theia.cloud
@@ -233,6 +243,16 @@ entries:
     version: 0.7.0
   theia-cloud-base:
   - apiVersion: v2
+    appVersion: 0.9.0-next
+    created: "2024-01-11T15:11:22.682327803Z"
+    description: Theia-cloud base chart
+    digest: 68d9832f6ee4128801104c20e871de57b9c52c6999f266cb2f570d8ec6ac4aec
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.9.0-next.0/theia-cloud-base-0.9.0-next.0.tgz
+    version: 0.9.0-next.0
+  - apiVersion: v2
     appVersion: 0.8.1.MS3
     created: "2023-10-27T14:10:38.991817652Z"
     description: Theia-cloud base chart
@@ -403,6 +423,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
     version: 0.7.2
   theia-cloud-crds:
+  - apiVersion: v2
+    appVersion: 0.9.0-next
+    created: "2024-01-11T15:11:22.853620059Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
+    digest: 7e29cd31e185da3a4858a9cd8ca1f5253de7e850f8c27b3bca6dfa88d2d994ff
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.9.0-next.0/theia-cloud-crds-0.9.0-next.0.tgz
+    version: 0.9.0-next.0
   - apiVersion: v2
     appVersion: 0.8.1.MS3
     created: "2023-10-27T14:10:39.155537369Z"
