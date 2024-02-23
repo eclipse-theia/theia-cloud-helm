@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversion-webhook
+  labels:
+    app: conversion-webhook
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conversion-webhook
+  template:
+    metadata:
+      labels:
+        app: conversion-webhook
+    spec:
+      containers:
+        - name: conversion-webhook-container
+          image: {{ .Values.conversion.image }}
+          ports:
+            - name: tls
+              containerPort: 443
+          volumeMounts:
+            - name: certificates
+              mountPath: {{ .Values.conversion.certMountPath }}
+              readOnly: true
+      volumes:
+        - name: certificates
+          secret:
+            secretName: conversion-webhook-cert-secret

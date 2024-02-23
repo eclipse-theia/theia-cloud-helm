@@ -45,13 +45,8 @@ image:
   # -- the image pull secret. Leave empty if registry is public
   pullSecret: ""
 
-  # -- Configures how sessions will be stopped. This defines the strategy and the limit in minutes and will override any specification from an appDefinition.
-  # Possible values for strategy:
-  # - FIXEDTIME   Sessions will be stopped after a fixed limit
-  timeoutStrategy: "FIXEDTIME"
-
   # -- Limit in minutes
-  timeoutLimit: "30"
+  timeout: "30"
 
 # -- You may adjust the hostname below.
 # @default -- (see details below)

@@ -2,6 +2,16 @@
 
 ## [0.10.0] - estimated 2024-04
 
+- [theia-cloud-crds] Provide conversion webhook for newer versions of CRDs [#49](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics
+  - This webhook is called, whenever a resource is requested in a specific version
+  - This is enabled from these versions: `AppDefintion.v1beta8`, `Session.v1beta6` and `Workspace.v1beta3`
+  - Older versions are deprecated and no longer in the definition
+- [theia-cloud-crds] Move status like fields to status [#](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics
+  - `Session.v1beta7`: Move `url`, `lastActivity` and `error` fields from the spec to the status.
+  - `Workspace.v1beta4`: Move the `error` field from the spec to the status. Also add the `error` field to `Workspace.v1beta3` as it was missing
+- [theia-cloud-crds] Remove `timeout.strategy` from AppDefinition [#](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics
+  - `AppDefinition.v1beta9`: Removed `timeout.strategy` and `timeout.limit` is now just `timeout`. This was done, as there is only one Strategy left.
+
 ## [0.9.0] - 2024-01-23
 
 - [All charts] Align [versioning](https://github.com/eclipsesource/theia-cloud-helm#versioning) between all components and introduce changelog [#45](https://github.com/eclipsesource/theia-cloud-helm/pull/45) | [#258](https://github.com/eclipsesource/theia-cloud/pull/258) - contributed on behalf of STMicroelectronics
