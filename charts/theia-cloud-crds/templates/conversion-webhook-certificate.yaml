@@ -9,5 +9,5 @@ spec:
   dnsNames:
     - "conversion-webhook-service.{{ .Release.Namespace }}.svc"
   issuerRef:
-    name: theia-cloud-selfsigned-issuer
+    name: {{ .Values.clusterIssuer }}
     kind: ClusterIssuer

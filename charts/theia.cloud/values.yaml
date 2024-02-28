@@ -284,12 +284,6 @@ operatorrole:
 servicerole:
   name: service-api-access
 
-issuerprod:
-  name: letsencrypt-prod
-
-issuerstaging:
-  name: theia-cloud-selfsigned-issuer
-
 # -- Values to influence the monitor
 # @default -- (see details below)
 monitor:

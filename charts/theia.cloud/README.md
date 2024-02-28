@@ -40,8 +40,6 @@ A Helm chart for Theia.cloud
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
 | issuer.email | string | `"mmorlock@example.com"` | EMail address of the certificate issuer. |
-| issuerprod.name | string | `"letsencrypt-prod"` |  |
-| issuerstaging.name | string | `"theia-cloud-selfsigned-issuer"` |  |
 | keycloak | object | (see details below) | Values related to Keycloak |
 | keycloak.authUrl | string | `"https://keycloak.url/auth/"` | Key cloak auth URL. Only has to be specified when enable: true |
 | keycloak.clientId | string | `"theia-cloud"` | The client-id. Only has to be specified when enable: true |

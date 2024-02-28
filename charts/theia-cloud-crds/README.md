@@ -8,6 +8,7 @@ A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| clusterIssuer | string | `"theia-cloud-selfsigned-issuer"` | The cluster issuer to use for the certificate |
 | conversion.certMountPath | string | `"/etc/webhook/certs"` | The location of where the certificates are mounted into the container (needs to match with application.properties) |
 | conversion.image | string | `"theiacloud/theia-cloud-conversion-webhook:0.10.0-next"` | The image of the webhook container |
 

@@ -3,3 +3,6 @@ conversion:
   image: theiacloud/theia-cloud-conversion-webhook:0.10.0-next
   # -- The location of where the certificates are mounted into the container (needs to match with application.properties)
   certMountPath: /etc/webhook/certs
+
+# -- The cluster issuer to use for the certificate
+clusterIssuer: theia-cloud-selfsigned-issuer
