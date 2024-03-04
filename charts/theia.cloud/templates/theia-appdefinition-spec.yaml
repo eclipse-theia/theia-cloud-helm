@@ -1,4 +1,4 @@
-apiVersion: theia.cloud/v1beta8
+apiVersion: theia.cloud/v1beta9
 kind: AppDefinition
 metadata:
   name: theia-cloud-demo
@@ -12,9 +12,7 @@ spec:
   ingressname: {{ tpl (.Values.ingress.instanceName | toString) . }}
   minInstances: 0
   maxInstances: 10
-  timeout:
-    limit: {{ tpl (.Values.image.timeoutLimit | toString) . }}
-    strategy: {{ tpl (.Values.image.timeoutStrategy | toString) . }}
+  timeout: {{ tpl (.Values.image.timeout | toString) . }}
   requestsMemory: 1000M
   limitsMemory: 1200M
   requestsCpu: "100m"
