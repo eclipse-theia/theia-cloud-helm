@@ -9,8 +9,11 @@ rules:
       - theia.cloud
     resources:
       - appdefinitions
+      - appdefinitions/status
       - sessions
+      - sessions/status
       - workspaces
+      - workspaces/status
     verbs: ["list", "create", "watch", "get", "patch", "delete"]
   -
     apiGroups:
