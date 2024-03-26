@@ -3,6 +3,16 @@ entries:
   theia-cloud:
   - apiVersion: v2
     appVersion: 0.10.0-next
+    created: "2024-03-26T14:47:43.356897862Z"
+    description: A Helm chart for Theia.cloud
+    digest: 3dba897bf199e85748415621bb0fb7ca8126d1e5fb7b861408183ea3eba46f2a
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.10.0-next.2/theia-cloud-0.10.0-next.2.tgz
+    version: 0.10.0-next.2
+  - apiVersion: v2
+    appVersion: 0.10.0-next
     created: "2024-03-04T13:58:46.246814169Z"
     description: A Helm chart for Theia.cloud
     digest: 29867d447b0022ea7409d7db4044b5e5f4886c121605f6c26fefd7ecfddd1d17
@@ -483,6 +493,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
     version: 0.7.2
   theia-cloud-crds:
+  - apiVersion: v2
+    appVersion: 0.10.0-next
+    created: "2024-03-26T14:47:43.633104078Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
+    digest: 4d71ad2bb38e982ff4c51d4b8acfc8205e3eb7acce47403afcdfd22d4d29fd99
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.10.0-next.2/theia-cloud-crds-0.10.0-next.2.tgz
+    version: 0.10.0-next.2
   - apiVersion: v2
     appVersion: 0.10.0-next
     created: "2024-03-04T13:58:46.402977865Z"
