@@ -54,7 +54,8 @@ demoApplication:
   # @default -- (see details below)
   monitor:
     # -- At which port the monitor extension is available
-    # Choose the same as the application port for the theia extension
+    # For the Theia extension take the same as the application port
+    # For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable
     port: 3000  
     # -- Values that are used by the activityTracker module
     # @default -- (see details below)

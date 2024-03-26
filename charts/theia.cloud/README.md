@@ -20,7 +20,7 @@ A Helm chart for Theia.cloud
 | demoApplication.monitor.activityTracker | object | (see details below) | Values that are used by the activityTracker module |
 | demoApplication.monitor.activityTracker.notifyAfter | int | `25` | Minutes of inactivity that lead to a warning displayed to the user Make greater than timeoutAfter to disable |
 | demoApplication.monitor.activityTracker.timeoutAfter | int | `30` | Minutes of inactivity that lead to pod shutdown |
-| demoApplication.monitor.port | int | `3000` | At which port the monitor extension is available Choose the same as the application port for the theia extension |
+| demoApplication.monitor.port | int | `3000` | At which port the monitor extension is available For the Theia extension take the same as the application port For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable |
 | demoApplication.name | string | `"theiacloud/theia-cloud-demo:0.10.0-next"` | The name of docker image to be used |
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
