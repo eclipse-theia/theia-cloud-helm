@@ -32,9 +32,11 @@ issuer:
   # -- EMail address of the certificate issuer.
   email: mmorlock@example.com
 
-# -- Docker image of the main application
+# -- Information about the demo application to be installed
 # @default -- (see details below)
-image:
+demoApplication:
+  # -- Should the demo application be installed
+  install: true
   # -- The name of docker image to be used
   name: theiacloud/theia-cloud-demo:0.10.0-next
 
@@ -47,6 +49,21 @@ image:
 
   # -- Limit in minutes
   timeout: "30"
+
+  # -- Values that are used by the monitor
+  # @default -- (see details below)
+  monitor:
+    # -- At which port the monitor extension is available
+    # Choose the same as the application port for the theia extension
+    port: 3000  
+    # -- Values that are used by the activityTracker module
+    # @default -- (see details below)
+    activityTracker:
+      # -- Minutes of inactivity that lead to pod shutdown
+      timeoutAfter: 30
+      # -- Minutes of inactivity that lead to a warning displayed to the user
+      # Make greater than timeoutAfter to disable
+      notifyAfter: 25
 
 # -- You may adjust the hostname below.
 # @default -- (see details below)
@@ -284,23 +301,15 @@ operatorrole:
 servicerole:
   name: service-api-access
 
-# -- Values to influence the monitor
+# -- Values to influence the monitor initialization on the operator
 # @default -- (see details below)
 monitor:
   # -- Should the monitor be enabled
   enable: true
-  # -- At which port the monitor extension is available
-  # Choose the same as the application port for the theia extension
-  port: 3000
   # -- Values to influence the activityTracker module
   # @default -- (see details below)
   activityTracker:
     # -- Should the activityTracker module be enabled
     enable: true
-    # -- Minutes between re-ping by the operator
+    # -- Minutes between re-pinging the pods
     interval: 1
-    # -- Minutes of inactivity that lead to pod shutdown
-    timeoutAfter: 30
-    # -- Minutes of inactivity that lead to a warning displayed to the user
-    # Make greater than timeoutAfter to disable
-    notifyAfter: 25

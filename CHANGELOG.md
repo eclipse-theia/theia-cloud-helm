@@ -11,6 +11,12 @@
   - `Workspace.v1beta4`: Move the `error` field from the spec to the status. Also add the `error` field to `Workspace.v1beta3` as it was missing
 - [theia-cloud-crds] Remove `timeout.strategy` from AppDefinition [#](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics
   - `AppDefinition.v1beta9`: Removed `timeout.strategy` and `timeout.limit` is now just `timeout`. This was done, as there is only one Strategy left.
+- [theia-cloud-crds] Provide shortnames for AppDefinition (appdef, ad) and Workspaces (ws) [#52](https://github.com/eclipsesource/theia-cloud-helm/pull/52) | [#289](https://github.com/eclipsesource/theia-cloud/pull/289) - contributed on behalf of STMicroelectronics
+- [theia-cloud] Make demo application optional (`demoApplication.install`) and group relevant fields together [#52](https://github.com/eclipsesource/theia-cloud-helm/pull/52) | [#289](https://github.com/eclipsesource/theia-cloud/pull/289) - contributed on behalf of STMicroelectronics
+  - `image` -> `demoApplication`
+  - `monitor.port` -> `demoApplication.monitor.port`
+  - `monitor.activityTracker.timeoutAfter` -> `demoApplication.monitor.activityTracker.timeoutAfter`
+  - `monitor.activityTracker.notifyAfter` -> `demoApplication.monitor.activityTracker.notifyAfter`
 
 ## [0.9.0] - 2024-01-23
 
@@ -18,5 +24,5 @@
 - [All charts] Change CRD versions from `vXbeta` to `v1betaX` and only keep latest two versions [#46](https://github.com/eclipsesource/theia-cloud-helm/pull/46) | [#266](https://github.com/eclipsesource/theia-cloud/pull/266) - contributed on behalf of STMicroelectronics
 
 ## [0.8.1] - 2023-10-01
-  
+
 - Last Milestone based version. No changelog available due to alpha-phase.
