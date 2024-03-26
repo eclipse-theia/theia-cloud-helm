@@ -11,6 +11,9 @@ spec:
     listKind: AppDefinitionList
     plural: appdefinitions
     singular: appdefinition
+    shortNames:
+    - appdef
+    - ad
   scope: Namespaced
   versions:
     - name: v1beta9

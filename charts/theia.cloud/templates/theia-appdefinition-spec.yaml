@@ -1,18 +1,19 @@
+{{- if .Values.demoApplication.install }}
 apiVersion: theia.cloud/v1beta9
 kind: AppDefinition
 metadata:
   name: theia-cloud-demo
 spec:
   name: theia-cloud-demo
-  image: {{ tpl (.Values.image.name | toString) . }}
-  imagePullPolicy: {{ if .Values.image.imagePullPolicy }}{{ tpl (.Values.image.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
-  pullSecret: {{ tpl (.Values.image.pullSecret | toString) . }}
+  image: {{ tpl (.Values.demoApplication.name | toString) . }}
+  imagePullPolicy: {{ if .Values.demoApplication.imagePullPolicy }}{{ tpl (.Values.demoApplication.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
+  pullSecret: {{ tpl (.Values.demoApplication.pullSecret | toString) . }}
   uid: 101
   port: 3000
   ingressname: {{ tpl (.Values.ingress.instanceName | toString) . }}
   minInstances: 0
   maxInstances: 10
-  timeout: {{ tpl (.Values.image.timeout | toString) . }}
+  timeout: {{ tpl (.Values.demoApplication.timeout | toString) . }}
   requestsMemory: 1000M
   limitsMemory: 1200M
   requestsCpu: "100m"
@@ -20,12 +21,13 @@ spec:
   downlinkLimit: 30000
   uplinkLimit: 30000
   mountPath: "/home/project/persisted"
-  {{- if .Values.monitor.enable }}
+  {{- if .Values.demoApplication.monitor }}
   monitor:
-    port: {{ tpl (.Values.monitor.port | toString) . }}
-    {{- if .Values.monitor.activityTracker.enable }}
+    port: {{ tpl (.Values.demoApplication.monitor.port | toString) . }}
+    {{- if .Values.demoApplication.monitor.activityTracker }}
     activityTracker:
-      timeoutAfter: {{ tpl (.Values.monitor.activityTracker.timeoutAfter | toString) .  }}
-      notifyAfter: {{ tpl (.Values.monitor.activityTracker.notifyAfter | toString) .  }}
+      timeoutAfter: {{ tpl (.Values.demoApplication.monitor.activityTracker.timeoutAfter | toString) .  }}
+      notifyAfter: {{ tpl (.Values.demoApplication.monitor.activityTracker.notifyAfter | toString) .  }}
     {{- end }}
   {{- end }}
+{{- end }}
