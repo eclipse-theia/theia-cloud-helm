@@ -1,6 +1,8 @@
 # Changelog
 
-## [0.10.0] - estimated 2024-04
+<!--  ## [0.11.0] - estimated 2024-07 -->
+
+## [0.10.0] - 2024-04-02
 
 - [theia-cloud-crds] Provide conversion webhook for newer versions of CRDs [#49](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics
   - This webhook is called, whenever a resource is requested in a specific version

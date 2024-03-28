@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.10.0-next.2](https://img.shields.io/badge/Version-0.10.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.0-next](https://img.shields.io/badge/AppVersion-0.10.0--next-informational?style=flat-square)
+![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.0](https://img.shields.io/badge/AppVersion-0.10.0-informational?style=flat-square)
 
 A Helm chart for Theia.cloud
 
@@ -21,7 +21,7 @@ A Helm chart for Theia.cloud
 | demoApplication.monitor.activityTracker.notifyAfter | int | `25` | Minutes of inactivity that lead to a warning displayed to the user Make greater than timeoutAfter to disable |
 | demoApplication.monitor.activityTracker.timeoutAfter | int | `30` | Minutes of inactivity that lead to pod shutdown |
 | demoApplication.monitor.port | int | `3000` | At which port the monitor extension is available For the Theia extension take the same as the application port For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable |
-| demoApplication.name | string | `"theiacloud/theia-cloud-demo:0.10.0-next"` | The name of docker image to be used |
+| demoApplication.name | string | `"theiacloud/theia-cloud-demo:0.10.0"` | The name of docker image to be used |
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
@@ -57,7 +57,7 @@ A Helm chart for Theia.cloud
 | landingPage.additionalApps | string | `nil` | The page may show these additional apps in a drop down. This is a map. The key maps to the app definition name The value is the label that is supposed to be shown in the UI  Example: different-app-definition:   label: "Different App Definition" further-app-definition:   label: "Further App Definition" |
 | landingPage.appDefinition | string | `"theia-cloud-demo"` | the app id to launch |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
-| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:0.10.0-next"` | the landing page image to use |
+| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:0.10.0"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | landingPage.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | monitor | object | (see details below) | Values to influence the monitor initialization on the operator |
@@ -70,7 +70,7 @@ A Helm chart for Theia.cloud
 | operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
 | operator.continueOnException | bool | `false` | Whether the operator should stop in cases where an exception is not handled |
 | operator.eagerStart | bool | `false` | Whether theia applications shall be started eager. This means that the application is already running without a user. When a user requests a new session, one of the already launched ones is assigned.  Currently only false is fully supported. |
-| operator.image | string | `"theiacloud/theia-cloud-operator:0.10.0-next"` | The operator image |
+| operator.image | string | `"theiacloud/theia-cloud-operator:0.10.0"` | The operator image |
 | operator.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the operator's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | operator.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | operator.leaderElection | object | (see details below) | Options to influence the operator's leader election |
@@ -81,13 +81,13 @@ A Helm chart for Theia.cloud
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
-| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:0.10.0-next"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
+| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:0.10.0"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
 | operatorrole.name | string | `"operator-api-access"` |  |
 | service | object | (see details below) | Values of the Theia.cloud REST service |
-| service.image | string | `"theiacloud/theia-cloud-service:0.10.0-next"` | The image to use |
+| service.image | string | `"theiacloud/theia-cloud-service:0.10.0"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | servicerole.name | string | `"service-api-access"` |  |
 
 ----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.12.0](https://github.com/norwoodj/helm-docs/releases/v1.12.0)
+Autogenerated from chart metadata using [helm-docs v1.13.1](https://github.com/norwoodj/helm-docs/releases/v1.13.1)
