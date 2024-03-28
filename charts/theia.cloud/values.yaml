@@ -38,7 +38,7 @@ demoApplication:
   # -- Should the demo application be installed
   install: true
   # -- The name of docker image to be used
-  name: theiacloud/theia-cloud-demo:0.10.0-next
+  name: theiacloud/theia-cloud-demo:0.10.0
 
   # -- Optional: Override the imagePullPolicy for the main application's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -112,7 +112,7 @@ hosts:
 # @default -- (see details below)
 landingPage:
   # -- the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:0.10.0-next
+  image: theiacloud/theia-cloud-landing-page:0.10.0
 
   # -- Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -174,7 +174,7 @@ keycloak:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:0.10.0-next
+  image: theiacloud/theia-cloud-operator:0.10.0
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -203,7 +203,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # -- If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.10.0-next
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:0.10.0
 
   # -- Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -266,7 +266,7 @@ operator:
 # @default -- (see details below)
 service:
   # -- The image to use
-  image: theiacloud/theia-cloud-service:0.10.0-next
+  image: theiacloud/theia-cloud-service:0.10.0
 
   # -- Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
