@@ -16,9 +16,101 @@ spec:
     - ad
   scope: Namespaced
   versions:
-    - name: v1beta9
+    - name: v1beta10
       served: true
       storage: true
+      # subresources describes the subresources for custom resources.
+      subresources:
+        # status enables the status subresource.
+        status: {}
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              x-kubernetes-validations:
+                - rule: "self.minInstances <= self.maxInstances"
+                  message: "minInstances should be less or equal than maxInstances."
+              properties:
+                name:
+                  type: string
+                  pattern: "^[a-z0-9A-Z-_]+$"
+                image:
+                  type: string
+                imagePullPolicy:
+                  type: string
+                  enum: ["Always", "IfNotPresent", "Never"]
+                pullSecret:
+                  type: string
+                uid:
+                  type: integer
+                port:
+                  type: integer
+                  minimum: 0
+                  maximum: 65535
+                ingressname:
+                  type: string
+                minInstances:
+                  type: integer
+                maxInstances:
+                  type: integer
+                timeout:
+                  type: integer
+                requestsMemory:
+                  type: string
+                requestsCpu:
+                  type: string
+                limitsMemory:
+                  type: string
+                limitsCpu:
+                  type: string
+                downlinkLimit:
+                  type: integer
+                uplinkLimit:
+                  type: integer
+                mountPath:
+                  type: string
+                monitor:
+                  type: object
+                  properties:
+                    port:
+                      type: integer
+                    activityTracker:
+                      type: object
+                      properties:
+                        timeoutAfter:
+                          type: integer
+                        notifyAfter:
+                          type: integer
+                options:
+                  type: object
+                  additionalProperties:
+                    x-kubernetes-int-or-string: true
+              required:
+                - name
+                - image
+                - uid
+                - port
+                - ingressname
+                - minInstances
+                - maxInstances
+                - requestsCpu
+                - requestsMemory
+                - limitsMemory
+                - limitsCpu
+            status:
+              type: object
+              properties:
+                operatorStatus:
+                  type: string
+                operatorMessage:
+                  type: string
+          required:
+            - spec
+    - name: v1beta9
+      served: true
+      storage: false
       # subresources describes the subresources for custom resources.
       subresources:
         # status enables the status subresource.
