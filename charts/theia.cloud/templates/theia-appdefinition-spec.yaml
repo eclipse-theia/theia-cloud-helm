@@ -1,5 +1,5 @@
 {{- if .Values.demoApplication.install }}
-apiVersion: theia.cloud/v1beta9
+apiVersion: theia.cloud/v1beta10
 kind: AppDefinition
 metadata:
   name: theia-cloud-demo
@@ -11,6 +11,8 @@ spec:
   uid: 101
   port: 3000
   ingressname: {{ tpl (.Values.ingress.instanceName | toString) . }}
+  ingressHostnamePrefixes:
+    - "*.webview."
   minInstances: 0
   maxInstances: 10
   timeout: {{ tpl (.Values.demoApplication.timeout | toString) . }}

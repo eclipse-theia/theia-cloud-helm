@@ -13,17 +13,36 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header 'X-Forwarded-Uri' $request_uri;
     nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.proxyBodySize | toString) . }}
+    {{- if .Values.hosts.paths.tlsSecretName }}
+    {{- if .Values.ingress.certManagerAnnotations }}
+    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
+    {{- if .Values.ingress.theiaCloudCommonName }}
+    cert-manager.io/common-name: "Theia.Cloud"
+    {{- end }}
+    acme.cert-manager.io/http01-ingress-class: nginx
+    {{- end }}
+    {{- end }}
 spec:
   ingressClassName: nginx
   {{- if .Values.hosts.tls }}
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+    {{- range .Values.hosts.additionalWildcardInstances }}
+    - {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
+    {{- end }}
+    {{- if .Values.hosts.paths.tlsSecretName }}
+    secretName: ws-cert-secret
+    {{- end }}
   {{- end }}
   {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
     - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
       http:
+    {{- range .Values.hosts.additionalWildcardInstances }}
+    - host: {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
+      http:
+    {{- end }}
   {{- else }}
   rules:
     {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instanceName | toString) .)).spec.rules }}

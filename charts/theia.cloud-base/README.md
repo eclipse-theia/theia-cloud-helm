@@ -1,6 +1,6 @@
 # theia-cloud-base
 
-![Version: 0.11.0-next.0](https://img.shields.io/badge/Version-0.11.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
+![Version: 0.11.0-next.1](https://img.shields.io/badge/Version-0.11.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
 
 Theia-cloud base chart
 
@@ -8,7 +8,9 @@ Theia-cloud base chart
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| certmanager.namespace | string | `"cert-manager"` | the namespace where the cert-manager is installed |
 | issuer.email | string | `"mmorlock@example.com"` | email used to issue let's encrypt certificates |
+| issuerca.name | string | `"theia-cloud-ca-certificate-signer"` | name for the issuer preparing a self signed CA certificate |
 | issuerprod.name | string | `"letsencrypt-prod"` | name for the let's encrypt production cluster issuer |
 | issuerstaging.name | string | `"theia-cloud-selfsigned-issuer"` | name for the self signed cluster issuer |
 | operatorrole.name | string | `"operator-api-access"` | name for the operator's cluster role |

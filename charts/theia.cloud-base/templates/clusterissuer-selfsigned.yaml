@@ -3,5 +3,6 @@ kind: ClusterIssuer
 metadata:
   name: {{ .Values.issuerstaging.name }}
 spec:
-  selfSigned: {}
+  ca:
+    secretName: theia-cloud-ca-key-pair
   

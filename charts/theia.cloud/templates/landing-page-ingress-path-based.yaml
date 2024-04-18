@@ -14,6 +14,11 @@ metadata:
     # This is necessary to correctly resolve relative paths (e.g. for css files) from the landing page.
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^([^.?]*[^/])$ $1/ redirect;
+    {{- if .Values.hosts.paths.tlsSecretName }}
+    {{- if .Values.ingress.certManagerAnnotations }}
+    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
+    {{- end }}
+    {{- end }}
   namespace: {{ .Release.Namespace }}
 spec:
   ingressClassName: nginx
@@ -21,6 +26,9 @@ spec:
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+    {{- if .Values.hosts.paths.tlsSecretName }}
+    secretName: landing-page-cert-secret
+    {{- end }}
   {{- end }}
   rules:
   - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
