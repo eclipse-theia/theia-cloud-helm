@@ -83,6 +83,10 @@ A Helm chart for Theia.cloud
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
 | operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:0.11.0-next"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
 | operatorrole.name | string | `"operator-api-access"` |  |
+| preloading | object | (see details below) | Values to configure preloading of images on Kubernetes nodes. |
+| preloading.enable | bool | `true` | Is image preloading enabled. |
+| preloading.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the image preloading containers. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
+| preloading.images | list | `[]` | Images to preload. Images must support running /bin/sh. If the list is empty and demoApplication.install == true, demoApplication.name is automatically added. |
 | service | object | (see details below) | Values of the Theia.cloud REST service |
 | service.image | string | `"theiacloud/theia-cloud-service:0.11.0-next"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |

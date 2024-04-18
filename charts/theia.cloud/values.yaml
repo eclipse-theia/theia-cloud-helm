@@ -314,3 +314,16 @@ monitor:
     enable: true
     # -- Minutes between re-pinging the pods
     interval: 1
+
+# -- Values to configure preloading of images on Kubernetes nodes.
+# @default -- (see details below)
+preloading:
+  # -- Is image preloading enabled.
+  enable: true
+  # -- Images to preload. Images must support running /bin/sh.
+  # If the list is empty and demoApplication.install == true,
+  # demoApplication.name is automatically added.
+  images: []
+  # -- Optional: Override the imagePullPolicy for the image preloading containers.
+  # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
+  imagePullPolicy:

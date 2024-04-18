@@ -1,0 +1,66 @@
+{{ if .Values.preloading.enable -}}
+
+{{- /*
+If the image preloading list is empty and the demo application is installed,
+add the demo application image to the list.
+If the list is not empty, it was explicitly overridden by the user and used as is.
+Initialize the $images variable because otherwise it is scoped to the if/else
+*/ -}}
+{{- $images := list -}}
+{{- if and (not .Values.preloading.images) .Values.demoApplication.install -}}
+  {{- $images = list .Values.demoApplication.name -}}
+{{- else -}}
+  {{- $images = .Values.preloading.images -}}
+{{- end -}}
+
+{{- /* Set image pull policy to local variable for increase readability. */ -}}
+{{- $imagePullPolicy := tpl (.Values.imagePullPolicy | toString) . -}}
+{{- if .Values.preloading.imagePullPolicy -}}
+  {{- $imagePullPolicy = tpl ($.Values.preloading.imagePullPolicy | toString) . -}}
+{{- end -}}
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: image-preloading
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: image-preloading
+    app.kubernetes.io/name: image-preloading
+    app.kubernetes.io/part-of: theia-cloud
+spec:
+  selector:
+    matchLabels:
+      app: image-preloading
+      app.kubernetes.io/name: image-preloading
+      app.kubernetes.io/part-of: theia-cloud
+  template:
+    metadata:
+      labels:
+        app: image-preloading
+        app.kubernetes.io/name: image-preloading
+        app.kubernetes.io/part-of: theia-cloud
+    spec:
+      # The pod can be killed instantly because it doesn't do any work requiring graceful shutdown
+      terminationGracePeriodSeconds: 0
+      initContainers:
+      {{- range $index, $image := $images }}
+      - name: image-preload-{{ $index }}
+        image: {{ $image }}
+        imagePullPolicy: {{ $imagePullPolicy }}
+        command: ["/bin/sh", "-c"]
+        args:
+        - "echo 'Loaded image {{ $image }}'; exit 0"
+      {{- end }}
+      # Run the pause container to make the Pod go into the Running state without consuming resources
+      containers:
+      - name: run
+        image: registry.k8s.io/pause:3.9
+        resources:
+          limits:
+            cpu: 1m
+            memory: 8M
+          requests:
+            cpu: 1m
+            memory: 8M
+{{- end }}
