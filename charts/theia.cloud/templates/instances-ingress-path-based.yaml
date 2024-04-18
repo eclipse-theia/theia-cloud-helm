@@ -28,7 +28,7 @@ spec:
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
-    {{- range .Values.hosts.additionalWildcardInstances }}
+    {{- range .Values.hosts.allWildcardInstances }}
     - {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
     {{- end }}
     {{- if .Values.hosts.paths.tlsSecretName }}
@@ -39,7 +39,7 @@ spec:
   rules:
     - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
       http:
-    {{- range .Values.hosts.additionalWildcardInstances }}
+    {{- range .Values.hosts.allWildcardInstances }}
     - host: {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
       http:
     {{- end }}

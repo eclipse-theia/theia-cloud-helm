@@ -7,7 +7,7 @@
 - [theia-cloud] Add landing page configuration options for logo file extension, loading text, user info title & text [#58](https://github.com/eclipsesource/theia-cloud-helm/pull/58) - contributed on behalf of STMicroelectronics
 - [theia-cloud-base] Self signed certificates are now signed by a Theia Cloud certificate authority. The certificate of the authority may be exported and imported in your Browser for easier local testing [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 - [theia-cloud-crds] Add `ingressHostnamePrefixes` list to `AppDefinition.v1beta10` [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57) | [#298](https://github.com/eclipsesource/theia-cloud/pull/298)
-- [theia-cloud] Add `additionalWildcardInstances` to values and create TLS entries for them in the instances-ingress [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
+- [theia-cloud] Add `allWildcardInstances` to values and create TLS entries for them in the instances-ingress [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 - [theia-cloud] Add `hosts.paths.tlsSecretName` to values which allows to optionally set the tls secretName on the ingress tls section when using paths [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 - [theia-cloud] Add `ingress.certManagerAnnotations` to values which allows to configure whether cert manager annotations will be added to the ingresses [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 

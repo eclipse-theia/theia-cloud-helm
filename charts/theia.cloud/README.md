@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.11.0-next.2](https://img.shields.io/badge/Version-0.11.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
+![Version: 0.11.0-next.3](https://img.shields.io/badge/Version-0.11.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
 
 A Helm chart for Theia.cloud
 
@@ -26,7 +26,7 @@ A Helm chart for Theia.cloud
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
-| hosts.additionalWildcardInstances | list | `["*.webview."]` | additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews These are required to configure TLS (if enabled via hosts.tls == true) |
+| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. These are required to configure TLS (if enabled via hosts.tls == true) |
 | hosts.instance | string | `"ws.192.168.39.173.nip.io"` | hostname for the launched Theia-applications |
 | hosts.landing | string | `"theia.cloud.192.168.39.173.nip.io"` | hostname of the landing page |
 | hosts.paths | object | (see details below) | Only needed when usePaths == true. Contains the baseHost and paths for all services |

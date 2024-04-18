@@ -116,10 +116,12 @@ hosts:
   # -- hostname for the launched Theia-applications
   instance: ws.192.168.39.173.nip.io
 
-  # -- additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
-  # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews
+  # -- all additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
+  # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. 
+  # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
+  # all app definitions need to be added.
   # These are required to configure TLS (if enabled via hosts.tls == true)
-  additionalWildcardInstances: ["*.webview."]
+  allWildcardInstances: ["*.webview."]
 
 # -- Values related to the landing page
 # @default -- (see details below)

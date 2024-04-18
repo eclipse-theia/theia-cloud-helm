@@ -26,7 +26,7 @@ spec:
   tls:
   - hosts:
     - {{ tpl (.Values.hosts.instance | toString) . }}
-    {{- range .Values.hosts.additionalWildcardInstances }}
+    {{- range .Values.hosts.allWildcardInstances }}
     - {{ printf "'%s%s'" . $.Values.hosts.instance }}
     {{- end }}
     secretName: ws-cert-secret
@@ -35,7 +35,7 @@ spec:
   rules:
     - host: {{ tpl (.Values.hosts.instance | toString) . }}
       http:
-    {{- range .Values.hosts.additionalWildcardInstances }}
+    {{- range .Values.hosts.allWildcardInstances }}
     - host: {{ printf "'%s%s'" . $.Values.hosts.instance }}
       http:
     {{- end }}
