@@ -1,3 +1,4 @@
+{{- $logoFileName :=  printf "logo.%s" (tpl (.Values.app.logoFileExtension | toString) .) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,8 +38,8 @@ spec:
               mountPath: /usr/share/nginx/html/config.js
               subPath: config.js
             - name: landing-page-config
-              mountPath: /usr/share/nginx/html/logo.svg
-              subPath: logo.svg
+              mountPath: {{ printf "/usr/share/nginx/html/%s" $logoFileName }}
+              subPath: {{ $logoFileName }}
       {{- if .Values.landingPage.imagePullSecret }}
       imagePullSecrets:
         - name: {{ tpl (.Values.landingPage.imagePullSecret | toString) . }}

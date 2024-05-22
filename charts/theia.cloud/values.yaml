@@ -26,6 +26,11 @@ app:
   # Another way is to directly add the base64 string to the values file.
   logoData:
 
+  # -- The file extension of the logo. Must be set to match the logo respectively the logoData.
+  # This is required because browsers cannot show a binary image (e.g. png) with a svg ending
+  # and vice-versa.
+  logoFileExtension: 'svg'
+
 # -- Values related to certificates/Cert-manager
 # @default -- (see details below)
 issuer:
@@ -142,6 +147,21 @@ landingPage:
     #   label: "Different App Definition"
     # further-app-definition:
     #   label: "Further App Definition"
+
+  # -- Should showing info title and text below the launch button be disabled
+  # true hides the info title and text
+  # false shows the info title and text
+  disableInfo: false
+  # -- Optional: If specified with a value, this overrides the info text shown on the landing page.
+  # Empty values are ignored. Use `disableInfo` to deactivate showing the info completely.
+  infoText:
+  # -- Optional: If specified with a value, this overrides the title of the info text shown on the landing page.
+  # Empty values are ignored. Use `disableInfo` to deactivate showing the info completely.
+  infoTitle:
+
+  # -- Optional: If specified with a value, this overrides the message shown to the user while the session is started.
+  # Empty values are ignored and the default text is used.
+  loadingText:
 
 # -- Values related to Keycloak
 # @default -- (see details below)
