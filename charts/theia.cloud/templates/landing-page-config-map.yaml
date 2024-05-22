@@ -1,3 +1,4 @@
+{{- $logoFileExtension :=  tpl (.Values.app.logoFileExtension | toString) . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -27,12 +28,23 @@ data:
         },
         {{- end }}
       ],
+      logoFileExtension: "{{ $logoFileExtension }}",
+      disableInfo: {{ tpl (.Values.landingPage.disableInfo | toString) . }},
+      {{- if .Values.landingPage.infoText }}
+      infoText: "{{ tpl (.Values.landingPage.infoText | toString) . }}",
+      {{- end }}
+      {{- if .Values.landingPage.infoTitle }}
+      infoTitle: "{{ tpl (.Values.landingPage.infoTitle | toString) . }}",
+      {{- end }}
+      {{- if .Values.landingPage.loadingText }}
+      loadingText: "{{ tpl (.Values.landingPage.loadingText | toString) . }}",
+      {{- end }}
     };
 binaryData:
   {{- if .Values.app.logoData }}
-  {{ print "logo.svg: "}}{{ .Values.app.logoData }}
+  {{ printf "logo.%s: " $logoFileExtension }}{{ .Values.app.logoData }}
   {{- else }}
   {{- range $path, $bytes := .Files.Glob (printf "%s" .Values.app.logo)}}
-  {{ print "logo.svg: "}}{{ $.Files.Get $path | b64enc }}
+  {{ printf "logo.%s: " $logoFileExtension }}{{ $.Files.Get $path | b64enc }}
   {{ end }}
   {{- end }}

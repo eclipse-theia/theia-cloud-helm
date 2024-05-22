@@ -4,6 +4,7 @@
 
 - [theia-cloud-crds] Add option field to CRDs and increase version to `Session.v1beta8`, `Workspace.v1beta5` and `AppDefinition.v1beta10` [#55](https://github.com/eclipsesource/theia-cloud-helm/pull/55) | [#293](https://github.com/eclipsesource/theia-cloud/pull/293)
 - [theia-cloud] Add configurable image preloading [#56](https://github.com/eclipsesource/theia-cloud-helm/pull/56)
+- [theia-cloud] Add landing page configuration options for logo file extension, loading text, user info title & text [#58](https://github.com/eclipsesource/theia-cloud-helm/pull/58) - contributed on behalf of STMicroelectronics
 
 ## [0.10.0] - 2024-04-02
 
