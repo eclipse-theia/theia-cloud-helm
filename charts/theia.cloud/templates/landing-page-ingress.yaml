@@ -7,7 +7,9 @@ metadata:
     {{- if not .Values.hosts.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     {{- end }}
+    {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
+    {{- end }}
   namespace: {{ .Release.Namespace }}
 spec:
   ingressClassName: nginx

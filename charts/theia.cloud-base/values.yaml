@@ -1,3 +1,7 @@
+issuerca:
+  # -- name for the issuer preparing a self signed CA certificate
+  name: theia-cloud-ca-certificate-signer
+
 issuerprod:
   # -- name for the let's encrypt production cluster issuer
   name: letsencrypt-prod
@@ -17,3 +21,7 @@ operatorrole:
 servicerole:
   # -- name for the services' cluster role
   name: service-api-access
+
+certmanager:
+  # -- the namespace where the cert-manager is installed
+  namespace: cert-manager

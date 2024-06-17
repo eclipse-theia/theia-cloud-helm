@@ -94,6 +94,9 @@ hosts:
     landing: trynow
     # -- path for deployed instances
     instance: instances
+    # -- whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress
+    # only needed when hosts.usePaths == true and hosts.tls == true
+    tlsSecretName: false
 
   # -- hostname of the REST-API
   service: service.192.168.39.173.nip.io
@@ -112,6 +115,13 @@ hosts:
 
   # -- hostname for the launched Theia-applications
   instance: ws.192.168.39.173.nip.io
+
+  # -- all additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
+  # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. 
+  # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
+  # all app definitions need to be added.
+  # These are required to configure TLS (if enabled via hosts.tls == true)
+  allWildcardInstances: ["*.webview."]
 
 # -- Values related to the landing page
 # @default -- (see details below)
@@ -304,12 +314,18 @@ ingress:
   # the name
   instanceName: "theia-cloud-demo-ws-ingress"
 
+  # -- When set to true the cert-manager.io annotations will be set.
+  # When false certificate management is handled outside of Theia Cloud.
+  certManagerAnnotations: true
+
   # -- The cluster issuer to use
+  # Only needed when ingress.certManagerAnnotations is true
   clusterIssuer: letsencrypt-prod
 
   # -- When set to true the cert-manager.io/common-name annotation will be set.
   # This is only required when the issued certificate by the cert-manager misses a
   # common-name
+  # Only needed when ingress.certManagerAnnotations is true
   theiaCloudCommonName: false
 
   # -- Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).

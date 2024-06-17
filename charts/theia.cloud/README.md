@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.11.0-next.0](https://img.shields.io/badge/Version-0.11.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
+![Version: 0.11.0-next.3](https://img.shields.io/badge/Version-0.11.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
 
 A Helm chart for Theia.cloud
 
@@ -12,6 +12,7 @@ A Helm chart for Theia.cloud
 | app.id | string | `"asdfghjkl"` | The app id which is used in the communication between website and REST-API as a spam migitation. This id is public. Please choose an random generated string. |
 | app.logo | string | `"logos/theiablueprint.svg"` | The logo of the application that should be displayed on the landing pages |
 | app.logoData | string | `nil` | set app.logoData=$(cat path/to/file.svg | base64 -w 0 -) Another way is to directly add the base64 string to the values file. |
+| app.logoFileExtension | string | `"svg"` | The file extension of the logo. Must be set to match the logo respectively the logoData. This is required because browsers cannot show a binary image (e.g. png) with a svg ending and vice-versa. |
 | app.name | string | `"Theia Blueprint"` | The name of the application that should be displayed on the landing pages |
 | demoApplication | object | (see details below) | Information about the demo application to be installed |
 | demoApplication.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the main application's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
@@ -25,6 +26,7 @@ A Helm chart for Theia.cloud
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
+| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. These are required to configure TLS (if enabled via hosts.tls == true) |
 | hosts.instance | string | `"ws.192.168.39.173.nip.io"` | hostname for the launched Theia-applications |
 | hosts.landing | string | `"theia.cloud.192.168.39.173.nip.io"` | hostname of the landing page |
 | hosts.paths | object | (see details below) | Only needed when usePaths == true. Contains the baseHost and paths for all services |
@@ -32,6 +34,7 @@ A Helm chart for Theia.cloud
 | hosts.paths.instance | string | `"instances"` | path for deployed instances |
 | hosts.paths.landing | string | `"trynow"` | path of the landing page |
 | hosts.paths.service | string | `"servicex"` | path of the REST service |
+| hosts.paths.tlsSecretName | bool | `false` | whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress only needed when hosts.usePaths == true and hosts.tls == true |
 | hosts.service | string | `"service.192.168.39.173.nip.io"` | hostname of the REST-API |
 | hosts.servicePort | int | `8081` | service port (default: 8081) |
 | hosts.serviceProtocol | string | `"https"` | protocol of the REST-API |
@@ -40,10 +43,11 @@ A Helm chart for Theia.cloud
 | hosts.useServicePortInHostname | bool | `false` | whether the service port needs to be part of the service URL (default: false) |
 | imagePullPolicy | string | `"Always"` | The default imagePullPolicy for containers of theia cloud. Can be overridden for individual components by specifying the imagePullPolicy variable there. Possible values: - Always - IfNotPresent - Never |
 | ingress | object | (see details below) | Values to influence the ingresses |
-| ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use |
+| ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. When false certificate management is handled outside of Theia Cloud. |
+| ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
 | ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point theia.cloud to the ingress via the name |
 | ingress.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
-| ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name |
+| ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
 | issuer.email | string | `"mmorlock@example.com"` | EMail address of the certificate issuer. |
 | keycloak | object | (see details below) | Values related to Keycloak |
@@ -56,10 +60,14 @@ A Helm chart for Theia.cloud
 | landingPage | object | (see details below) | Values related to the landing page |
 | landingPage.additionalApps | string | `nil` | The page may show these additional apps in a drop down. This is a map. The key maps to the app definition name The value is the label that is supposed to be shown in the UI  Example: different-app-definition:   label: "Different App Definition" further-app-definition:   label: "Further App Definition" |
 | landingPage.appDefinition | string | `"theia-cloud-demo"` | the app id to launch |
+| landingPage.disableInfo | bool | `false` | Should showing info title and text below the launch button be disabled true hides the info title and text false shows the info title and text |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
 | landingPage.image | string | `"theiacloud/theia-cloud-landing-page:0.11.0-next"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | landingPage.imagePullSecret | string | `nil` | Optional: the image pull secret |
+| landingPage.infoText | string | `nil` | Optional: If specified with a value, this overrides the info text shown on the landing page. Empty values are ignored. Use `disableInfo` to deactivate showing the info completely. |
+| landingPage.infoTitle | string | `nil` | Optional: If specified with a value, this overrides the title of the info text shown on the landing page. Empty values are ignored. Use `disableInfo` to deactivate showing the info completely. |
+| landingPage.loadingText | string | `nil` | Optional: If specified with a value, this overrides the message shown to the user while the session is started. Empty values are ignored and the default text is used. |
 | monitor | object | (see details below) | Values to influence the monitor initialization on the operator |
 | monitor.activityTracker | object | (see details below) | Values to influence the activityTracker module |
 | monitor.activityTracker.enable | bool | `true` | Should the activityTracker module be enabled |

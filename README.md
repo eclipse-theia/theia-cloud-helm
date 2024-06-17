@@ -44,5 +44,5 @@ Furthermore, the new version, together with a release estimation date, should be
 ## How to generate Chart READMEs
 
 ```bash
-docker run --rm --volume "$(pwd)/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
+docker pull jnorwood/helm-docs:latest && docker run --rm --volume "$(pwd)/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
 ```

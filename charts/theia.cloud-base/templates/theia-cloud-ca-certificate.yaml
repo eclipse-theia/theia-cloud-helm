@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: theia-cloud-ca-certificate
+  namespace: {{ .Values.certmanager.namespace }}
+spec:
+  commonName: "Theia Cloud CA"
+  secretName: theia-cloud-ca-key-pair
+  isCA: true
+  issuerRef:
+    name: {{ .Values.issuerca.name }}
+    kind: ClusterIssuer
+  duration: 2160h
+  renewBefore: 360h
