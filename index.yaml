@@ -3,6 +3,16 @@ entries:
   theia-cloud:
   - apiVersion: v2
     appVersion: 0.11.0-next
+    created: "2024-06-17T08:45:12.775689065Z"
+    description: A Helm chart for Theia.cloud
+    digest: ddf6d65e76ef0cba47e8cfa2eb82e263c326f5f77dca6fb8e7df849515b8dd52
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-0.11.0-next.3/theia-cloud-0.11.0-next.3.tgz
+    version: 0.11.0-next.3
+  - apiVersion: v2
+    appVersion: 0.11.0-next
     created: "2024-05-23T08:43:39.009481626Z"
     description: A Helm chart for Theia.cloud
     digest: 170b5194d380577aa99032d53e940e2d8862a17a61d1b37ddbfedd9a8be3a1a1
@@ -324,6 +334,16 @@ entries:
   theia-cloud-base:
   - apiVersion: v2
     appVersion: 0.11.0-next
+    created: "2024-06-17T08:45:12.94887218Z"
+    description: Theia-cloud base chart
+    digest: a945bf4d03fd1af2db22ee4a1aad3b0d6a2b5ad8f5ce2c8e406742d4158fe724
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.11.0-next.1/theia-cloud-base-0.11.0-next.1.tgz
+    version: 0.11.0-next.1
+  - apiVersion: v2
+    appVersion: 0.11.0-next
     created: "2024-04-11T13:40:04.84988496Z"
     description: Theia-cloud base chart
     digest: fd66b88475f65cb3039ed59c4a0df986c4e8421e30dc9f29f7d11efaae949e23
@@ -553,6 +573,16 @@ entries:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-base-0.7.2/theia-cloud-base-0.7.2.tgz
     version: 0.7.2
   theia-cloud-crds:
+  - apiVersion: v2
+    appVersion: 0.11.0-next
+    created: "2024-06-17T08:45:13.083627949Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
+    digest: 14a2044338faa505121140abbf88cc2d464b7199000a3013294c11f54172d6dd
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.11.0-next.2/theia-cloud-crds-0.11.0-next.2.tgz
+    version: 0.11.0-next.2
   - apiVersion: v2
     appVersion: 0.11.0-next
     created: "2024-04-18T07:45:26.386346442Z"
