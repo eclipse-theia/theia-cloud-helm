@@ -10,7 +10,7 @@ metadata:
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia.Cloud"
+    cert-manager.io/common-name: "Theia Cloud"
     {{- end }}
     {{- end }}
     nginx.ingress.kubernetes.io/rewrite-target: /service$1

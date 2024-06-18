@@ -11,7 +11,7 @@ metadata:
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia.Cloud"
+    cert-manager.io/common-name: "Theia Cloud"
     {{- end }}
     acme.cert-manager.io/http01-ingress-class: nginx
     {{- end }}

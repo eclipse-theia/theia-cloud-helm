@@ -2,7 +2,7 @@
 
 ![Version: 0.11.0-next.3](https://img.shields.io/badge/Version-0.11.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
 
-A Helm chart for Theia.cloud
+A Helm chart for Theia Cloud
 
 ## Values
 
@@ -45,7 +45,7 @@ A Helm chart for Theia.cloud
 | ingress | object | (see details below) | Values to influence the ingresses |
 | ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. When false certificate management is handled outside of Theia Cloud. |
 | ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
-| ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point theia.cloud to the ingress via the name |
+| ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
 | ingress.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
@@ -95,7 +95,7 @@ A Helm chart for Theia.cloud
 | preloading.enable | bool | `true` | Is image preloading enabled. |
 | preloading.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the image preloading containers. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | preloading.images | list | `[]` | Images to preload. Images must support running /bin/sh. If the list is empty and demoApplication.install == true, demoApplication.name is automatically added. |
-| service | object | (see details below) | Values of the Theia.cloud REST service |
+| service | object | (see details below) | Values of the Theia Cloud REST service |
 | service.image | string | `"theiacloud/theia-cloud-service:0.11.0-next"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |

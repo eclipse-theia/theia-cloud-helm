@@ -279,7 +279,7 @@ operator:
           </Console>
         </Appenders>
         <Loggers>
-          <Logger name="org.eclipse.theia.cloud.operator" level="info"
+          <Logger name="org.eclipse.theiacloud.operator" level="info"
             additivity="false">
             <AppenderRef ref="Console" />
           </Logger>
@@ -292,7 +292,7 @@ operator:
   # -- The version to use of the quay.io/oauth2-proxy/oauth2-proxy image
   oAuth2ProxyVersion: "v7.5.1"
 
-# -- Values of the Theia.cloud REST service
+# -- Values of the Theia Cloud REST service
 # @default -- (see details below)
 service:
   # -- The image to use
@@ -310,7 +310,7 @@ service:
 ingress:
   # -- The name of the ingress which will be updated to publish new theia application.
   # If this is not existing it will be created.
-  # You may chose to set the ingress up yourself and point theia.cloud to the ingress via
+  # You may chose to set the ingress up yourself and point Theia Cloud to the ingress via
   # the name
   instanceName: "theia-cloud-demo-ws-ingress"
 
