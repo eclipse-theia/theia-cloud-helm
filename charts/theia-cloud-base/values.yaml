@@ -1,8 +1,10 @@
 issuerca:
+  useExisting: false
   # -- name for the issuer preparing a self signed CA certificate
   name: theia-cloud-ca-certificate-signer
 
 issuerprod:
+  useExisting: false
   # -- name for the let's encrypt production cluster issuer
   name: letsencrypt-prod
 
