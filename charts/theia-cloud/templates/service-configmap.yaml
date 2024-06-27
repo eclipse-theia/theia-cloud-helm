@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   APPID: {{ tpl (.Values.app.id | toString) . }}
-  SERVICE_PORT: {{ tpl (.Values.hosts.servicePort | toString) . | quote }}
+  SERVICE_PORT: {{ tpl (.Values.service.port | toString) . | quote }}
   KEYCLOAK_ENABLE: {{ tpl (.Values.keycloak.enable | toString) . | quote }}
   {{- if eq (tpl (.Values.keycloak.enable | toString) .) "true" }}
   KEYCLOAK_SERVERURL: {{ tpl (.Values.keycloak.authUrl | toString) . }}realms/{{ tpl (.Values.keycloak.realm | toString) . }}

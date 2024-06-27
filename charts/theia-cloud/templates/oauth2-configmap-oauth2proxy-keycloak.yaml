@@ -26,10 +26,10 @@ data:
     reverse_proxy="true"
     # email_domains=["*"]
     {{- if .Values.hosts.usePaths }}
-    cookie_domains=["{{ tpl (.Values.hosts.paths.baseHost | toString) . }}"]
-    whitelist_domains=["{{ tpl (.Values.hosts.paths.baseHost | toString) . }}:*",".google.com:*"]
+    cookie_domains=["{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"]
+    whitelist_domains=["{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}:*",".google.com:*"]
     {{- else }}
-    cookie_domains=["{{ tpl (.Values.hosts.instance | toString) . }}"]
-    whitelist_domains=["{{ tpl (.Values.hosts.instance | toString) . }}:*",".google.com:*"]
+    cookie_domains=["{{ tpl (.Values.hosts.configuration.instance | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"]
+    whitelist_domains=["{{ tpl (.Values.hosts.configuration.instance | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}:*",".google.com:*"]
     {{- end }}
     custom_templates_dir="/templates"

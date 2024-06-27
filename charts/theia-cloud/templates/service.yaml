@@ -26,7 +26,7 @@ spec:
         imagePullPolicy: {{ if .Values.service.imagePullPolicy }}{{ tpl (.Values.service.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
         ports:
         - name: http
-          containerPort: {{ tpl (.Values.hosts.servicePort | toString) . }}
+          containerPort: {{ tpl (.Values.service.port | toString) . }}
           protocol: TCP
         envFrom:
         - configMapRef:
@@ -50,5 +50,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: {{ tpl (.Values.hosts.servicePort | toString) . }}
-      targetPort: {{ tpl (.Values.hosts.servicePort | toString) . }}
+      port: {{ tpl (.Values.service.port | toString) . }}
+      targetPort: {{ tpl (.Values.service.port | toString) . }}

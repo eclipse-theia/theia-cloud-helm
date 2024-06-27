@@ -79,48 +79,24 @@ hosts:
   # false uses an explicit host for each service
   usePaths: false
 
-  # -- Does Theia Cloud expect TLS connections (true)
-  # or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false)
-  tls: true
-
-  # -- Only needed when usePaths == true. Contains the baseHost and paths for all services
+  # -- Configuration for the hostnames. Contains the baseHost and afixes for all services
   # @default -- (see details below)
-  paths:
-    # -- baseHost configures the host for all services when usePaths == true. Otherwise the explicit host definitions of the services are used.
+  configuration:
+    # -- baseHost configures the host for all services. 
+    # Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path
     baseHost: 192.168.39.173.nip.io
-    # -- path of the REST service
+    # -- afix of the REST service
     service: servicex
-    # -- path of the landing page
+    # -- afix of the landing page
     landing: trynow
-    # -- path for deployed instances
+    # -- afix for deployed instances
     instance: instances
-    # -- whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress
-    # only needed when hosts.usePaths == true and hosts.tls == true
-    tlsSecretName: false
-
-  # -- hostname of the REST-API
-  service: service.192.168.39.173.nip.io
-
-  # -- protocol of the REST-API
-  serviceProtocol: https
-
-  # -- service port (default: 8081)
-  servicePort: 8081
-
-  # -- whether the service port needs to be part of the service URL (default: false)
-  useServicePortInHostname: false
-
-  # -- hostname of the landing page
-  landing: theia.cloud.192.168.39.173.nip.io
-
-  # -- hostname for the launched Theia-applications
-  instance: ws.192.168.39.173.nip.io
 
   # -- all additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
   # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. 
   # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
   # all app definitions need to be added.
-  # These are required to configure TLS (if enabled via hosts.tls == true)
+  # These are required to configure TLS (if enabled via ingress.tls == true)
   allWildcardInstances: ["*.webview."]
 
 # -- Values related to the landing page
@@ -279,7 +255,7 @@ operator:
           </Console>
         </Appenders>
         <Loggers>
-          <Logger name="org.eclipse.theiacloud.operator" level="info"
+          <Logger name="org.eclipse.theia.cloud.operator" level="info"
             additivity="false">
             <AppenderRef ref="Console" />
           </Logger>
@@ -305,6 +281,12 @@ service:
   # -- Optional: the image pull secret
   imagePullSecret:
 
+  # -- service port (default: 8081)
+  port: 8081
+
+  # -- protocol of the REST-API
+  protocol: https
+
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
@@ -315,6 +297,7 @@ ingress:
   instanceName: "theia-cloud-demo-ws-ingress"
 
   # -- When set to true the cert-manager.io annotations will be set.
+  # Only used when ingress.addTLSSecretName === true
   # When false certificate management is handled outside of Theia Cloud.
   certManagerAnnotations: true
 
@@ -331,6 +314,14 @@ ingress:
   # -- Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).
   # Defaults to 1m. Setting size to 0 disables checking of client request body size.
   proxyBodySize: 1m
+
+  # -- Does Theia Cloud expect TLS connections (true)
+  # or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false)
+  tls: true
+
+  # -- whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress
+  # only needed when ingress.tls == true
+  addTLSSecretName: true
 
 operatorrole:
   name: operator-api-access

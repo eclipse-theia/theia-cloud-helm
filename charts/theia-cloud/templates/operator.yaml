@@ -45,9 +45,9 @@ spec:
           - {{ tpl (.Values.operator.wondershaperImage | toString) . }}
           - "--serviceUrl"
           {{- if .Values.hosts.usePaths }}
-          - {{ tpl (.Values.hosts.serviceProtocol | toString) . }}://{{ tpl (.Values.hosts.paths.baseHost | toString) . }}/{{ tpl (.Values.hosts.paths.service | toString) . }}
+          - {{ tpl (.Values.service.protocol | toString) . }}://{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}/{{ tpl (.Values.hosts.configuration.service | toString) . }}
           {{- else}}
-          - {{ tpl (.Values.hosts.serviceProtocol | toString) . }}://{{ tpl (.Values.hosts.service | toString) . }}{{ if .Values.hosts.useServicePortInHostname }}:{{ tpl (.Values.hosts.servicePort | toString) . }}{{ end }}
+          - {{ tpl (.Values.service.protocol | toString) . }}://{{ tpl (.Values.hosts.configuration.service | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
           {{- end }}
           - "--sessionsPerUser"
           - "{{ tpl (.Values.operator.sessionsPerUser | toString) . }}"
@@ -55,13 +55,13 @@ spec:
           - {{ tpl (.Values.app.id | toString) . }}
           {{- if .Values.hosts.usePaths }}
           - "--instancesHost"
-          - "{{ tpl (.Values.hosts.paths.baseHost | toString) . }}"
+          - "{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"
           - "--usePaths"
           - "--instancesPath"
-          - "{{ tpl (.Values.hosts.paths.instance | toString) . }}"
+          - "{{ tpl (.Values.hosts.configuration.instance | toString) . }}"
           {{- else }}
           - "--instancesHost"
-          - "{{ tpl (.Values.hosts.instance | toString) . }}"
+          - "{{ tpl (.Values.hosts.configuration.instance | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"
           {{- end }}
           - "--storageClassName"
           - "{{ tpl (.Values.operator.storageClassName | toString) . }}"
