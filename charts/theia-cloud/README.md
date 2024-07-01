@@ -1,8 +1,8 @@
 # theia-cloud
 
-![Version: 0.11.0-next.3](https://img.shields.io/badge/Version-0.11.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
+![Version: 0.11.0-next.4](https://img.shields.io/badge/Version-0.11.0--next.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0-next](https://img.shields.io/badge/AppVersion-0.11.0--next-informational?style=flat-square)
 
-A Helm chart for Theia.cloud
+A Helm chart for Theia Cloud
 
 ## Values
 
@@ -26,28 +26,22 @@ A Helm chart for Theia.cloud
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
-| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. These are required to configure TLS (if enabled via hosts.tls == true) |
-| hosts.instance | string | `"ws.192.168.39.173.nip.io"` | hostname for the launched Theia-applications |
-| hosts.landing | string | `"theia.cloud.192.168.39.173.nip.io"` | hostname of the landing page |
-| hosts.paths | object | (see details below) | Only needed when usePaths == true. Contains the baseHost and paths for all services |
-| hosts.paths.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services when usePaths == true. Otherwise the explicit host definitions of the services are used. |
-| hosts.paths.instance | string | `"instances"` | path for deployed instances |
-| hosts.paths.landing | string | `"trynow"` | path of the landing page |
-| hosts.paths.service | string | `"servicex"` | path of the REST service |
-| hosts.paths.tlsSecretName | bool | `false` | whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress only needed when hosts.usePaths == true and hosts.tls == true |
-| hosts.service | string | `"service.192.168.39.173.nip.io"` | hostname of the REST-API |
-| hosts.servicePort | int | `8081` | service port (default: 8081) |
-| hosts.serviceProtocol | string | `"https"` | protocol of the REST-API |
-| hosts.tls | bool | `true` | Does Theia Cloud expect TLS connections (true) or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false) |
+| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. These are required to configure TLS (if enabled via ingress.tls == true) |
+| hosts.configuration | object | (see details below) | Configuration for the hostnames. Contains the baseHost and afixes for all services |
+| hosts.configuration.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services.  Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path |
+| hosts.configuration.instance | string | `"instances"` | afix for deployed instances |
+| hosts.configuration.landing | string | `"trynow"` | afix of the landing page |
+| hosts.configuration.service | string | `"servicex"` | afix of the REST service |
 | hosts.usePaths | bool | `false` | Use paths configures that all services should run on the same host but on different paths. true uses paths false uses an explicit host for each service |
-| hosts.useServicePortInHostname | bool | `false` | whether the service port needs to be part of the service URL (default: false) |
 | imagePullPolicy | string | `"Always"` | The default imagePullPolicy for containers of theia cloud. Can be overridden for individual components by specifying the imagePullPolicy variable there. Possible values: - Always - IfNotPresent - Never |
 | ingress | object | (see details below) | Values to influence the ingresses |
-| ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. When false certificate management is handled outside of Theia Cloud. |
+| ingress.addTLSSecretName | bool | `true` | whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress only needed when ingress.tls == true |
+| ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. Only used when ingress.addTLSSecretName === true When false certificate management is handled outside of Theia Cloud. |
 | ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
-| ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point theia.cloud to the ingress via the name |
+| ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
 | ingress.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
+| ingress.tls | bool | `true` | Does Theia Cloud expect TLS connections (true) or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false) |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
 | issuer.email | string | `"mmorlock@example.com"` | EMail address of the certificate issuer. |
 | keycloak | object | (see details below) | Values related to Keycloak |
@@ -95,10 +89,12 @@ A Helm chart for Theia.cloud
 | preloading.enable | bool | `true` | Is image preloading enabled. |
 | preloading.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the image preloading containers. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | preloading.images | list | `[]` | Images to preload. Images must support running /bin/sh. If the list is empty and demoApplication.install == true, demoApplication.name is automatically added. |
-| service | object | (see details below) | Values of the Theia.cloud REST service |
+| service | object | (see details below) | Values of the Theia Cloud REST service |
 | service.image | string | `"theiacloud/theia-cloud-service:0.11.0-next"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |
+| service.port | int | `8081` | service port (default: 8081) |
+| service.protocol | string | `"https"` | protocol of the REST-API |
 | servicerole.name | string | `"service-api-access"` |  |
 
 ----------------------------------------------

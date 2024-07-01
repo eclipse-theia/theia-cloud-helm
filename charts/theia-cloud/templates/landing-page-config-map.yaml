@@ -15,9 +15,9 @@ data:
       keycloakRealm: "{{ tpl (.Values.keycloak.realm | toString) . }}",
       keycloakClientId: "{{ tpl (.Values.keycloak.clientId | toString) . }}",
       {{- if .Values.hosts.usePaths }}
-      serviceUrl: "{{ tpl (.Values.hosts.serviceProtocol | toString) . }}://{{ tpl (.Values.hosts.paths.baseHost | toString) . }}/{{ tpl (.Values.hosts.paths.service | toString) . }}",
+      serviceUrl: "{{ tpl (.Values.service.protocol | toString) . }}://{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}/{{ tpl (.Values.hosts.configuration.service | toString) . }}",
       {{- else }}
-      serviceUrl: "{{ tpl (.Values.hosts.serviceProtocol | toString) . }}://{{ tpl (.Values.hosts.service | toString) . }}{{ if .Values.hosts.useServicePortInHostname }}:{{ tpl (.Values.hosts.servicePort | toString) . }}{{ end }}",
+      serviceUrl: "{{ tpl (.Values.service.protocol | toString) . }}://{{ tpl (.Values.hosts.configuration.service | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}",
       {{- end }}
       appDefinition: "{{ tpl (.Values.landingPage.appDefinition | toString) . }}",
       additionalApps: [

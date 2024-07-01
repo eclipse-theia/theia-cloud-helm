@@ -1,41 +1,41 @@
-{{- if .Values.hosts.usePaths }}
+{{- if not .Values.hosts.usePaths }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: service-ingress
   annotations:
-    {{- if not .Values.hosts.tls }}
+    {{- if not .Values.ingress.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     {{- end }}
-    nginx.ingress.kubernetes.io/rewrite-target: /service$1
-    {{- if .Values.hosts.paths.tlsSecretName }}
+    {{- if .Values.ingress.addTLSSecretName }}
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia.Cloud"
+    cert-manager.io/common-name: "Theia Cloud"
     {{- end }}
     {{- end }}
     {{- end }}
+    nginx.ingress.kubernetes.io/rewrite-target: /service$1
   namespace: {{ .Release.Namespace }}
 spec:
   ingressClassName: nginx
-  {{- if .Values.hosts.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
-    {{- if .Values.hosts.paths.tlsSecretName }}
+    - {{ tpl (.Values.hosts.configuration.service | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+    {{- if .Values.ingress.addTLSSecretName }}
     secretName: service-cert-secret
     {{- end }}
   {{- end }}
   rules:
-  - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+  - host: {{ tpl (.Values.hosts.configuration.service | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
     http:
       paths:
       - backend:
           service:
             name: service-service
             port:
-              number: {{ tpl (.Values.hosts.servicePort | toString) . }}
-        path: /{{ tpl (.Values.hosts.paths.service | toString) . }}/service($|(/.*))
+              number: {{ tpl (.Values.service.port | toString) . }}
+        path: /service($|(/.*))
         pathType: ImplementationSpecific
 {{- end }}

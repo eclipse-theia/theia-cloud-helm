@@ -4,23 +4,27 @@ kind: Ingress
 metadata:
   name: landing-page-ingress
   annotations:
-    {{- if not .Values.hosts.tls }}
+    {{- if not .Values.ingress.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     {{- end }}
+    {{- if .Values.ingress.addTLSSecretName }}
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
+    {{- end }}
     {{- end }}
   namespace: {{ .Release.Namespace }}
 spec:
   ingressClassName: nginx
-  {{- if .Values.hosts.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.landing | toString) . }}
+    - {{ tpl (.Values.hosts.configuration.landing | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+    {{- if .Values.ingress.addTLSSecretName }}
     secretName: landing-page-cert-secret
+    {{- end }}
   {{- end }}
   rules:
-  - host: {{ tpl (.Values.hosts.landing | toString) . }}
+  - host: {{ tpl (.Values.hosts.configuration.landing | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
     http:
       paths:
       - backend:

@@ -4,17 +4,17 @@ kind: Ingress
 metadata:
   name: landing-page-ingress
   annotations:
-    {{- if not .Values.hosts.tls }}
+    {{- if not .Values.ingress.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     {{- end }}
-    {{- if .Values.hosts.paths.landing }}
+    {{- if .Values.hosts.configuration.landing }}
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     {{- end }}
     # Rewrite all URLs not ending with a segment containing . or ? with a trailing slash
     # This is necessary to correctly resolve relative paths (e.g. for css files) from the landing page.
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^([^.?]*[^/])$ $1/ redirect;
-    {{- if .Values.hosts.paths.tlsSecretName }}
+    {{- if .Values.ingress.addTLSSecretName }}
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
     {{- end }}
@@ -22,16 +22,16 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   ingressClassName: nginx
-  {{- if .Values.hosts.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
-    {{- if .Values.hosts.paths.tlsSecretName }}
+    - {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+    {{- if .Values.ingress.addTLSSecretName }}
     secretName: landing-page-cert-secret
     {{- end }}
   {{- end }}
   rules:
-  - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+  - host: {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
     http:
       paths:
       - backend:
@@ -39,6 +39,6 @@ spec:
             name: landing-page-service
             port:
               number: 80
-        path: /{{ if .Values.hosts.paths.landing }}{{ tpl (.Values.hosts.paths.landing | toString) . }}(/|$)(.*){{ end }}
+        path: /{{ if .Values.hosts.configuration.landing }}{{ tpl (.Values.hosts.configuration.landing | toString) . }}(/|$)(.*){{ end }}
         pathType: Prefix
 {{- end }}

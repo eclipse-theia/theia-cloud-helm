@@ -11,6 +11,20 @@
 - [theia-cloud] Add `hosts.paths.tlsSecretName` to values which allows to optionally set the tls secretName on the ingress tls section when using paths [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 - [theia-cloud] Add `ingress.certManagerAnnotations` to values which allows to configure whether cert manager annotations will be added to the ingresses [#57](https://github.com/eclipsesource/theia-cloud-helm/pull/57)
 
+### Breaking Changes in 0.11.0
+
+In preparation for a first major release we will introduce some breaking changes in order to make the helm chart configuration easier to understand.
+
+- [theia-cloud] move `hosts.tls` to `ingress.tls` [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] move `hosts.paths.tlsSecretName` to `ingress.addTLSSecretName` (default is set to `true` which is a change for path based installs) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] move `hosts.paths` to `hosts.configuration` [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] remove `hosts.useServicePortInHostname` (no replacement) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] move `hosts.servicePort` to `service.port` [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] move `hosts.serviceProtocol` to `service.protocol` [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] removed `hosts.service` (now `hosts.configuration.service` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] removed `hosts.landing` (now `hosts.configuration.landing` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] removed `hosts.instance` (now `hosts.configuration.instance` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+
 ## [0.10.0] - 2024-04-02
 
 - [theia-cloud-crds] Provide conversion webhook for newer versions of CRDs [#49](https://github.com/eclipsesource/theia-cloud-helm/pull/49) | [#283](https://github.com/eclipsesource/theia-cloud/pull/283) - contributed on behalf of STMicroelectronics

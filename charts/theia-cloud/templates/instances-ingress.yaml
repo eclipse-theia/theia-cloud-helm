@@ -1,46 +1,46 @@
-{{- if .Values.hosts.usePaths }}
+{{- if not .Values.hosts.usePaths }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ tpl (.Values.ingress.instanceName | toString) . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    {{- if not .Values.hosts.tls }}
+    {{- if not .Values.ingress.tls }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    {{- end }}
+    {{- if .Values.ingress.addTLSSecretName }}
+    {{- if .Values.ingress.certManagerAnnotations }}
+    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
+    {{- if .Values.ingress.theiaCloudCommonName }}
+    cert-manager.io/common-name: "Theia Cloud"
+    {{- end }}
+    acme.cert-manager.io/http01-ingress-class: nginx
+    {{- end }}
     {{- end }}
     nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header 'X-Forwarded-Uri' $request_uri;
     nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.proxyBodySize | toString) . }}
-    {{- if .Values.hosts.paths.tlsSecretName }}
-    {{- if .Values.ingress.certManagerAnnotations }}
-    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
-    {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia.Cloud"
-    {{- end }}
-    acme.cert-manager.io/http01-ingress-class: nginx
-    {{- end }}
-    {{- end }}
 spec:
   ingressClassName: nginx
-  {{- if .Values.hosts.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+    - {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
     {{- range .Values.hosts.allWildcardInstances }}
-    - {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
+    - {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
     {{- end }}
-    {{- if .Values.hosts.paths.tlsSecretName }}
+    {{- if .Values.ingress.addTLSSecretName }}
     secretName: ws-cert-secret
     {{- end }}
   {{- end }}
   {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
-    - host: {{ tpl (.Values.hosts.paths.baseHost | toString) . }}
+    - host: {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
       http:
     {{- range .Values.hosts.allWildcardInstances }}
-    - host: {{ printf "'%s%s'" . $.Values.hosts.paths.baseHost }}
+    - host: {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
       http:
     {{- end }}
   {{- else }}
