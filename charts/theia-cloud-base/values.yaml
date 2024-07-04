@@ -1,10 +1,10 @@
 issuerca:
-  enable: false
+  enable: true
   # -- name for the issuer preparing a self signed CA certificate
   name: theia-cloud-ca-certificate-signer
 
 issuerprod:
-  enable: false
+  enable: true
   # -- name for the let's encrypt production cluster issuer
   name: letsencrypt-prod
 

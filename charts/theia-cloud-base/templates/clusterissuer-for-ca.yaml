@@ -1,4 +1,4 @@
-{{- if eq .Values.issuerca.enable false }}
+{{- if .Values.issuerca.enable }}
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
