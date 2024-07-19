@@ -13,23 +13,8 @@ app:
   # as a spam migitation. This id is public. Please choose an random generated string.
   id: asdfghjkl
 
-  # -- The name of the application that should be displayed on the landing pages
+  # -- The name of the application that may be displayed e.g. on the landing pages
   name: Theia Blueprint
-
-  # -- The logo of the application that should be displayed on the landing pages
-  logo: logos/theiablueprint.svg
-
-  # -- Set a base64 encoded svg image that should be displayed on the landing pages.
-  # If this is given, the logo value above is ignored.
-  # On Linux, you can directly generate the base64 string when applying the chart like this:
-  # --set app.logoData=$(cat path/to/file.svg | base64 -w 0 -)
-  # Another way is to directly add the base64 string to the values file.
-  logoData:
-
-  # -- The file extension of the logo. Must be set to match the logo respectively the logoData.
-  # This is required because browsers cannot show a binary image (e.g. png) with a svg ending
-  # and vice-versa.
-  logoFileExtension: 'svg'
 
 # -- Values related to certificates/Cert-manager
 # @default -- (see details below)
@@ -148,6 +133,21 @@ landingPage:
   # -- Optional: If specified with a value, this overrides the message shown to the user while the session is started.
   # Empty values are ignored and the default text is used.
   loadingText:
+
+  # -- The logo of the application that should be displayed on the landing pages
+  logo: logos/theiablueprint.svg
+
+  # -- Set a base64 encoded svg image that should be displayed on the landing pages.
+  # If this is given, the logo value above is ignored.
+  # On Linux, you can directly generate the base64 string when applying the chart like this:
+  # --set landingPage.logoData=$(cat path/to/file.svg | base64 -w 0 -)
+  # Another way is to directly add the base64 string to the values file.
+  logoData:
+
+  # -- The file extension of the logo. Must be set to match the logo respectively the logoData.
+  # This is required because browsers cannot show a binary image (e.g. png) with a svg ending
+  # and vice-versa.
+  logoFileExtension: 'svg'
 
 # -- Values related to Keycloak
 # @default -- (see details below)

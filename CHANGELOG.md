@@ -24,6 +24,7 @@ In preparation for a first major release we will introduce some breaking changes
 - [theia-cloud] removed `hosts.service` (now `hosts.configuration.service` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
 - [theia-cloud] removed `hosts.landing` (now `hosts.configuration.landing` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
 - [theia-cloud] removed `hosts.instance` (now `hosts.configuration.instance` + `hosts.configuration.baseHost`) [#59](https://github.com/eclipsesource/theia-cloud-helm/pull/59)
+- [theia-cloud] move `app.logo`, `app.logoData`, and `app.logoFileExtension` to `landingPage.logo`, `landingPage.logoData`, and `landingPage.logoFileExtension` [#63](https://github.com/eclipsesource/theia-cloud-helm/pull/63)
 
 ## [0.10.0] - 2024-04-02
 
