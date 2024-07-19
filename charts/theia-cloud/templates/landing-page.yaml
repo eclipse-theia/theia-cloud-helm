@@ -1,4 +1,4 @@
-{{- $logoFileName :=  printf "logo.%s" (tpl (.Values.app.logoFileExtension | toString) .) -}}
+{{- $logoFileName :=  printf "logo.%s" (tpl (.Values.landingPage.logoFileExtension | toString) .) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
