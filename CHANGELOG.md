@@ -1,6 +1,8 @@
 # Changelog
 
-## [0.11.0] - estimated 2024-07
+<!-- ## [0.12.0] - estimated 2024-10 -->
+
+## [0.11.0] - 2024-07-23
 
 - [theia-cloud-crds] Add option field to CRDs and increase version to `Session.v1beta8`, `Workspace.v1beta5` and `AppDefinition.v1beta10` [#55](https://github.com/eclipsesource/theia-cloud-helm/pull/55) | [#293](https://github.com/eclipsesource/theia-cloud/pull/293)
 - [theia-cloud] Add configurable image preloading [#56](https://github.com/eclipsesource/theia-cloud-helm/pull/56)
