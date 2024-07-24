@@ -1,6 +1,6 @@
 conversion:
   # -- The image of the webhook container
-  image: theiacloud/theia-cloud-conversion-webhook:0.11.1
+  image: theiacloud/theia-cloud-conversion-webhook:0.12.0-next
   # -- The location of where the certificates are mounted into the container (needs to match with application.properties)
   certMountPath: /etc/webhook/certs
 
