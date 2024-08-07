@@ -6,7 +6,7 @@ There are three charts:
 
 * `theia-cloud-base` installs cluster wide resources that may be used by multiple Theia Cloud installations
 * `theia-cloud-crds` installs the custom resource definitions
-* `theia-cloud` installs Theia Cloud itself and depends on `theia-cloud-base` and `theia-cloud-cds`
+* `theia-cloud` installs Theia Cloud itself and depends on `theia-cloud-base` and `theia-cloud-crds`
 
 ## Cluster Prerequisites
 The charts depend on well-established software in the Kubernetes ecosystem. Please make sure to install the dependencies before releasing with _helm_.
