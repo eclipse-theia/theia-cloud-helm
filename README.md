@@ -8,6 +8,15 @@ There are three charts:
 * `theia-cloud-crds` installs the custom resource definitions
 * `theia-cloud` installs Theia Cloud itself and depends on `theia-cloud-base` and `theia-cloud-cds`
 
+## Cluster Prerequisites
+The charts depend on well-established software in the Kubernetes ecosystem. Please make sure to install the dependencies before releasing with _helm_.
+
+* **cert-manager.io** is used for certificate management, supports internal/testing issuers and supports Let's Encrypt certificates. Installation instructions can be found [here](https://cert-manager.io), a helm chart [here](https://cert-manager.io/docs/installation/helm/). 
+
+* **ingress-nginx** is used to performantly assemble _nginx_ configuration files and synchronizes changes. Learn more about it [here](https://kubernetes.github.io/ingress-nginx/).
+
+You can find more information in the official [Theia Cloud documentation](https://theia-cloud.io/documentation/setuptheiacloud/). 
+
 ## Versioning
 
 The chart `version` should get updated on every change/commit/PR.\
