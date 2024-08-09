@@ -81,7 +81,7 @@ hosts:
   # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. 
   # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
   # all app definitions need to be added.
-  # IMPORTANT: If this gets update the helm chart needs to be re-installed,
+  # IMPORTANT: If this gets updated, the helm chart needs to be re-installed because
   # helm upgrade will not properly update this at the moment.
   # These are required to configure TLS (if enabled via ingress.tls == true)
   allWildcardInstances: ["*.webview."]
