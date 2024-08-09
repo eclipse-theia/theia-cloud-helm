@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.12.0-next.0](https://img.shields.io/badge/Version-0.12.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
+![Version: 0.11.2](https://img.shields.io/badge/Version-0.11.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.1](https://img.shields.io/badge/AppVersion-0.11.1-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -23,7 +23,7 @@ A Helm chart for Theia Cloud
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
-| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. These are required to configure TLS (if enabled via ingress.tls == true) |
+| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) |
 | hosts.configuration | object | (see details below) | Configuration for the hostnames. Contains the baseHost and afixes for all services |
 | hosts.configuration.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services.  Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path |
 | hosts.configuration.instance | string | `"instances"` | afix for deployed instances |
