@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.11.2](https://img.shields.io/badge/Version-0.11.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.1](https://img.shields.io/badge/AppVersion-0.11.1-informational?style=flat-square)
+![Version: 0.12.0-next.1](https://img.shields.io/badge/Version-0.12.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
