@@ -28,13 +28,21 @@ spec:
   tls:
   - hosts:
     - {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
-    {{- range .Values.hosts.allWildcardInstances }}
-    - {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
-    {{- end }}
     {{- if .Values.ingress.addTLSSecretName }}
     secretName: ws-cert-secret
     {{- end }}
   {{- end }}
+
+  {{- range $wildcard, $secretName := .Values.ingress.allWildcardSecretNames }}
+  {{- range $.Values.hosts.allWildcardInstances }}
+  {{- if eq . $wildcard }}
+  - hosts:
+    - {{ tpl (printf "%s%s.%s" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
+    secretName: {{ $secretName }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
+
   {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
     - host: {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
