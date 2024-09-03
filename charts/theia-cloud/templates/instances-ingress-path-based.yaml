@@ -46,7 +46,7 @@ spec:
   {{- else }}
   rules:
     {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instanceName | toString) .)).spec.rules }}
-    - host: {{ .host }}
+    - host: {{ .host | quote }}
       {{ if .http }}
       http:
         paths:
