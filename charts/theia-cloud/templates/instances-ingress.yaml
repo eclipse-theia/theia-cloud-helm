@@ -29,17 +29,21 @@ spec:
   - hosts:
     - {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
     {{- if .Values.ingress.addTLSSecretName }}
+    {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+    {{- if (not (hasKey $.Values.ingress.allWildcardSecretNames $wildcard)) }}
+    - {{ tpl (printf "%s%s.%s" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
+    {{- end }}
+    {{- end }}
     secretName: ws-cert-secret
     {{- end }}
   {{- end }}
 
-  {{- range $wildcard, $secretName := .Values.ingress.allWildcardSecretNames }}
-  {{- range $.Values.hosts.allWildcardInstances }}
-  {{- if eq . $wildcard }}
+  {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+  {{- if hasKey $.Values.ingress.allWildcardSecretNames $wildcard }}
+  {{- $secretName := get $.Values.ingress.allWildcardSecretNames $wildcard }}
   - hosts:
-    - {{ tpl (printf "%s%s.%s" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
+    - {{ tpl (printf "%s%s.%s" $wildcard $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
     secretName: {{ $secretName }}
-  {{- end }}
   {{- end }}
   {{- end }}
 
@@ -48,7 +52,7 @@ spec:
     - host: {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
       http:
     {{- range .Values.hosts.allWildcardInstances }}
-    - host: {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
+    - host: {{ tpl (printf "%s%s.%s" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
       http:
     {{- end }}
   {{- else }}

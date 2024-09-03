@@ -327,8 +327,8 @@ ingress:
 
   # -- Sets special certificates for wildcard hostnames. This is a map.
   # The key is the wildcard hostname and the value is the secret name.
-  allWildcardSecretNames:
-    "*.webview.": webview-ws-cert-secret
+  allWildcardSecretNames: {}
+  #  "*.webview.": webview-ws-cert-secret
 
 operatorrole:
   name: operator-api-access
