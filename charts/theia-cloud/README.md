@@ -39,6 +39,7 @@ A Helm chart for Theia Cloud
 | ingress.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
 | ingress.tls | bool | `true` | Does Theia Cloud expect TLS connections (true) or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false) |
+| ingress.allWildcardSecretNames | dict | `{}` | all additional wildcard hostnames and the respective secretName. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames when they also have been added to `hosts.allWildcardInstances`. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
 | issuer.email | string | `"mmorlock@example.com"` | EMail address of the certificate issuer. |
 | keycloak | object | (see details below) | Values related to Keycloak |
