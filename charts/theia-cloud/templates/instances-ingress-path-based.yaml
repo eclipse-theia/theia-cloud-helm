@@ -27,13 +27,24 @@ spec:
   {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
-    {{- range .Values.hosts.allWildcardInstances }}
-    - {{ printf "'%s%s'" . $.Values.hosts.configuration.baseHost }}
-    {{- end }}
+    - {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
     {{- if .Values.ingress.addTLSSecretName }}
+    {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+    {{- if (not (hasKey $.Values.ingress.allWildcardSecretNames $wildcard)) }}
+    - {{ tpl (printf "%s%s.%s" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
+    {{- end }}
+    {{- end }}
     secretName: ws-cert-secret
     {{- end }}
+  {{- end }}
+
+  {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+  {{- if hasKey $.Values.ingress.allWildcardSecretNames $wildcard }}
+  {{- $secretName := get $.Values.ingress.allWildcardSecretNames $wildcard }}
+  - hosts:
+    - {{ tpl (printf "%s%s.%s" $wildcard $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost | toString) . | quote }}
+    secretName: {{ $secretName }}
+  {{- end }}
   {{- end }}
   {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
