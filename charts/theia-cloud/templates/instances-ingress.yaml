@@ -43,7 +43,7 @@ spec:
   {{- $secretName := get $.Values.ingress.allWildcardSecretNames $wildcard }}
   - hosts:
     - {{ printf "%s%s.%s" (tpl $wildcard $) (tpl $.Values.hosts.configuration.instance $) (tpl $.Values.hosts.configuration.baseHost $) | quote }}
-    secretName: {{ $secretName }}
+    secretName: {{ tpl $secretName $ | quote }}
   {{- end }}
   {{- end }}
 
