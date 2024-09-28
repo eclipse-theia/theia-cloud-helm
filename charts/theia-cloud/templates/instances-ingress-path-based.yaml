@@ -51,7 +51,7 @@ spec:
     - host: {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
       http:
     {{- range .Values.hosts.allWildcardInstances }}
-    - host: {{ printf "'%s%s'" (tpl . $) $.Values.hosts.configuration.baseHost }}
+    - host: {{ printf "'%s%s'" (tpl . $) (tpl $.Values.hosts.configuration.baseHost $) }}
       http:
     {{- end }}
   {{- else }}
