@@ -326,6 +326,12 @@ ingress:
   # only needed when ingress.tls == true
   addTLSSecretName: true
 
+  # -- All additional wildcard hostnames and the respective TLS secret names.
+  # Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one.
+  # Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`.
+  allWildcardSecretNames: {}
+  #  "*.webview.": webview-ws-cert-secret
+
 operatorrole:
   name: operator-api-access
 

@@ -28,19 +28,31 @@ spec:
   tls:
   - hosts:
     - {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
-    {{- range .Values.hosts.allWildcardInstances }}
-    - {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
-    {{- end }}
     {{- if .Values.ingress.addTLSSecretName }}
+    {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+    {{- if (not (hasKey $.Values.ingress.allWildcardSecretNames $wildcard)) }}
+    - {{ printf "%s%s.%s" (tpl . $) (tpl $.Values.hosts.configuration.instance $) (tpl $.Values.hosts.configuration.baseHost $) | quote }}
+    {{- end }}
+    {{- end }}
     secretName: ws-cert-secret
     {{- end }}
   {{- end }}
+
+  {{- range $wildcard := .Values.hosts.allWildcardInstances }}
+  {{- if hasKey $.Values.ingress.allWildcardSecretNames $wildcard }}
+  {{- $secretName := get $.Values.ingress.allWildcardSecretNames $wildcard }}
+  - hosts:
+    - {{ printf "%s%s.%s" (tpl $wildcard $) (tpl $.Values.hosts.configuration.instance $) (tpl $.Values.hosts.configuration.baseHost $) | quote }}
+    secretName: {{ tpl $secretName $ | quote }}
+  {{- end }}
+  {{- end }}
+
   {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
   rules:
-    - host: {{ tpl (printf "%s.%s" .Values.hosts.configuration.instance .Values.hosts.configuration.baseHost | toString) . }}
+    - host: {{ printf "%s.%s" (tpl .Values.hosts.configuration.instance .) (tpl .Values.hosts.configuration.baseHost .) }}
       http:
     {{- range .Values.hosts.allWildcardInstances }}
-    - host: {{ printf "'%s%s.%s'" . $.Values.hosts.configuration.instance $.Values.hosts.configuration.baseHost }}
+    - host: {{ printf "%s%s.%s" (tpl . $) (tpl $.Values.hosts.configuration.instance $) (tpl $.Values.hosts.configuration.baseHost $) | quote }}
       http:
     {{- end }}
   {{- else }}
