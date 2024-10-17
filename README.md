@@ -4,18 +4,27 @@ This repository contains the helm charts for Theia Cloud.
 
 There are three charts:
 
-* `theia-cloud-base` installs cluster wide resources that may be used by multiple Theia Cloud installations
-* `theia-cloud-crds` installs the custom resource definitions
-* `theia-cloud` installs Theia Cloud itself and depends on `theia-cloud-base` and `theia-cloud-crds`
+- `theia-cloud-base` installs cluster wide resources that may be used by multiple Theia Cloud installations
+- `theia-cloud-crds` installs the custom resource definitions
+- `theia-cloud` installs Theia Cloud itself and depends on `theia-cloud-base` and `theia-cloud-crds`
 
 ## Cluster Prerequisites
+
 The charts depend on well-established software in the Kubernetes ecosystem. Please make sure to install the dependencies before releasing with _helm_.
 
-* **cert-manager.io** is used for certificate management, supports internal/testing issuers and supports Let's Encrypt certificates. Installation instructions can be found [here](https://cert-manager.io), a helm chart [here](https://cert-manager.io/docs/installation/helm/). 
+- **cert-manager.io** is used for certificate management, supports internal/testing issuers and supports Let's Encrypt certificates. Installation instructions can be found [here](https://cert-manager.io), a helm chart [here](https://cert-manager.io/docs/installation/helm/).
 
-* **ingress-nginx** is used to performantly assemble _nginx_ configuration files and synchronizes changes. Learn more about it [here](https://kubernetes.github.io/ingress-nginx/).
+- **ingress-nginx** is used to performantly assemble _nginx_ configuration files and synchronizes changes. Learn more about it [here](https://kubernetes.github.io/ingress-nginx/).
 
-You can find more information in the official [Theia Cloud documentation](https://theia-cloud.io/documentation/setuptheiacloud/). 
+**Note:** Since ingress-nginx version 1.10 , the annotation `nginx.ingress.kubernetes.io/configuration-snippet` is disabled by default and needs to be enabled.
+To enable this option, you need to set the flag `allow-snippet-annotations: "true"` in the ingress-nginx values.
+
+```sh
+kubectl -n ingress-nginx patch cm ingress-nginx-controller --patch '{"data":{"allow-snippet-annotations":"true"}}'
+kubectl -n ingress-nginx delete pod -l app.kubernetes.io/name=ingress-nginx
+```
+
+You can find more information in the official [Theia Cloud documentation](https://theia-cloud.io/documentation/setuptheiacloud/).
 
 ## Versioning
 
@@ -55,3 +64,5 @@ Furthermore, the new version, together with a release estimation date, should be
 ```bash
 docker pull jnorwood/helm-docs:latest && docker run --rm --volume "$(pwd)/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
 ```
+
+or run the `Rebuild READMEs` task.
