@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ tpl (.Values.ingress.instanceName | toString) . }}
+  name: {{ tpl (.Values.ingress.instances.name | toString) . }}
   namespace: {{ .Release.Namespace }}
   annotations:
     {{- if not .Values.ingress.tls }}
@@ -10,9 +10,13 @@ metadata:
     {{- end }}
     nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    {{- if .Values.ingress.instances.configurationSnippets }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header 'X-Forwarded-Uri' $request_uri;
-    nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.proxyBodySize | toString) . }}
+      {{- range .Values.ingress.instances.configurationSnippets }}
+      {{ . }};
+      {{- end }}
+    {{- end }}
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ tpl (.Values.ingress.instances.proxyBodySize | toString) . }}
     {{- if .Values.ingress.addTLSSecretName }}
     {{- if .Values.ingress.certManagerAnnotations }}
     cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
@@ -30,7 +34,7 @@ spec:
     - {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
     {{- if .Values.ingress.addTLSSecretName }}
     {{- range $wildcard := .Values.hosts.allWildcardInstances }}
-    {{- if (not (hasKey $.Values.ingress.allWildcardSecretNames $wildcard)) }}
+    {{- if (not (hasKey $.Values.ingress.instances.allWildcardSecretNames $wildcard)) }}
     - {{ printf "%s%s" (tpl . $) (tpl $.Values.hosts.configuration.baseHost $)| quote }}
     {{- end }}
     {{- end }}
@@ -39,14 +43,14 @@ spec:
   {{- end }}
 
   {{- range $wildcard := .Values.hosts.allWildcardInstances }}
-  {{- if hasKey $.Values.ingress.allWildcardSecretNames $wildcard }}
-  {{- $secretName := get $.Values.ingress.allWildcardSecretNames $wildcard }}
+  {{- if hasKey $.Values.ingress.instances.allWildcardSecretNames $wildcard }}
+  {{- $secretName := get $.Values.ingress.instances.allWildcardSecretNames $wildcard }}
   - hosts:
     - {{ printf "%s%s" (tpl $wildcard $) (tpl $.Values.hosts.configuration.baseHost $) | quote }}
     secretName: {{ tpl $secretName $ | quote }}
   {{- end }}
   {{- end }}
-  {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instanceName | toString) .) ) }}
+  {{- if not (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace  (tpl (.Values.ingress.instances.name | toString) .) ) }}
   rules:
     - host: {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
       http:
@@ -56,7 +60,7 @@ spec:
     {{- end }}
   {{- else }}
   rules:
-    {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instanceName | toString) .)).spec.rules }}
+    {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instances.name | toString) .)).spec.rules }}
     - host: {{ .host | quote }}
       {{ if .http }}
       http:

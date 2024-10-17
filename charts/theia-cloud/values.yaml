@@ -46,7 +46,7 @@ demoApplication:
     # -- At which port the monitor extension is available
     # For the Theia extension take the same as the application port
     # For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable
-    port: 3000  
+    port: 3000
     # -- Values that are used by the activityTracker module
     # @default -- (see details below)
     activityTracker:
@@ -67,7 +67,7 @@ hosts:
   # -- Configuration for the hostnames. Contains the baseHost and afixes for all services
   # @default -- (see details below)
   configuration:
-    # -- baseHost configures the host for all services. 
+    # -- baseHost configures the host for all services.
     # Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path
     baseHost: 192.168.39.173.nip.io
     # -- afix of the REST service
@@ -78,7 +78,7 @@ hosts:
     instance: instances
 
   # -- all additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
-  # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. 
+  # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.
   # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
   # all app definitions need to be added.
   # IMPORTANT: If this gets updated, the helm chart needs to be re-installed because
@@ -150,7 +150,7 @@ landingPage:
   # -- The file extension of the logo. Must be set to match the logo respectively the logoData.
   # This is required because browsers cannot show a binary image (e.g. png) with a svg ending
   # and vice-versa.
-  logoFileExtension: 'svg'
+  logoFileExtension: "svg"
 
 # -- Values related to Keycloak
 # @default -- (see details below)
@@ -228,7 +228,7 @@ operator:
   requestedStorage: "250Mi"
 
   # -- Number of operator instances to create
-  replicas: 2
+  replicas: 1
 
   # -- Options to influence the operator's leader election
   # @default -- (see details below)
@@ -293,11 +293,29 @@ service:
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
-  # -- The name of the ingress which will be updated to publish new theia application.
-  # If this is not existing it will be created.
-  # You may chose to set the ingress up yourself and point Theia Cloud to the ingress via
-  # the name
-  instanceName: "theia-cloud-demo-ws-ingress"
+  # -- Values to influence the instances ingress
+  instances:
+    # -- The name of the ingress which will be updated to publish new theia application.
+    # If this is not existing it will be created.
+    # You may chose to set the ingress up yourself and point Theia Cloud to the ingress via
+    # the name
+    name: "theia-cloud-demo-ws-ingress"
+
+    # -- Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).
+    # Defaults to 1m. Setting size to 0 disables checking of client request body size.
+    proxyBodySize: 1m
+
+    # -- All additional wildcard hostnames and the respective TLS secret names.
+    # Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one.
+    # Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`.
+    allWildcardSecretNames: {}
+    #  "*.webview.": webview-ws-cert-secret
+
+    # -- Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
+    # One entry in this array results in a line for the annotation.
+    # Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information.
+    configurationSnippets:
+      - "proxy_set_header 'X-Forwarded-Uri' $request_uri"
 
   # -- When set to true the cert-manager.io annotations will be set.
   # Only used when ingress.addTLSSecretName === true
@@ -314,10 +332,6 @@ ingress:
   # Only needed when ingress.certManagerAnnotations is true
   theiaCloudCommonName: false
 
-  # -- Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).
-  # Defaults to 1m. Setting size to 0 disables checking of client request body size.
-  proxyBodySize: 1m
-
   # -- Does Theia Cloud expect TLS connections (true)
   # or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false)
   tls: true
@@ -325,12 +339,6 @@ ingress:
   # -- whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress
   # only needed when ingress.tls == true
   addTLSSecretName: true
-
-  # -- All additional wildcard hostnames and the respective TLS secret names.
-  # Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one.
-  # Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`.
-  allWildcardSecretNames: {}
-  #  "*.webview.": webview-ws-cert-secret
 
 operatorrole:
   name: operator-api-access
