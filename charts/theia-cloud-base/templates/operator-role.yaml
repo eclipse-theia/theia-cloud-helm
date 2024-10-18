@@ -3,8 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ .Values.operatorrole.name }}
 rules:
-  -
-    apiGroups:
+  - apiGroups:
       - ""
       - apiextensions.k8s.io
       - theia.cloud
@@ -27,4 +26,3 @@ rules:
       - deployments
       - leases
     verbs: ["list", "create", "watch", "get", "patch", "delete", "update"]
-    
