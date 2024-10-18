@@ -313,6 +313,7 @@ ingress:
 
     # -- Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
     # One entry in this array results in a line for the annotation.
+    # Do not add a semicolon at the end of the line here, it will automatically added.
     # Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information.
     configurationSnippets:
       - "proxy_set_header 'X-Forwarded-Uri' $request_uri"

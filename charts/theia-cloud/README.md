@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.12.0-next.4](https://img.shields.io/badge/Version-0.12.0--next.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
+![Version: 0.12.0-next.5](https://img.shields.io/badge/Version-0.12.0--next.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -37,7 +37,7 @@ A Helm chart for Theia Cloud
 | ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
 | ingress.instances | object | `{"allWildcardSecretNames":{},"configurationSnippets":["proxy_set_header 'X-Forwarded-Uri' $request_uri"],"name":"theia-cloud-demo-ws-ingress","proxyBodySize":"1m"}` | Values to influence the instances ingress |
 | ingress.instances.allWildcardSecretNames | object | `{}` | All additional wildcard hostnames and the respective TLS secret names. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`. |
-| ingress.instances.configurationSnippets | list | `["proxy_set_header 'X-Forwarded-Uri' $request_uri"]` | Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation. One entry in this array results in a line for the annotation. Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information. |
+| ingress.instances.configurationSnippets | list | `["proxy_set_header 'X-Forwarded-Uri' $request_uri"]` | Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation. One entry in this array results in a line for the annotation. Do not add a semicolon at the end of the line here, it will automatically added. Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information. |
 | ingress.instances.name | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
 | ingress.instances.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
