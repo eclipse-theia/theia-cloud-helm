@@ -3,8 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ .Values.servicerole.name }}
 rules:
-  -
-    apiGroups:
+  - apiGroups:
       - ""
       - theia.cloud
     resources:
@@ -15,11 +14,9 @@ rules:
       - workspaces
       - workspaces/status
     verbs: ["list", "create", "watch", "get", "patch", "delete"]
-  -
-    apiGroups:
+  - apiGroups:
       - ""
       - metrics.k8s.io
     resources:
       - pods
     verbs: ["list", "get", "watch"]
-    

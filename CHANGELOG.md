@@ -2,6 +2,11 @@
 
 ## [0.12.0] - estimated 2024-10
 
+- [theia-cloud] move `ingress.instanceName` to `ingress.instances.name` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] move `ingress.proxyBodySize` to `ingress.instances.proxyBodySize` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] move `ingress.allWildcardSecretNames` to `ingress.instances.allWildcardSecretNames` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] Add `ingress.instances.configurationSnippets` to values which allows to set nginx configurations via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+
 ## [0.11.0] - 2024-07-23
 
 - [theia-cloud-crds] Add option field to CRDs and increase version to `Session.v1beta8`, `Workspace.v1beta5` and `AppDefinition.v1beta10` [#55](https://github.com/eclipsesource/theia-cloud-helm/pull/55) | [#293](https://github.com/eclipsesource/theia-cloud/pull/293)

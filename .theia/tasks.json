@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rebuild READMEs",
+      "type": "shell",
+      "command": "docker pull jnorwood/helm-docs:latest && docker run --rm --volume \"$(pwd)/charts:/helm-docs\" -u $(id -u) jnorwood/helm-docs:latest",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

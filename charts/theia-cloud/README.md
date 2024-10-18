@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 0.12.0-next.1](https://img.shields.io/badge/Version-0.12.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
+![Version: 0.12.0-next.5](https://img.shields.io/badge/Version-0.12.0--next.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0-next](https://img.shields.io/badge/AppVersion-0.12.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -23,9 +23,9 @@ A Helm chart for Theia Cloud
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
-| hosts.allWildcardInstances | list | `["*.webview."]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.  Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) |
+| hosts.allWildcardInstances | list | `[]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) I.e. custom certificates or a cert-manager provider that can handle wildcard certificates need to be configured. |
 | hosts.configuration | object | (see details below) | Configuration for the hostnames. Contains the baseHost and afixes for all services |
-| hosts.configuration.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services.  Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path |
+| hosts.configuration.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services. Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path |
 | hosts.configuration.instance | string | `"instances"` | afix for deployed instances |
 | hosts.configuration.landing | string | `"trynow"` | afix of the landing page |
 | hosts.configuration.service | string | `"servicex"` | afix of the REST service |
@@ -33,11 +33,13 @@ A Helm chart for Theia Cloud
 | imagePullPolicy | string | `"Always"` | The default imagePullPolicy for containers of theia cloud. Can be overridden for individual components by specifying the imagePullPolicy variable there. Possible values: - Always - IfNotPresent - Never |
 | ingress | object | (see details below) | Values to influence the ingresses |
 | ingress.addTLSSecretName | bool | `true` | whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress only needed when ingress.tls == true |
-| ingress.allWildcardSecretNames | object | `{}` | All additional wildcard hostnames and the respective TLS secret names. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`. |
 | ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. Only used when ingress.addTLSSecretName === true When false certificate management is handled outside of Theia Cloud. |
 | ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
-| ingress.instanceName | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
-| ingress.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
+| ingress.instances | object | `{"allWildcardSecretNames":{},"configurationSnippets":["proxy_set_header 'X-Forwarded-Uri' $request_uri"],"name":"theia-cloud-demo-ws-ingress","proxyBodySize":"1m"}` | Values to influence the instances ingress |
+| ingress.instances.allWildcardSecretNames | object | `{}` | All additional wildcard hostnames and the respective TLS secret names. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`. |
+| ingress.instances.configurationSnippets | list | `["proxy_set_header 'X-Forwarded-Uri' $request_uri"]` | Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation. One entry in this array results in a line for the annotation. Do not add a semicolon at the end of the line here, it is automatically added. Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information. |
+| ingress.instances.name | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
+| ingress.instances.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
 | ingress.tls | bool | `true` | Does Theia Cloud expect TLS connections (true) or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false) |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
@@ -80,7 +82,7 @@ A Helm chart for Theia Cloud
 | operator.logging | object | (see details below) | Allows to override the operator's log4j configuration |
 | operator.maxWatchIdleTime | string | `"3600000"` | Configures the timeout in milliseconds when a watcher for either AppDefinitions, Workspaces, or Sessions is assumed to be not working. When this is detected the operator instance will stop and a new operator will set up fresh watchers. |
 | operator.oAuth2ProxyVersion | string | `"v7.5.1"` | The version to use of the quay.io/oauth2-proxy/oauth2-proxy image |
-| operator.replicas | int | `2` | Number of operator instances to create |
+| operator.replicas | int | `1` | Number of operator instances to create |
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
