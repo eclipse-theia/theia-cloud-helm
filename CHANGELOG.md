@@ -1,11 +1,21 @@
 # Changelog
 
-## [0.12.0] - estimated 2024-10
+## [1.0.0] - estimated 2024-11
 
-- [theia-cloud] move `ingress.instanceName` to `ingress.instances.name` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
-- [theia-cloud] move `ingress.proxyBodySize` to `ingress.instances.proxyBodySize` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
-- [theia-cloud] move `ingress.allWildcardSecretNames` to `ingress.instances.allWildcardSecretNames` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+## [0.12.0] - 2024-10-30
+
+- [.github/workflows] Update actions [#77](https://github.com/eclipse-theia/theia-cloud-helm/pull/77)
 - [theia-cloud] Add `ingress.instances.configurationSnippets` to values which allows to set nginx configurations via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] Add custom secretNames to wildcard instances [#73](https://github.com/eclipse-theia/theia-cloud-helm/pull/73)
+- [theia-cloud] Fix theia-cloud helm chart not being updateable [#69](https://github.com/eclipse-theia/theia-cloud-helm/pull/69)
+- [documentation] Add links to cluster prerequisites [#68](https://github.com/eclipse-theia/theia-cloud-helm/pull/68)
+
+### Breaking Changes in 0.12.0
+
+- [theia-cloud] Move `ingress.instanceName` to `ingress.instances.name` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] Move `ingress.proxyBodySize` to `ingress.instances.proxyBodySize` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] Move `ingress.allWildcardSecretNames` to `ingress.instances.allWildcardSecretNames` [#76](https://github.com/eclipsesource/theia-cloud-helm/pull/76)
+- [theia-cloud] Remove webview wildcard from default values [#72](https://github.com/eclipse-theia/theia-cloud-helm/pull/72/files)
 
 ## [0.11.0] - 2024-07-23
 
