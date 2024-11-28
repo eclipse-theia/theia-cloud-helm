@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.0.0] - estimated 2024-11
+<!-- ## [1.1.0] - estimated 2025-02 -->
+
+## [1.0.0] - 2024-11-29
+
+- No Helm Chart related changes. See the [Theia Cloud changelog](https://github.com/eclipse-theia/theia-cloud/blob/main/CHANGELOG.md#100---2024-11-29).
 
 ## [0.12.0] - 2024-10-30
 
