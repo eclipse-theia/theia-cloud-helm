@@ -16,7 +16,10 @@ rules:
     verbs: ["list", "create", "watch", "get", "patch", "delete"]
   - apiGroups:
       - ""
+      - apps
       - metrics.k8s.io
     resources:
+      - deployments
+      - replicasets
       - pods
     verbs: ["list", "get", "watch"]

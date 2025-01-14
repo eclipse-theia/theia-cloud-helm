@@ -25,4 +25,5 @@ rules:
       - configmaps
       - deployments
       - leases
-    verbs: ["list", "create", "watch", "get", "patch", "delete", "update"]
+      - pods
+    verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]
