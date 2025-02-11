@@ -158,6 +158,9 @@ keycloak:
   # -- Whether keycloak authentication shall be used
   enable: false
 
+  # -- The name of the Keycloak group identifying admin users who are allowed to access the service's admin endpoints.
+  adminGroup: "theia-cloud/admin"
+
   # -- Key cloak auth URL. Only has to be specified when enable: true
   authUrl: "https://keycloak.url/auth/"
 

@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 1.1.0-next.0](https://img.shields.io/badge/Version-1.1.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
+![Version: 1.1.0-next.1](https://img.shields.io/badge/Version-1.1.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -45,6 +45,7 @@ A Helm chart for Theia Cloud
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
 | issuer.email | string | `"mmorlock@example.com"` | EMail address of the certificate issuer. |
 | keycloak | object | (see details below) | Values related to Keycloak |
+| keycloak.adminGroup | string | `"theia-cloud/admin"` | The name of the Keycloak group identifying admin users who are allowed to access the service's admin endpoints. |
 | keycloak.authUrl | string | `"https://keycloak.url/auth/"` | Key cloak auth URL. Only has to be specified when enable: true |
 | keycloak.clientId | string | `"theia-cloud"` | The client-id. Only has to be specified when enable: true |
 | keycloak.clientSecret | string | `"publicbutoauth2proxywantsasecret"` | The oaid client secret. In case you configure your keycloak client as confidential, then you may specifiy the secret here. If you stick with our default public client, you may leave below value. For public clients keycloak does not generate a client-secret, but in order to make oath2-proxy happy, we will pass a value |
