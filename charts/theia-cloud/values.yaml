@@ -90,6 +90,9 @@ hosts:
 # -- Values related to the landing page
 # @default -- (see details below)
 landingPage:
+  # -- Whether the landing page shall be enabled
+  enabled: true
+
   # -- the landing page image to use
   image: theiacloud/theia-cloud-landing-page:1.1.0-next
 

@@ -1,3 +1,4 @@
+{{- if .Values.landingPage.enabled }}
 {{- if .Values.hosts.usePaths }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -41,4 +42,5 @@ spec:
               number: 80
         path: /{{ if .Values.hosts.configuration.landing }}{{ tpl (.Values.hosts.configuration.landing | toString) . }}(/|$)(.*){{ end }}
         pathType: Prefix
+{{- end }}
 {{- end }}
