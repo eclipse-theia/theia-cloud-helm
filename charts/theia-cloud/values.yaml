@@ -179,6 +179,20 @@ keycloak:
   # for how to generate a strong cookie secret.
   cookieSecret: "OQINaROshtE9TcZkNAm5Zs2Pv3xaWytBmc5W7sPX7ws="
 
+# -- Values related to OAuth2 Proxy configuration
+oauth2Proxy:
+  # Allowed redirect domains for OAuth2 Proxy (controls whitelist_domains).
+  # When empty, defaults are used:
+  #   if hosts.usePaths: [ "<baseHost>:*", "<keycloak host>:*" ]
+  #   else: [ "<instance>:*", "<keycloak host>:*" ]
+  whitelistDomains: []
+
+  # Cookie domains for OAuth2 Proxy.
+  # When empty, defaults are used:
+  #   if hosts.usePaths: [ "<baseHost>" ]
+  #   else: [ "<instance>.<baseHost>" ]
+  cookieDomains: []
+
 # -- Values related to the operator
 # @default -- (see details below)
 operator:
