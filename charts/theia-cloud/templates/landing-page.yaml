@@ -1,3 +1,4 @@
+{{- if .Values.landingPage.enabled }}
 {{- $logoFileName :=  printf "logo.%s" (tpl (.Values.landingPage.logoFileExtension | toString) .) -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -48,7 +49,9 @@ spec:
         - name: landing-page-config
           configMap:
             name: landing-page-config
+{{- end}}
 ---
+{{- if .Values.landingPage.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -65,3 +68,4 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
+{{- end }}
