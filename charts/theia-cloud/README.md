@@ -85,6 +85,8 @@ A Helm chart for Theia Cloud
 | operator.oAuth2ProxyVersion | string | `"v7.5.1"` | The version to use of the quay.io/oauth2-proxy/oauth2-proxy image |
 | operator.replicas | int | `1` | Number of operator instances to create |
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
+| operator.requestsCpu | string | `"100m"` | Amount of CPU requested for the operator.. |
+| operator.requestsMemory | string | `"1000M"` | Amount of memory requested for the operator. |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
 | operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:1.1.0-next"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
