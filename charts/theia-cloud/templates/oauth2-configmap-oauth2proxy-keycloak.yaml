@@ -32,11 +32,29 @@ data:
     skip_provider_button="true"
     reverse_proxy="true"
     # email_domains=["*"]
+    {{- $cookieDomains := .Values.oauth2Proxy.cookieDomains | default (list) }}
+    {{- $whitelistDomains := .Values.oauth2Proxy.whitelistDomains | default (list) }}
     {{- if .Values.hosts.usePaths }}
+      {{- if gt (len $cookieDomains) 0 }}
+    cookie_domains={{ toJson $cookieDomains }}
+      {{- else }}
     cookie_domains=["{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"]
-    whitelist_domains=["{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}:*","{{ $keycloakHost }}:*",".google.com:*"]
+      {{- end }}
+      {{- if gt (len $whitelistDomains) 0 }}
+    whitelist_domains={{ toJson $whitelistDomains }}
+      {{- else }}
+    whitelist_domains=["{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}:*","{{ $keycloakHost }}:*"]
+      {{- end }}
     {{- else }}
+      {{- if gt (len $cookieDomains) 0 }}
+    cookie_domains={{ toJson $cookieDomains }}
+      {{- else }}
     cookie_domains=["{{ tpl (.Values.hosts.configuration.instance | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"]
-    whitelist_domains=["{{ tpl (.Values.hosts.configuration.instance | toString) . }}:*","{{ $keycloakHost }}:*",".google.com:*"]
+      {{- end }}
+      {{- if gt (len $whitelistDomains) 0 }}
+    whitelist_domains={{ toJson $whitelistDomains }}
+      {{- else }}
+    whitelist_domains=["{{ tpl (.Values.hosts.configuration.instance | toString) . }}:*","{{ $keycloakHost }}:*"]
+      {{- end }}
     {{- end }}
     custom_templates_dir="/templates"
