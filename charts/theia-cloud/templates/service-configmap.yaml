@@ -8,6 +8,7 @@ data:
   SERVICE_PORT: {{ tpl (.Values.service.port | toString) . | quote }}
   KEYCLOAK_ENABLE: {{ tpl (.Values.keycloak.enable | toString) . | quote }}
   {{- if eq (tpl (.Values.keycloak.enable | toString) .) "true" }}
+  KEYCLOAK_ADMIN_GROUP: {{ tpl (.Values.keycloak.adminGroup | toString) . }}
   KEYCLOAK_SERVERURL: {{ tpl (.Values.keycloak.authUrl | toString) . }}realms/{{ tpl (.Values.keycloak.realm | toString) . }}
   KEYCLOAK_CLIENTID: {{ tpl (.Values.keycloak.clientId | toString) . }}
   KEYCLOAK_CLIENTSECRET: {{ tpl (.Values.keycloak.clientSecret | toString) . }}
