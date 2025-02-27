@@ -3,6 +3,16 @@ entries:
   theia-cloud:
   - apiVersion: v2
     appVersion: 1.1.0-next
+    created: "2025-02-27T16:19:17.477759516Z"
+    description: A Helm chart for Theia Cloud
+    digest: bfe258672b1a04d73816d7228a5f92c4342a89c5f3dd742efcb4ad0a663d4e92
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipse-theia/theia-cloud-helm/releases/download/theia-cloud-1.1.0-next.3/theia-cloud-1.1.0-next.3.tgz
+    version: 1.1.0-next.3
+  - apiVersion: v2
+    appVersion: 1.1.0-next
     created: "2025-02-27T15:49:57.440732284Z"
     description: A Helm chart for Theia Cloud
     digest: 5b3d2e6dc834d3bd1b469909807a5f39e851979a484b1212c8fde1b8001dd70b
@@ -992,4 +1002,4 @@ entries:
     urls:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.8.1-v001/theia-cloud-crds-0.8.1-v001.tgz
     version: 0.8.1-v001
-generated: "2025-02-27T15:49:57.44129235Z"
+generated: "2025-02-27T16:19:17.478358809Z"
