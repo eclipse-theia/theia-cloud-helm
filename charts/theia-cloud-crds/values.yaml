@@ -3,6 +3,8 @@ conversion:
   image: theiacloud/theia-cloud-conversion-webhook:1.1.0-next
   # -- The location of where the certificates are mounted into the container (needs to match with application.properties)
   certMountPath: /etc/webhook/certs
+  # -- The certificate reload period in seconds
+  certReloadPeriod: 604800
 
 # -- The cluster issuer to use for the certificate
 clusterIssuer: theia-cloud-selfsigned-issuer

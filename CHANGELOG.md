@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.0] - estimated 2025-02
+## [1.1.0] - estimated between 2025-04 and 2025-07
 
 ## [1.0.0] - 2024-11-29
 
