@@ -106,3 +106,5 @@ spec:
       imagePullSecrets:
         - name: {{ tpl (.Values.operator.imagePullSecret | toString) . }}
       {{- end }}
+      requestsMemory: {{ tpl (.Values.operator.requestsMemory | toString) . }}
+      requestsCpu: {{ tpl (.Values.operator.requestsCpu | toString) . }}

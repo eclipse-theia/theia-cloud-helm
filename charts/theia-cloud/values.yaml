@@ -291,6 +291,12 @@ operator:
   # -- The version to use of the quay.io/oauth2-proxy/oauth2-proxy image
   oAuth2ProxyVersion: "v7.5.1"
 
+  # -- Amount of memory requested for the operator.
+  requestsMemory: 1000M
+
+  # -- Amount of CPU requested for the operator..
+  requestsCpu: "100m"
+
 # -- Values of the Theia Cloud REST service
 # @default -- (see details below)
 service:
