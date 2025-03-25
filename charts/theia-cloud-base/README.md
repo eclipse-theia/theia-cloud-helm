@@ -1,8 +1,11 @@
 # theia-cloud-base
 
-![Version: 1.1.0-next.0](https://img.shields.io/badge/Version-1.1.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
+![Version: 1.1.0-next.1](https://img.shields.io/badge/Version-1.1.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
 
 Theia-cloud base chart
+
+*This chart was tested with Helm version v3.17.0.*
+*Other versions may work as well, but if you encounter any issues, we recommend trying with the tested version to rule out version-specific problems.*
 
 ## Values
 

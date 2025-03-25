@@ -4,6 +4,9 @@
 
 A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
 
+*This chart was tested with Helm version v3.17.0.*
+*Other versions may work as well, but if you encounter any issues, we recommend trying with the tested version to rule out version-specific problems.*
+
 ## Values
 
 | Key | Type | Default | Description |

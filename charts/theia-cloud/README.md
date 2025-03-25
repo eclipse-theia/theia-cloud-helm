@@ -1,8 +1,11 @@
 # theia-cloud
 
-![Version: 1.1.0-next.1](https://img.shields.io/badge/Version-1.1.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
+![Version: 1.1.0-next.3](https://img.shields.io/badge/Version-1.1.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
+
+*This chart was tested with Helm version v3.17.0.*
+*Other versions may work as well, but if you encounter any issues, we recommend trying with the tested version to rule out version-specific problems.*
 
 ## Values
 
@@ -56,6 +59,7 @@ A Helm chart for Theia Cloud
 | landingPage.additionalApps | string | `nil` | The page may show these additional apps in a drop down. This is a map. The key maps to the app definition name The value is the label that is supposed to be shown in the UI  Example: different-app-definition:   label: "Different App Definition" further-app-definition:   label: "Further App Definition" |
 | landingPage.appDefinition | string | `"theia-cloud-demo"` | the app id to launch |
 | landingPage.disableInfo | bool | `false` | Should showing info title and text below the launch button be disabled true hides the info title and text false shows the info title and text |
+| landingPage.enabled | bool | `true` | Whether the landing page shall be enabled |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
 | landingPage.image | string | `"theiacloud/theia-cloud-landing-page:1.1.0-next"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
@@ -71,6 +75,7 @@ A Helm chart for Theia Cloud
 | monitor.activityTracker.enable | bool | `true` | Should the activityTracker module be enabled |
 | monitor.activityTracker.interval | int | `1` | Minutes between re-pinging the pods |
 | monitor.enable | bool | `true` | Should the monitor be enabled |
+| oauth2Proxy | object | `{"cookieDomains":[],"whitelistDomains":[]}` | Values related to OAuth2 Proxy configuration |
 | operator | object | (see details below) | Values related to the operator |
 | operator.bandwidthLimiter | string | `"K8SANNOTATION"` | Whether Theia Cloud shall limit network speed. This might not be fully supported on all cloud provider/in all clusters. Possible values: - K8SANNOTATION                   Set via kubernetes annotations (kubernetes.io/egress-bandwidth and kubernetes.io/ingress-bandwidth) - WONDERSHAPER                    Set via wondershaper init container - K8SANNOTATIONANDWONDERSHAPER    Set Kubernetes annotations and use wondershaper init container |
 | operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
