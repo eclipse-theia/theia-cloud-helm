@@ -1,6 +1,6 @@
 # theia-cloud-crds
 
-![Version: 1.1.0-next.0](https://img.shields.io/badge/Version-1.1.0--next.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
+![Version: 1.1.0-next.1](https://img.shields.io/badge/Version-1.1.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
 
 A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
 
@@ -13,6 +13,7 @@ A Helm chart for the custom resource definitions (CRDs) of Theia Cloud
 |-----|------|---------|-------------|
 | clusterIssuer | string | `"theia-cloud-selfsigned-issuer"` | The cluster issuer to use for the certificate |
 | conversion.certMountPath | string | `"/etc/webhook/certs"` | The location of where the certificates are mounted into the container (needs to match with application.properties) |
+| conversion.certReloadPeriod | int | `604800` | The certificate reload period in seconds |
 | conversion.image | string | `"theiacloud/theia-cloud-conversion-webhook:1.1.0-next"` | The image of the webhook container |
 
 ----------------------------------------------

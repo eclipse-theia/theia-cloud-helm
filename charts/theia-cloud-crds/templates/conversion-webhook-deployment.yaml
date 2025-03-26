@@ -21,6 +21,9 @@ spec:
           ports:
             - name: tls
               containerPort: 443
+          env:
+            - name: CERT_RELOAD_PERIOD
+              value: {{ .Values.conversion.certReloadPeriod | quote }}
           volumeMounts:
             - name: certificates
               mountPath: {{ .Values.conversion.certMountPath }}
