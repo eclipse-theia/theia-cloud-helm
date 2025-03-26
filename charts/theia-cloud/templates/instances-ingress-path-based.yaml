@@ -60,9 +60,15 @@ spec:
     {{- end }}
   {{- else }}
   rules:
+    - host: {{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+      http:
+    {{- range .Values.hosts.allWildcardInstances }}
+    - host: {{ printf "'%s%s'" (tpl . $) (tpl $.Values.hosts.configuration.baseHost $) }}
+      http:
+    {{- end }}
     {{ range $rule := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace (tpl (.Values.ingress.instances.name | toString) .)).spec.rules }}
+    {{ if .http }}
     - host: {{ .host | quote }}
-      {{ if .http }}
       http:
         paths:
           {{ with index .http.paths 0 }}
@@ -74,7 +80,7 @@ spec:
                 port:
                   number: {{ .backend.service.port.number  }}
           {{- end }}
-      {{ end }}
+    {{ end }}
     {{- end }}
   {{- end }}
 {{- end }}
