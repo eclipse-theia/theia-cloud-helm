@@ -22,4 +22,5 @@ rules:
       - deployments
       - replicasets
       - pods
+      - services
     verbs: ["list", "get", "watch"]
