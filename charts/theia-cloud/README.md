@@ -12,7 +12,7 @@ A Helm chart for Theia Cloud
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | app | object | (see details below) | General information about the deployed app |
-| app.id | string | `"asdfghjkl"` | The app id which is used in the communication between website and REST-API as a spam migitation. This id is public. Please choose an random generated string. |
+| app.id | string | `"asdfghjkl"` | (Deprecated) The app id which is used in the communication between website and REST-API as a spam migitation. This id is public. Please choose an random generated string. Use service.authToken instead. |
 | app.name | string | `"Theia Blueprint"` | The name of the application that may be displayed e.g. on the landing pages |
 | demoApplication | object | (see details below) | Information about the demo application to be installed |
 | demoApplication.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the main application's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
@@ -99,6 +99,7 @@ A Helm chart for Theia Cloud
 | preloading.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the image preloading containers. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | preloading.images | list | `[]` | Images to preload. Images must support running /bin/sh. If the list is empty and demoApplication.install == true, demoApplication.name is automatically added. |
 | service | object | (see details below) | Values of the Theia Cloud REST service |
+| service.authToken | string | `"asdfghjkl"` | The service authentication token used in the communication between website and REST-API for spam mitigation. This token is public. Please choose a random generated string. |
 | service.image | string | `"theiacloud/theia-cloud-service:1.1.0-next"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |

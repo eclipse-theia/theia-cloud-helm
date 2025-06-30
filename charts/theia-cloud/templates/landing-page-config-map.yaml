@@ -8,7 +8,7 @@ metadata:
 data:
   config.js: |
     window.theiaCloudConfig = {
-      appId: "{{ tpl (.Values.app.id | toString) . }}",
+      serviceAuthToken: "{{ tpl ((.Values.service.authToken | default .Values.app.id) | toString) . }}",
       appName: "{{ tpl (.Values.app.name | toString) . }}",
       useEphemeralStorage: {{ tpl (.Values.landingPage.ephemeralStorage | toString) . }},
       useKeycloak: {{ tpl (.Values.keycloak.enable | toString) . }},
@@ -24,7 +24,7 @@ data:
       additionalApps: [
         {{- range $key, $val := .Values.landingPage.additionalApps }}
         {
-          appId: {{ $key | quote}},
+          serviceAuthToken: {{ $key | quote}},
           appName: {{ $val.label | quote }},
         },
         {{- end }}
