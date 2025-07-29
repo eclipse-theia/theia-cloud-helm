@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.1.0] - estimated between 2025-04 and 2025-07
+## [1.1.1] - 2025-08-01
+
+- [theia-cloud-base] Extend operator and service K8S permissions for eager start handling [#86](https://github.com/eclipse-theia/theia-cloud-helm/pull/86)
+- [theia-cloud] Add admin group configuration for the service deployment [#87](https://github.com/eclipse-theia/theia-cloud-helm/pull/87)
+- [theia-cloud] Make LandingPage optional [#88](https://github.com/eclipse-theia/theia-cloud-helm/pull/88)
+- [theia-cloud] Make OAuth2 Proxy's allowed redirect domains configurable [#89](https://github.com/eclipse-theia/theia-cloud-helm/pull/89)
+- [theia-cloud-crds] Allow to set cert reload period in conversion webhook [#91](https://github.com/eclipse-theia/theia-cloud-helm/pull/91)
+- [theia-cloud-base] Extend service K8S permissions for config store [#94](https://github.com/eclipse-theia/theia-cloud-helm/pull/94)
 
 ## [1.0.1] - 2025-03-24
 
