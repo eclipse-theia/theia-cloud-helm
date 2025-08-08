@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.2.0] - estimated between 2025-11 and 2026-02
+
 ## [1.1.1] - 2025-08-01
 
 - [theia-cloud-base] Extend operator and service K8S permissions for eager start handling [#86](https://github.com/eclipse-theia/theia-cloud-helm/pull/86)
