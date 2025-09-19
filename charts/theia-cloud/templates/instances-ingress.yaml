@@ -68,7 +68,7 @@ spec:
         paths:
           {{ with index .http.paths 0 }}
           - path: {{ .path }}
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ .backend.service.name  }}
