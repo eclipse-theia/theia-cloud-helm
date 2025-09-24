@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] - 2025-09-26
+
+- [theia-cloud] Use ingress path type ImplementationSpecific instead of Prefix [#99](https://github.com/eclipse-theia/theia-cloud-helm/pull/99)
+
 ## [1.1.1] - 2025-08-01
 
 - [theia-cloud-base] Extend operator and service K8S permissions for eager start handling [#86](https://github.com/eclipse-theia/theia-cloud-helm/pull/86)
