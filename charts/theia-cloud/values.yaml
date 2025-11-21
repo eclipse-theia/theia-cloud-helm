@@ -29,7 +29,7 @@ demoApplication:
   # -- Should the demo application be installed
   install: true
   # -- The name of docker image to be used
-  name: theiacloud/theia-cloud-demo:1.1.0-next
+  name: theiacloud/theia-cloud-demo:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the main application's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -95,7 +95,7 @@ landingPage:
   enabled: true
 
   # -- the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:1.1.0-next
+  image: theiacloud/theia-cloud-landing-page:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -204,7 +204,7 @@ oauth2Proxy:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:1.1.0-next
+  image: theiacloud/theia-cloud-operator:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -233,7 +233,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # -- If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.1.0-next
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.2.0-next
 
   # -- Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -290,7 +290,7 @@ operator:
       </Configuration>
 
   # -- The version to use of the quay.io/oauth2-proxy/oauth2-proxy image
-  oAuth2ProxyVersion: "v7.5.1"
+  oAuth2ProxyVersion: "v7.12.0"
 
 # -- Values of the Theia Cloud REST service
 # @default -- (see details below)
@@ -300,7 +300,7 @@ service:
   authToken: asdfghjkl
 
   # -- The image to use
-  image: theiacloud/theia-cloud-service:1.1.0-next
+  image: theiacloud/theia-cloud-service:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.

@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 1.1.0-next.3](https://img.shields.io/badge/Version-1.1.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0-next](https://img.shields.io/badge/AppVersion-1.1.0--next-informational?style=flat-square)
+![Version: 1.2.0-next.2](https://img.shields.io/badge/Version-1.2.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-next](https://img.shields.io/badge/AppVersion-1.2.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -12,7 +12,7 @@ A Helm chart for Theia Cloud
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | app | object | (see details below) | General information about the deployed app |
-| app.id | string | `"asdfghjkl"` | (Deprecated) The app id which is used in the communication between website and REST-API as a spam migitation. This id is public. Please choose an random generated string. Use service.authToken instead. |
+| app.id | Deprecated | `"asdfghjkl"` | The app id which is used in the communication between website and REST-API as a spam migitation. This id is public. Please choose an random generated string. Use service.authToken instead. |
 | app.name | string | `"Theia Blueprint"` | The name of the application that may be displayed e.g. on the landing pages |
 | demoApplication | object | (see details below) | Information about the demo application to be installed |
 | demoApplication.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the main application's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
@@ -22,7 +22,7 @@ A Helm chart for Theia Cloud
 | demoApplication.monitor.activityTracker.notifyAfter | int | `25` | Minutes of inactivity that lead to a warning displayed to the user Make greater than timeoutAfter to disable |
 | demoApplication.monitor.activityTracker.timeoutAfter | int | `30` | Minutes of inactivity that lead to pod shutdown |
 | demoApplication.monitor.port | int | `3000` | At which port the monitor extension is available For the Theia extension take the same as the application port For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable |
-| demoApplication.name | string | `"theiacloud/theia-cloud-demo:1.1.0-next"` | The name of docker image to be used |
+| demoApplication.name | string | `"theiacloud/theia-cloud-demo:1.2.0-next"` | The name of docker image to be used |
 | demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
@@ -61,7 +61,7 @@ A Helm chart for Theia Cloud
 | landingPage.disableInfo | bool | `false` | Should showing info title and text below the launch button be disabled true hides the info title and text false shows the info title and text |
 | landingPage.enabled | bool | `true` | Whether the landing page shall be enabled |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
-| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:1.1.0-next"` | the landing page image to use |
+| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:1.2.0-next"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | landingPage.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | landingPage.infoText | string | `nil` | Optional: If specified with a value, this overrides the info text shown on the landing page. Empty values are ignored. Use `disableInfo` to deactivate showing the info completely. |
@@ -81,18 +81,18 @@ A Helm chart for Theia Cloud
 | operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
 | operator.continueOnException | bool | `false` | Whether the operator should stop in cases where an exception is not handled |
 | operator.eagerStart | bool | `false` | Whether theia applications shall be started eager. This means that the application is already running without a user. When a user requests a new session, one of the already launched ones is assigned.  Currently only false is fully supported. |
-| operator.image | string | `"theiacloud/theia-cloud-operator:1.1.0-next"` | The operator image |
+| operator.image | string | `"theiacloud/theia-cloud-operator:1.2.0-next"` | The operator image |
 | operator.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the operator's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | operator.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | operator.leaderElection | object | (see details below) | Options to influence the operator's leader election |
 | operator.logging | object | (see details below) | Allows to override the operator's log4j configuration |
 | operator.maxWatchIdleTime | string | `"3600000"` | Configures the timeout in milliseconds when a watcher for either AppDefinitions, Workspaces, or Sessions is assumed to be not working. When this is detected the operator instance will stop and a new operator will set up fresh watchers. |
-| operator.oAuth2ProxyVersion | string | `"v7.5.1"` | The version to use of the quay.io/oauth2-proxy/oauth2-proxy image |
+| operator.oAuth2ProxyVersion | string | `"v7.12.0"` | The version to use of the quay.io/oauth2-proxy/oauth2-proxy image |
 | operator.replicas | int | `1` | Number of operator instances to create |
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
 | operator.storageClassName | string | `"default"` | The name of the storage class for persistent volume claims for workspaces. This storage class must be present on the cluster. Most cloud providers offer a default storage class without additional configuration. |
-| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:1.1.0-next"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
+| operator.wondershaperImage | string | `"theiacloud/theia-cloud-wondershaper:1.2.0-next"` | If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container |
 | operatorrole.name | string | `"operator-api-access"` |  |
 | preloading | object | (see details below) | Values to configure preloading of images on Kubernetes nodes. |
 | preloading.enable | bool | `true` | Is image preloading enabled. |
@@ -100,7 +100,7 @@ A Helm chart for Theia Cloud
 | preloading.images | list | `[]` | Images to preload. Images must support running /bin/sh. If the list is empty and demoApplication.install == true, demoApplication.name is automatically added. |
 | service | object | (see details below) | Values of the Theia Cloud REST service |
 | service.authToken | string | `"asdfghjkl"` | The service authentication token used in the communication between website and REST-API for spam mitigation. This token is public. Please choose a random generated string. |
-| service.image | string | `"theiacloud/theia-cloud-service:1.1.0-next"` | The image to use |
+| service.image | string | `"theiacloud/theia-cloud-service:1.2.0-next"` | The image to use |
 | service.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the service's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | service.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | service.port | int | `8081` | service port (default: 8081) |

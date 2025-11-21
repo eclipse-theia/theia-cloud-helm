@@ -41,6 +41,6 @@ spec:
             port:
               number: 80
         path: /{{ if .Values.hosts.configuration.landing }}{{ tpl (.Values.hosts.configuration.landing | toString) . }}(/|$)(.*){{ end }}
-        pathType: Prefix
+        pathType: ImplementationSpecific
 {{- end }}
 {{- end }}
