@@ -4,21 +4,10 @@ kind: Ingress
 metadata:
   name: service-ingress
   annotations:
-    {{- if not .Values.ingress.tls }}
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    {{- end }}
-    {{- if .Values.ingress.addTLSSecretName }}
-    {{- if .Values.ingress.certManagerAnnotations }}
-    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
-    {{- if .Values.ingress.theiaCloudCommonName }}
-    cert-manager.io/common-name: "Theia Cloud"
-    {{- end }}
-    {{- end }}
-    {{- end }}
-    nginx.ingress.kubernetes.io/rewrite-target: /service$1
+    {{- include "theiacloud.ingress.service.annotations" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ include "theiacloud.ingress.className" . }}
   {{- if .Values.ingress.tls }}
   tls:
   - hosts:

@@ -318,7 +318,14 @@ service:
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
+  # -- The ingress controller to use. Currently supported: nginx
+  controller: nginx
+
+  # -- Optional: Override the ingressClassName. If empty, defaults based on ingress.controller
+  ingressClassName: ""
+
   # -- Values to influence the instances ingress
+  # @default -- (see details below)
   instances:
     # -- The name of the ingress which will be updated to publish new theia application.
     # If this is not existing it will be created.
@@ -336,12 +343,29 @@ ingress:
     allWildcardSecretNames: {}
     #  "*.webview.": webview-ws-cert-secret
 
-    # -- Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
+    # -- Optional: Custom annotations for instances ingress. If empty, defaults based on ingress.controller
+    annotations: {}
+
+    # -- (Deprecated) Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
     # One entry in this array results in a line for the annotation.
     # Do not add a semicolon at the end of the line here, it is automatically added.
+    # This is deprecated in favor of using ingress.instances.annotations with the configuration-snippet key.
+    # If both configurationSnippets and annotations with configuration-snippet are provided, annotations takes precedence.
     # Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information.
     configurationSnippets:
       - "proxy_set_header 'X-Forwarded-Uri' $request_uri"
+
+  # -- Values to influence the landing page ingress
+  # @default -- (see details below)
+  landingPage:
+    # -- Optional: Custom annotations for landing page ingress. If empty, defaults based on ingress.controller
+    annotations: {}
+
+  # -- Values to influence the service ingress
+  # @default -- (see details below) 
+  service:
+    # -- Optional: Custom annotations for service ingress. If empty, defaults based on ingress.controller
+    annotations: {}
 
   # -- When set to true the cert-manager.io annotations will be set.
   # Only used when ingress.addTLSSecretName === true

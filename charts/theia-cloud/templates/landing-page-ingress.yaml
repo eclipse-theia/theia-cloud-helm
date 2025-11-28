@@ -5,17 +5,10 @@ kind: Ingress
 metadata:
   name: landing-page-ingress
   annotations:
-    {{- if not .Values.ingress.tls }}
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    {{- end }}
-    {{- if .Values.ingress.addTLSSecretName }}
-    {{- if .Values.ingress.certManagerAnnotations }}
-    cert-manager.io/cluster-issuer: {{ tpl (.Values.ingress.clusterIssuer | toString) . }}
-    {{- end }}
-    {{- end }}
+    {{- include "theiacloud.ingress.landingPage.annotations" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ include "theiacloud.ingress.className" . }}
   {{- if .Values.ingress.tls }}
   tls:
   - hosts:
