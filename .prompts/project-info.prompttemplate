@@ -1,0 +1,36 @@
+# Theia Cloud Helm - Project Info
+
+## Overview
+Helm charts for deploying Theia Cloud on Kubernetes. Contains three interdependent charts that install cluster resources, CRDs, and the main application components.
+
+## Repository Structure
+
+### Charts (`charts/`)
+- `theia-cloud-base/` - Cluster-wide resources (ClusterIssuers, ClusterRoles) shared across installations
+- `theia-cloud-crds/` - Custom Resource Definitions (AppDefinition, Session, Workspace) with conversion webhook
+- `theia-cloud/` - Main chart deploying operator, service, landing page, and ingresses; depends on base and crds charts
+
+### Chart Dependencies
+Install order matters: Install `theia-cloud-crds` and `theia-cloud-base` before `theia-cloud`
+
+### Cluster Prerequisites
+- **cert-manager.io** - Certificate management (required)
+- **Ingress Controller** - Either ingress-nginx (requires `allow-snippet-annotations: "true"` since v1.10) or HAProxy
+- **Keycloak** - Optional; required only when authentication is enabled (`keycloak.enable: true`)
+
+## Versioning
+
+### Chart Versions
+- Chart `version` increments on every change (only for modified charts)
+- Pre-releases: `X.Y.Z-next.N` where N increments per commit/PR
+- `appVersion` points to `<version>-next` tag (images may change until release)
+
+## Documentation Generation
+
+Chart READMEs are auto-generated from `README.md.gotmpl` templates using helm-docs:
+```bash
+docker run --rm -v "$(pwd)/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
+```
+Or use the `Rebuild READMEs` VS Code task.
+
+**Important**: After modifying `Chart.yaml` or `values.yaml` in any chart, always regenerate the corresponding README with the task.

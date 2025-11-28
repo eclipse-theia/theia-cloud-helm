@@ -90,6 +90,8 @@ spec:
           {{- if .Values.operator.continueOnException }}
           - "--continueOnException"
           {{- end }}
+          - "--ingressPathSuffix"
+          - "{{ include "theiacloud.ingress.pathSuffix" . }}"
         {{- if .Values.operator.logging.override }}
         volumeMounts:
           - name: operator-logging-config

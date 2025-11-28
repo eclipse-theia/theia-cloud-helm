@@ -318,7 +318,7 @@ service:
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
-  # -- The ingress controller to use. Currently supported: "nginx" or null
+  # -- The ingress controller to use. Currently supported: "nginx", "haproxy", or null
   # Determines controller-specific default annotations and ingress class name to use.
   # Using null or an unknown value results in only explicitly specified annotations being used.
   controller: nginx
@@ -338,6 +338,11 @@ ingress:
     # -- Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia).
     # Defaults to 1m. Setting size to 0 disables checking of client request body size.
     proxyBodySize: 1m
+
+    # -- Timeout for tunnel/WebSocket connections (HAProxy only).
+    # This controls how long idle WebSocket connections are kept alive.
+    # Format: time with suffix (e.g., "1h", "30m", "2h")
+    timeoutTunnel: "1h"
 
     # -- All additional wildcard hostnames and the respective TLS secret names.
     # Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one.
@@ -364,7 +369,7 @@ ingress:
     annotations: {}
 
   # -- Values to influence the service ingress
-  # @default -- (see details below) 
+  # @default -- (see details below)
   service:
     # -- Optional: Custom annotations for service ingress. If empty, defaults based on ingress.controller
     annotations: {}

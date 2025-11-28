@@ -25,6 +25,6 @@ spec:
             name: service-service
             port:
               number: {{ tpl (.Values.service.port | toString) . }}
-        path: /service($|(/.*))
-        pathType: ImplementationSpecific
+        path: /service{{ include "theiacloud.ingress.pathSuffix" . }}
+        pathType: {{ include "theiacloud.ingress.pathType" . }}
 {{- end }}

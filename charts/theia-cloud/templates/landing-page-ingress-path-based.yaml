@@ -26,7 +26,7 @@ spec:
             name: landing-page-service
             port:
               number: 80
-        path: /{{ if .Values.hosts.configuration.landing }}{{ tpl (.Values.hosts.configuration.landing | toString) . }}(/|$)(.*){{ end }}
-        pathType: ImplementationSpecific
+        path: /{{ if .Values.hosts.configuration.landing }}{{ tpl (.Values.hosts.configuration.landing | toString) . }}{{ include "theiacloud.ingress.pathSuffix" . }}{{ end }}
+        pathType: {{ include "theiacloud.ingress.pathType" . }}
 {{- end }}
 {{- end }}
