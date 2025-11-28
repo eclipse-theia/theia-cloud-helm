@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 1.2.0-next.3](https://img.shields.io/badge/Version-1.2.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-next](https://img.shields.io/badge/AppVersion-1.2.0--next-informational?style=flat-square)
+![Version: 1.2.0-next.4](https://img.shields.io/badge/Version-1.2.0--next.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-next](https://img.shields.io/badge/AppVersion-1.2.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -38,7 +38,7 @@ A Helm chart for Theia Cloud
 | ingress.addTLSSecretName | bool | `true` | whether the default Theia Cloud tls secret names should be used. If false no tls secret name will be set on the ingress only needed when ingress.tls == true |
 | ingress.certManagerAnnotations | bool | `true` | When set to true the cert-manager.io annotations will be set. Only used when ingress.addTLSSecretName === true When false certificate management is handled outside of Theia Cloud. |
 | ingress.clusterIssuer | string | `"letsencrypt-prod"` | The cluster issuer to use Only needed when ingress.certManagerAnnotations is true |
-| ingress.controller | string | `"nginx"` | The ingress controller to use. Currently supported: nginx |
+| ingress.controller | string | `"nginx"` | The ingress controller to use. Currently supported: nginx, haproxy |
 | ingress.ingressClassName | string | `""` | Optional: Override the ingressClassName. If empty, defaults based on ingress.controller |
 | ingress.instances | object | (see details below) | Values to influence the instances ingress |
 | ingress.instances.allWildcardSecretNames | object | `{}` | All additional wildcard hostnames and the respective TLS secret names. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`. |

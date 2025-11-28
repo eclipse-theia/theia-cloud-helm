@@ -318,7 +318,7 @@ service:
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
-  # -- The ingress controller to use. Currently supported: nginx
+  # -- The ingress controller to use. Currently supported: nginx, haproxy
   controller: nginx
 
   # -- Optional: Override the ingressClassName. If empty, defaults based on ingress.controller
