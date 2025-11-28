@@ -24,7 +24,7 @@ data:
       additionalApps: [
         {{- range $key, $val := .Values.landingPage.additionalApps }}
         {
-          serviceAuthToken: {{ $key | quote}},
+          appId: {{ $key | quote}},
           appName: {{ $val.label | quote }},
         },
         {{- end }}
