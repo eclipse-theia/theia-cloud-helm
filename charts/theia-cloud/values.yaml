@@ -9,8 +9,9 @@ imagePullPolicy: Always
 # -- General information about the deployed app
 # @default -- (see details below)
 app:
-  # -- The app id which is used in the communication between website and REST-API
+  # -- (Deprecated) The app id which is used in the communication between website and REST-API
   # as a spam migitation. This id is public. Please choose an random generated string.
+  # Use service.authToken instead.
   id: asdfghjkl
 
   # -- The name of the application that may be displayed e.g. on the landing pages
@@ -294,6 +295,10 @@ operator:
 # -- Values of the Theia Cloud REST service
 # @default -- (see details below)
 service:
+  # -- The service authentication token used in the communication between website and REST-API
+  # for spam mitigation. This token is public. Please choose a random generated string.
+  authToken: asdfghjkl
+
   # -- The image to use
   image: theiacloud/theia-cloud-service:1.2.0-next
 

@@ -51,8 +51,8 @@ spec:
           {{- end }}
           - "--sessionsPerUser"
           - "{{ tpl (.Values.operator.sessionsPerUser | toString) . }}"
-          - "--appId"
-          - {{ tpl (.Values.app.id | toString) . }}
+          - "--serviceAuthToken"
+          - {{ tpl ((.Values.service.authToken | default .Values.app.id) | toString) . }}
           {{- if .Values.hosts.usePaths }}
           - "--instancesHost"
           - "{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}"
