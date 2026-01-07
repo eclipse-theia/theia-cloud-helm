@@ -61,7 +61,7 @@ A Helm chart for Theia Cloud
 | landingPage.disableInfo | bool | `false` | Should showing info title and text below the launch button be disabled true hides the info title and text false shows the info title and text |
 | landingPage.enabled | bool | `true` | Whether the landing page shall be enabled |
 | landingPage.ephemeralStorage | bool | `true` | If set to true no persisted storage is used when creating sessions on the landing page. Set to false if you want to use persisted storage. |
-| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:1.1.1"` | the landing page image to use |
+| landingPage.image | string | `"theiacloud/theia-cloud-landing-page:1.1.2-test.1"` | the landing page image to use |
 | landingPage.imagePullPolicy | string | `nil` | Optional: Override the imagePullPolicy for the landing page's docker image. If this is omitted or empty, the root at .Values.imagePullPolicy is used. |
 | landingPage.imagePullSecret | string | `nil` | Optional: the image pull secret |
 | landingPage.infoText | string | `nil` | Optional: If specified with a value, this overrides the info text shown on the landing page. Empty values are ignored. Use `disableInfo` to deactivate showing the info completely. |

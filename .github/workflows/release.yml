@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - jf/non-root-landing-page
+  workflow_dispatch:
 
 jobs:
   release:
