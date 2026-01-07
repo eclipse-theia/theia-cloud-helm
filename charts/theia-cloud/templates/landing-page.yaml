@@ -26,12 +26,12 @@ spec:
           imagePullPolicy: {{ if .Values.landingPage.imagePullPolicy }}{{ tpl (.Values.landingPage.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           readinessProbe:
             httpGet:
               path: /config.js
-              port: 80
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:
@@ -67,5 +67,5 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
 {{- end }}
