@@ -90,6 +90,13 @@ spec:
           {{- if .Values.operator.continueOnException }}
           - "--continueOnException"
           {{- end }}
+          {{- if .Values.operator.enableCaching }}
+          - "--enableCaching"
+          {{- end }}
+          {{- if .Values.operator.cacheUrl }}
+          - "--cacheUrl"
+          - "{{ tpl (.Values.operator.cacheUrl | toString) . }}"
+          {{- end }}
         {{- if .Values.operator.logging.override }}
         volumeMounts:
           - name: operator-logging-config

@@ -251,6 +251,12 @@ operator:
   # -- Number of operator instances to create
   replicas: 1
 
+  # -- Whether to enable caching of Theia application containers
+  enableCaching: false
+
+  # -- The URL of the remote cache server. Only used when enableCaching is true
+  cacheUrl: "http://theia-shared-cache:5071"
+
   # -- Options to influence the operator's leader election
   # @default -- (see details below)
   leaderElection:
