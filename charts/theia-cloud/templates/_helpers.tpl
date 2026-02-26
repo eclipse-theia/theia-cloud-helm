@@ -147,7 +147,7 @@ For subdomain-based: rewrites /<session-id>/path -> /path
 haproxy-ingress.github.io/ssl-redirect: "false"
 {{- end }}
 haproxy-ingress.github.io/proxy-body-size: {{ tpl (.Values.ingress.instances.proxyBodySize | toString) . }}
-haproxy-ingress.github.io/timeout-tunnel: {{ tpl (.Values.ingress.instances.timeoutTunnel | default "1h" | toString) . }}
+haproxy-ingress.github.io/timeout-tunnel: {{ tpl (.Values.ingress.instances.timeoutTunnel | toString) . }}
 {{- if .Values.hosts.usePaths }}
 {{- $instancesPath := tpl (.Values.hosts.configuration.instance | toString) . }}
 haproxy-ingress.github.io/path-type: prefix
