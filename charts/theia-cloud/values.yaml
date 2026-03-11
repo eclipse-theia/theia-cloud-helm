@@ -9,8 +9,9 @@ imagePullPolicy: Always
 # -- General information about the deployed app
 # @default -- (see details below)
 app:
-  # -- The app id which is used in the communication between website and REST-API
+  # -- (Deprecated) The app id which is used in the communication between website and REST-API
   # as a spam migitation. This id is public. Please choose an random generated string.
+  # Use service.authToken instead.
   id: asdfghjkl
 
   # -- The name of the application that may be displayed e.g. on the landing pages
@@ -28,7 +29,7 @@ demoApplication:
   # -- Should the demo application be installed
   install: true
   # -- The name of docker image to be used
-  name: theiacloud/theia-cloud-demo:1.1.1
+  name: theiacloud/theia-cloud-demo:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the main application's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -94,7 +95,7 @@ landingPage:
   enabled: true
 
   # -- the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:1.1.2-test.1
+  image: theiacloud/theia-cloud-landing-page:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -203,7 +204,7 @@ oauth2Proxy:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:1.1.1
+  image: theiacloud/theia-cloud-operator:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -232,7 +233,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # -- If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.1.1
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.2.0-next
 
   # -- Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -289,13 +290,17 @@ operator:
       </Configuration>
 
   # -- The version to use of the quay.io/oauth2-proxy/oauth2-proxy image
-  oAuth2ProxyVersion: "v7.5.1"
+  oAuth2ProxyVersion: "v7.12.0"
 
 # -- Values of the Theia Cloud REST service
 # @default -- (see details below)
 service:
+  # -- The service authentication token used in the communication between website and REST-API
+  # for spam mitigation. This token is public. Please choose a random generated string.
+  authToken: asdfghjkl
+
   # -- The image to use
-  image: theiacloud/theia-cloud-service:1.1.1
+  image: theiacloud/theia-cloud-service:1.2.0-next
 
   # -- Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -313,7 +318,16 @@ service:
 # -- Values to influence the ingresses
 # @default -- (see details below)
 ingress:
+  # -- The ingress controller to use. Currently supported: "nginx", "haproxy", or null
+  # Determines controller-specific default annotations and ingress class name to use.
+  # Using null or an unknown value results in only explicitly specified annotations being used.
+  controller: nginx
+
+  # -- Optional: Override the ingressClassName. If empty, defaults based on ingress.controller
+  ingressClassName: ""
+
   # -- Values to influence the instances ingress
+  # @default -- (see details below)
   instances:
     # -- The name of the ingress which will be updated to publish new theia application.
     # If this is not existing it will be created.
@@ -325,18 +339,40 @@ ingress:
     # Defaults to 1m. Setting size to 0 disables checking of client request body size.
     proxyBodySize: 1m
 
+    # -- Timeout for tunnel/WebSocket connections (HAProxy only).
+    # This controls how long idle WebSocket connections are kept alive.
+    # Format: time with suffix (e.g., "1h", "30m", "2h")
+    timeoutTunnel: "1h"
+
     # -- All additional wildcard hostnames and the respective TLS secret names.
     # Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one.
     # Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`.
     allWildcardSecretNames: {}
     #  "*.webview.": webview-ws-cert-secret
 
-    # -- Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
+    # -- Optional: Custom annotations for instances ingress. If empty, defaults based on ingress.controller
+    annotations: {}
+
+    # -- (Deprecated) Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
     # One entry in this array results in a line for the annotation.
     # Do not add a semicolon at the end of the line here, it is automatically added.
+    # This is deprecated in favor of using ingress.instances.annotations with the configuration-snippet key.
+    # If both configurationSnippets and annotations with configuration-snippet are provided, annotations takes precedence.
     # Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information.
     configurationSnippets:
       - "proxy_set_header 'X-Forwarded-Uri' $request_uri"
+
+  # -- Values to influence the landing page ingress
+  # @default -- (see details below)
+  landingPage:
+    # -- Optional: Custom annotations for landing page ingress. If empty, defaults based on ingress.controller
+    annotations: {}
+
+  # -- Values to influence the service ingress
+  # @default -- (see details below)
+  service:
+    # -- Optional: Custom annotations for service ingress. If empty, defaults based on ingress.controller
+    annotations: {}
 
   # -- When set to true the cert-manager.io annotations will be set.
   # Only used when ingress.addTLSSecretName === true

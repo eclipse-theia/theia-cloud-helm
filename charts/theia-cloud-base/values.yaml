@@ -9,6 +9,8 @@ issuerprod:
   enable: true
   # -- name for the let's encrypt production cluster issuer
   name: letsencrypt-prod
+  # -- ingress class for the HTTP-01 ACME challenge solver
+  ingressClass: nginx
 
 issuerstaging:
   # -- name for the self signed cluster issuer

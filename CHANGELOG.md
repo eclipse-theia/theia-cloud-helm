@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0] - estimated between 2025-11 and 2026-05
+
+- [theia-cloud] Add HAProxy ingress controller support alongside existing nginx support [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
+
+### Breaking Changes in 1.2.0
+
+- [theia-cloud] The nginx ingress path regex pattern changed from `($|(/.*))` to `(/|$)(.*)` and the rewrite-target annotation now uses `$1$2` instead of `$1`. This maintains the same functionality but users with custom nginx configurations relying on the capture group numbering may need to adjust. [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
+
+## [1.1.2] - 2025-09-26
+
+- [theia-cloud] Use ingress path type ImplementationSpecific instead of Prefix [#99](https://github.com/eclipse-theia/theia-cloud-helm/pull/99)
+
 ## [1.1.1] - 2025-08-01
 
 - [theia-cloud-base] Extend operator and service K8S permissions for eager start handling [#86](https://github.com/eclipse-theia/theia-cloud-helm/pull/86)
