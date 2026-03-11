@@ -4,6 +4,7 @@ metadata:
   name: service-config
   namespace: {{ .Release.Namespace }}
 data:
+  SERVICE_AUTH_TOKEN: {{ tpl ((.Values.service.authToken | default .Values.app.id) | toString) . }}
   APPID: {{ tpl (.Values.app.id | toString) . }}
   SERVICE_PORT: {{ tpl (.Values.service.port | toString) . | quote }}
   KEYCLOAK_ENABLE: {{ tpl (.Values.keycloak.enable | toString) . | quote }}
