@@ -1,12 +1,17 @@
 # Changelog
 
-## [1.2.0] - estimated between 2025-11 and 2026-05
+## [1.2.0] - 2026-04-07
 
-- [theia-cloud] Add HAProxy ingress controller support alongside existing nginx support [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
+- [theia-cloud] Run landing page container as non-root user [#102](https://github.com/eclipse-theia/theia-cloud-helm/pull/102)
+- [theia-cloud] Fix ingress host rules being dropped during Helm chart upgrades [#93](https://github.com/eclipse-theia/theia-cloud-helm/pull/93)
+- [theia-cloud] Rename app.id to service.authToken for service authentication token configuration [#95](https://github.com/eclipse-theia/theia-cloud-helm/pull/95)
+- [theia-cloud, theia-cloud-base] Make ingress controller configurable and add HAProxy ingress controller support [#101](https://github.com/eclipse-theia/theia-cloud-helm/pull/101) [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
 
 ### Breaking Changes in 1.2.0
 
+- [theia-cloud, theia-cloud-base] The default ingress controller changed from `nginx` to `haproxy`. Ingress NGINX has been retired (see [Ingress NGINX Retirement: What You Need to Know](https://www.kubernetes.dev/blog/2025/11/12/ingress-nginx-retirement/)). While nginx is still fully supported, existing deployments using nginx must now explicitly set `ingress.controller: "nginx"` (in theia-cloud) and `issuerprod.ingressClass: "nginx"` (in theia-cloud-base) in their Helm values. [#101](https://github.com/eclipse-theia/theia-cloud-helm/pull/101) [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
 - [theia-cloud] The nginx ingress path regex pattern changed from `($|(/.*))` to `(/|$)(.*)` and the rewrite-target annotation now uses `$1$2` instead of `$1`. This maintains the same functionality but users with custom nginx configurations relying on the capture group numbering may need to adjust. [#104](https://github.com/eclipse-theia/theia-cloud-helm/pull/104)
+- [theia-cloud] app.id is deprecated in favor of service.authToken. The landing page config property appId is now serviceAuthToken, and the operator flag --appId is now --serviceAuthToken. Custom landing pages or tooling referencing the old names must be updated. [#95](https://github.com/eclipse-theia/theia-cloud-helm/pull/95)
 
 ## [1.1.2] - 2025-09-26
 

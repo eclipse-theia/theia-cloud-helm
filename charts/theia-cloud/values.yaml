@@ -321,7 +321,7 @@ ingress:
   # -- The ingress controller to use. Currently supported: "nginx", "haproxy", or null
   # Determines controller-specific default annotations and ingress class name to use.
   # Using null or an unknown value results in only explicitly specified annotations being used.
-  controller: nginx
+  controller: haproxy
 
   # -- Optional: Override the ingressClassName. If empty, defaults based on ingress.controller
   ingressClassName: ""
