@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   theia-cloud:
   - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2026-04-09T11:25:25.844853498Z"
+    description: A Helm chart for Theia Cloud
+    digest: e904574fbf22342b6cd59d9349d3ae6aabf268d121cfcff62f43cc179a8574ad
+    name: theia-cloud
+    type: application
+    urls:
+    - https://github.com/eclipse-theia/theia-cloud-helm/releases/download/theia-cloud-1.2.0/theia-cloud-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.2.0-next
     created: "2026-03-12T09:57:16.870369398Z"
     description: A Helm chart for Theia Cloud
@@ -603,6 +613,16 @@ entries:
     version: 0.7.0
   theia-cloud-base:
   - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2026-04-09T11:25:25.993175078Z"
+    description: Theia-cloud base chart
+    digest: 9c264e0bd2d34ac3f4830df30e703ca0ecdc19b15c53d553c76ecafd7b9a664a
+    name: theia-cloud-base
+    type: application
+    urls:
+    - https://github.com/eclipse-theia/theia-cloud-helm/releases/download/theia-cloud-base-1.2.0/theia-cloud-base-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.2.0-next
     created: "2026-01-23T11:28:27.343724434Z"
     description: Theia-cloud base chart
@@ -994,6 +1014,17 @@ entries:
     version: 0.7.2
   theia-cloud-crds:
   - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2026-04-09T11:25:26.143360138Z"
+    description: A Helm chart for the custom resource definitions (CRDs) of Theia
+      Cloud
+    digest: 45979ac926c2f000173af343bcb81afd6526d402571c6d6c3a7c9f62c1cd5f57
+    name: theia-cloud-crds
+    type: application
+    urls:
+    - https://github.com/eclipse-theia/theia-cloud-helm/releases/download/theia-cloud-crds-1.2.0/theia-cloud-crds-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.2.0-next
     created: "2025-11-14T09:07:46.256836556Z"
     description: A Helm chart for the custom resource definitions (CRDs) of Theia
@@ -1268,4 +1299,4 @@ entries:
     urls:
     - https://github.com/eclipsesource/theia-cloud-helm/releases/download/theia-cloud-crds-0.8.1-v001/theia-cloud-crds-0.8.1-v001.tgz
     version: 0.8.1-v001
-generated: "2026-03-12T09:57:16.870842323Z"
+generated: "2026-04-09T11:25:26.144849492Z"
