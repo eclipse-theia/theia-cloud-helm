@@ -221,8 +221,9 @@ operator:
   eagerStart: false
 
   # -- Select your cloud provider. Possible values:
-  # - K8S      Plain Kubernetes
-  # - MINIKUBE Local deployment on Minikube
+  # - K8S        Plain Kubernetes
+  # - MINIKUBE   Local deployment on Minikube
+  # - OPENSHIFT  Red Hat OpenShift (requires hosts.usePaths: false)
   cloudProvider: "K8S"
 
   # -- Whether Theia Cloud shall limit network speed. This might not be fully supported

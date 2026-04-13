@@ -86,7 +86,7 @@ A Helm chart for Theia Cloud
 | oauth2Proxy | object | `{"cookieDomains":[],"whitelistDomains":[]}` | Values related to OAuth2 Proxy configuration |
 | operator | object | (see details below) | Values related to the operator |
 | operator.bandwidthLimiter | string | `"K8SANNOTATION"` | Whether Theia Cloud shall limit network speed. This might not be fully supported on all cloud provider/in all clusters. Possible values: - K8SANNOTATION                   Set via kubernetes annotations (kubernetes.io/egress-bandwidth and kubernetes.io/ingress-bandwidth) - WONDERSHAPER                    Set via wondershaper init container - K8SANNOTATIONANDWONDERSHAPER    Set Kubernetes annotations and use wondershaper init container |
-| operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S      Plain Kubernetes - MINIKUBE Local deployment on Minikube |
+| operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S        Plain Kubernetes - MINIKUBE   Local deployment on Minikube - OPENSHIFT  Red Hat OpenShift (requires hosts.usePaths: false) |
 | operator.continueOnException | bool | `false` | Whether the operator should stop in cases where an exception is not handled |
 | operator.eagerStart | bool | `false` | Whether theia applications shall be started eager. This means that the application is already running without a user. When a user requests a new session, one of the already launched ones is assigned.  Currently only false is fully supported. |
 | operator.image | string | `"theiacloud/theia-cloud-operator:1.3.0-next"` | The operator image |
