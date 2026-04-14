@@ -1,3 +1,4 @@
+{{- if .Values.issuerca.enable }}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -12,3 +13,4 @@ spec:
     kind: ClusterIssuer
   duration: 2160h
   renewBefore: 360h
+{{- end }}
