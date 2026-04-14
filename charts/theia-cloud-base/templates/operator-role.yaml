@@ -27,3 +27,8 @@ rules:
       - leases
       - pods
     verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]
+  - apiGroups:
+      - route.openshift.io
+    resources:
+      - routes
+    verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]

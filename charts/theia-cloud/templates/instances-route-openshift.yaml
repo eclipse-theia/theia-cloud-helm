@@ -1,0 +1,24 @@
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ tpl (.Values.ingress.instances.name | toString) . }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- if .Values.ingress.instances.annotations }}
+    {{- .Values.ingress.instances.annotations | toYaml | nindent 4 }}
+    {{- end }}
+spec:
+  # host is intentionally empty — this is a template; operator sets per-session hostname
+  to:
+    kind: Service
+    name: placeholder
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+  {{- if .Values.ingress.tls }}
+  tls:
+    termination: edge
+  {{- end }}
+{{- end }}
