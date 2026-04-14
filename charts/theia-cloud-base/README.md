@@ -19,6 +19,7 @@ Theia-cloud base chart
 | issuerprod.ingressClass | string | `"haproxy"` | ingress class for the HTTP-01 ACME challenge solver |
 | issuerprod.name | string | `"letsencrypt-prod"` | name for the let's encrypt production cluster issuer |
 | issuerstaging.name | string | `"theia-cloud-selfsigned-issuer"` | name for the self signed cluster issuer |
+| operator.cloudProvider | string | `"K8S"` | Select your cloud provider. Possible values: - K8S        Plain Kubernetes - OPENSHIFT  Red Hat OpenShift |
 | operatorrole.name | string | `"operator-api-access"` | name for the operator's cluster role |
 | servicerole.name | string | `"service-api-access"` | name for the services' cluster role |
 

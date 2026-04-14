@@ -27,8 +27,10 @@ rules:
       - leases
       - pods
     verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
   - apiGroups:
       - route.openshift.io
     resources:
       - routes
     verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]
+{{- end }}

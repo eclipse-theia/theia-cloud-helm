@@ -1,0 +1,16 @@
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openshift-route-config
+  namespace: {{ .Release.Namespace }}
+data:
+  useTls: {{ .Values.ingress.tls | quote }}
+  {{- if .Values.ingress.instances.annotations }}
+  # Annotations are serialized as YAML key-value pairs, parsed by the operator via fabric8 Serialization.
+  annotations: |
+    {{- range $key, $value := .Values.ingress.instances.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+{{- end }}
