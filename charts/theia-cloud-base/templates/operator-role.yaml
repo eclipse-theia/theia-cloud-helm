@@ -32,5 +32,6 @@ rules:
       - route.openshift.io
     resources:
       - routes
+      - routes/custom-host
     verbs: ["list", "create", "watch", "get", "edit", "patch", "delete", "update"]
 {{- end }}

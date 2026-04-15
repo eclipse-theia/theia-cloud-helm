@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0] - unreleased
+
+- [theia-cloud] Add OpenShift support: Route resources for landing page, service, and session routing as an alternative to Ingress [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
+- [theia-cloud-base] Conditionally grant `route.openshift.io` RBAC permissions to the operator when `cloudProvider` is `OPENSHIFT` [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
+- [theia-cloud-base] Honor `issuerca.enable` for self-signed cert resources - CA certificate and ClusterIssuer are now skipped when disabled [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
+
+### Breaking Changes in 1.3.0
+
+- [theia-cloud-base] New required value `operator.cloudProvider` added to `theia-cloud-base` (defaults to `K8S`). Deployments overriding `operator.cloudProvider` in the `theia-cloud` chart must also set it consistently in `theia-cloud-base` for correct RBAC generation.
+
 ## [1.2.0] - 2026-04-09
 
 - [theia-cloud] Run landing page container as non-root user [#102](https://github.com/eclipse-theia/theia-cloud-helm/pull/102)
