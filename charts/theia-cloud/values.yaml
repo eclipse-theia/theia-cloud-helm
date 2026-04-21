@@ -35,8 +35,8 @@ demoApplication:
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
   imagePullPolicy:
 
-  # -- the image pull secret. Leave empty if registry is public
-  pullSecret: ""
+  # -- Optional: the image pull secret. Leave unset if the registry is public.
+  pullSecret:
 
   # -- Limit in minutes
   timeout: "30"
@@ -221,8 +221,9 @@ operator:
   eagerStart: false
 
   # -- Select your cloud provider. Possible values:
-  # - K8S      Plain Kubernetes
-  # - MINIKUBE Local deployment on Minikube
+  # - K8S        Plain Kubernetes
+  # - MINIKUBE   Local deployment on Minikube
+  # - OPENSHIFT  Red Hat OpenShift (requires hosts.usePaths: false)
   cloudProvider: "K8S"
 
   # -- Whether Theia Cloud shall limit network speed. This might not be fully supported

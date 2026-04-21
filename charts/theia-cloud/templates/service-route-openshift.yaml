@@ -1,0 +1,24 @@
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: service-route
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- if .Values.ingress.service.annotations }}
+    {{- .Values.ingress.service.annotations | toYaml | nindent 4 }}
+    {{- end }}
+spec:
+  host: {{ tpl (.Values.hosts.configuration.service | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+  to:
+    kind: Service
+    name: service-service
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+  {{- if .Values.ingress.tls }}
+  tls:
+    termination: edge
+  {{- end }}
+{{- end }}

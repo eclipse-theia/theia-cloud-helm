@@ -28,6 +28,12 @@ servicerole:
   # -- name for the services' cluster role
   name: service-api-access
 
+operator:
+  # -- Select your cloud provider. Possible values:
+  # - K8S        Plain Kubernetes
+  # - OPENSHIFT  Red Hat OpenShift
+  cloudProvider: "K8S"
+
 certmanager:
   # -- the namespace where the cert-manager is installed
   namespace: cert-manager
