@@ -23,7 +23,7 @@ A Helm chart for Theia Cloud
 | demoApplication.monitor.activityTracker.timeoutAfter | int | `30` | Minutes of inactivity that lead to pod shutdown |
 | demoApplication.monitor.port | int | `3000` | At which port the monitor extension is available For the Theia extension take the same as the application port For the VSCode extension take 8081 (default) or the port specified via the THEIACLOUD_MONITOR_PORT env variable |
 | demoApplication.name | string | `"theiacloud/theia-cloud-demo:1.3.0-next"` | The name of docker image to be used |
-| demoApplication.pullSecret | string | `""` | the image pull secret. Leave empty if registry is public |
+| demoApplication.pullSecret | string | `nil` | Optional: the image pull secret. Leave unset if the registry is public. |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
 | hosts.allWildcardInstances | list | `[]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) I.e. custom certificates or a cert-manager provider that can handle wildcard certificates need to be configured. |
