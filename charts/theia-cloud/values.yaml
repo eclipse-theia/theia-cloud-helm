@@ -95,7 +95,7 @@ landingPage:
   enabled: true
 
   # -- the landing page image to use
-  image: theiacloud/theia-cloud-landing-page:1.3.0-ocp.0-next
+  image: theiacloud/theia-cloud-landing-page:1.3.0-next
 
   # -- Optional: Override the imagePullPolicy for the landing page's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -204,7 +204,7 @@ oauth2Proxy:
 # @default -- (see details below)
 operator:
   # -- The operator image
-  image: theiacloud/theia-cloud-operator:1.3.0-ocp.0-next
+  image: theiacloud/theia-cloud-operator:1.3.0-next
 
   # -- Optional: Override the imagePullPolicy for the operator's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.
@@ -234,7 +234,7 @@ operator:
   bandwidthLimiter: "K8SANNOTATION"
 
   # -- If bandwidthLimiter is set to WONDERSHAPER or K8SANNOTATIONANDWONDERSHAPER this image will be used for the wondershaper init container
-  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.3.0-ocp.0-next
+  wondershaperImage: theiacloud/theia-cloud-wondershaper:1.3.0-next
 
   # -- Set the number of active sessions a single user can launch
   sessionsPerUser: "1"
@@ -301,7 +301,7 @@ service:
   authToken: asdfghjkl
 
   # -- The image to use
-  image: theiacloud/theia-cloud-service:1.3.0-ocp.0-next
+  image: theiacloud/theia-cloud-service:1.3.0-next
 
   # -- Optional: Override the imagePullPolicy for the service's docker image.
   # If this is omitted or empty, the root at .Values.imagePullPolicy is used.

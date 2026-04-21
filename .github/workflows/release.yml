@@ -3,7 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
-      - jf/openshift
+      - main
 
 jobs:
   release:
