@@ -289,7 +289,9 @@ operator:
         </Loggers>
       </Configuration>
 
-  # -- The version to use of the quay.io/oauth2-proxy/oauth2-proxy image
+  # -- The image (without tag) to use for the oauth2-proxy container. Override this to pull from a private registry in air-gapped or corporate networks.
+  oAuth2ProxyImage: "quay.io/oauth2-proxy/oauth2-proxy"
+  # -- The version (image tag) to use of the oauth2-proxy image
   oAuth2ProxyVersion: "v7.12.0"
 
 # -- Values of the Theia Cloud REST service
