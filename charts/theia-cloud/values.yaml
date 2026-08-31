@@ -81,7 +81,9 @@ hosts:
   # -- all additional wildcard hostnames that may be required in the launched Theia-applications, e.g.
   # "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews.
   # Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from
-  # all app definitions need to be added.
+  # all app definitions need to be added. This setting and ingressHostnamePrefixes are used by Kubernetes
+  # Ingress routing and are not currently implemented by OpenShift session Routes. See the OpenShift deployment
+  # guide in the Theia Cloud repository for the THEIA_WEBVIEW_EXTERNAL_ENDPOINT workaround and security caveat.
   # IMPORTANT: If this gets updated, the helm chart needs to be re-installed because
   # helm upgrade will not properly update this at the moment.
   # These are required to configure TLS (if enabled via ingress.tls == true)
@@ -353,7 +355,8 @@ ingress:
     allWildcardSecretNames: {}
     #  "*.webview.": webview-ws-cert-secret
 
-    # -- Optional: Custom annotations for instances ingress. If empty, defaults based on ingress.controller
+    # -- Optional: Custom annotations for the instances ingress. On OpenShift these are applied to each
+    # operator-created session Route instead. If empty, Ingress annotations default based on ingress.controller.
     annotations: {}
 
     # -- (Deprecated) Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation.
@@ -368,13 +371,15 @@ ingress:
   # -- Values to influence the landing page ingress
   # @default -- (see details below)
   landingPage:
-    # -- Optional: Custom annotations for landing page ingress. If empty, defaults based on ingress.controller
+    # -- Optional: Custom annotations for the landing page Ingress or OpenShift Route.
+    # If empty, Ingress annotations default based on ingress.controller.
     annotations: {}
 
   # -- Values to influence the service ingress
   # @default -- (see details below)
   service:
-    # -- Optional: Custom annotations for service ingress. If empty, defaults based on ingress.controller
+    # -- Optional: Custom annotations for the service Ingress or OpenShift Route.
+    # If empty, Ingress annotations default based on ingress.controller.
     annotations: {}
 
   # -- When set to true the cert-manager.io annotations will be set.

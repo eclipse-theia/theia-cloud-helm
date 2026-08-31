@@ -1,6 +1,6 @@
 # theia-cloud
 
-![Version: 1.3.0-next.2](https://img.shields.io/badge/Version-1.3.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0-next](https://img.shields.io/badge/AppVersion-1.3.0--next-informational?style=flat-square)
+![Version: 1.3.0-next.3](https://img.shields.io/badge/Version-1.3.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0-next](https://img.shields.io/badge/AppVersion-1.3.0--next-informational?style=flat-square)
 
 A Helm chart for Theia Cloud
 
@@ -26,7 +26,7 @@ A Helm chart for Theia Cloud
 | demoApplication.pullSecret | string | `nil` | Optional: the image pull secret. Leave unset if the registry is public. |
 | demoApplication.timeout | string | `"30"` | Limit in minutes |
 | hosts | object | (see details below) | You may adjust the hostname below. |
-| hosts.allWildcardInstances | list | `[]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) I.e. custom certificates or a cert-manager provider that can handle wildcard certificates need to be configured. |
+| hosts.allWildcardInstances | list | `[]` | all additional wildcard hostnames that may be required in the launched Theia-applications, e.g. "*.webview." which leads to "*.webview.ws.192.168.39.173.nip.io" to expose webviews. Please note that this means that this usually means that all "ingressHostnamePrefixes" patterns from all app definitions need to be added. This setting and ingressHostnamePrefixes are used by Kubernetes Ingress routing and are not currently implemented by OpenShift session Routes. See the OpenShift deployment guide in the Theia Cloud repository for the THEIA_WEBVIEW_EXTERNAL_ENDPOINT workaround and security caveat. IMPORTANT: If this gets updated, the helm chart needs to be re-installed because helm upgrade will not properly update this at the moment. These are required to configure TLS (if enabled via ingress.tls == true) I.e. custom certificates or a cert-manager provider that can handle wildcard certificates need to be configured. |
 | hosts.configuration | object | (see details below) | Configuration for the hostnames. Contains the baseHost and afixes for all services |
 | hosts.configuration.baseHost | string | `"192.168.39.173.nip.io"` | baseHost configures the host for all services. Depending on hosts.usePaths the services will be prepended as a subdomain or appended as a path |
 | hosts.configuration.instance | string | `"instances"` | afix for deployed instances |
@@ -42,15 +42,15 @@ A Helm chart for Theia Cloud
 | ingress.ingressClassName | string | `""` | Optional: Override the ingressClassName. If empty, defaults based on ingress.controller |
 | ingress.instances | object | (see details below) | Values to influence the instances ingress |
 | ingress.instances.allWildcardSecretNames | object | `{}` | All additional wildcard hostnames and the respective TLS secret names. Use this for wildcard hostnames that should use a TLS certificate with a `secretName` different from the default one. Only accepts wildcard hostnames that are configured in `hosts.allWildcardInstances`. |
-| ingress.instances.annotations | object | `{}` | Optional: Custom annotations for instances ingress. If empty, defaults based on ingress.controller |
+| ingress.instances.annotations | object | `{}` | Optional: Custom annotations for the instances ingress. On OpenShift these are applied to each operator-created session Route instead. If empty, Ingress annotations default based on ingress.controller. |
 | ingress.instances.configurationSnippets | Deprecated | `["proxy_set_header 'X-Forwarded-Uri' $request_uri"]` | Additional configuration to the ingress configuration via the `nginx.ingress.kubernetes.io/configuration-snippet` annotation. One entry in this array results in a line for the annotation. Do not add a semicolon at the end of the line here, it is automatically added. This is deprecated in favor of using ingress.instances.annotations with the configuration-snippet key. If both configurationSnippets and annotations with configuration-snippet are provided, annotations takes precedence. Note: Since ingress-nginx version 1.10 this annotation needs to be enabled. See [this README](../../README.md#cluster-prerequisites) for more information. |
 | ingress.instances.name | string | `"theia-cloud-demo-ws-ingress"` | The name of the ingress which will be updated to publish new theia application. If this is not existing it will be created. You may chose to set the ingress up yourself and point Theia Cloud to the ingress via the name |
 | ingress.instances.proxyBodySize | string | `"1m"` | Sets the maximum allowed size of the client request body inside the application (e.g. file uploads in Theia). Defaults to 1m. Setting size to 0 disables checking of client request body size. |
 | ingress.instances.timeoutTunnel | string | `"1h"` | Timeout for tunnel/WebSocket connections (HAProxy only). This controls how long idle WebSocket connections are kept alive. Format: time with suffix (e.g., "1h", "30m", "2h") |
 | ingress.landingPage | object | (see details below) | Values to influence the landing page ingress |
-| ingress.landingPage.annotations | object | `{}` | Optional: Custom annotations for landing page ingress. If empty, defaults based on ingress.controller |
+| ingress.landingPage.annotations | object | `{}` | Optional: Custom annotations for the landing page Ingress or OpenShift Route. If empty, Ingress annotations default based on ingress.controller. |
 | ingress.service | object | (see details below) | Values to influence the service ingress |
-| ingress.service.annotations | object | `{}` | Optional: Custom annotations for service ingress. If empty, defaults based on ingress.controller |
+| ingress.service.annotations | object | `{}` | Optional: Custom annotations for the service Ingress or OpenShift Route. If empty, Ingress annotations default based on ingress.controller. |
 | ingress.theiaCloudCommonName | bool | `false` | When set to true the cert-manager.io/common-name annotation will be set. This is only required when the issued certificate by the cert-manager misses a common-name Only needed when ingress.certManagerAnnotations is true |
 | ingress.tls | bool | `true` | Does Theia Cloud expect TLS connections (true) or is TLS terminated outside of Theia Cloud (e.g. via a Load Balancer) (false) |
 | issuer | object | (see details below) | Values related to certificates/Cert-manager |
@@ -95,7 +95,8 @@ A Helm chart for Theia Cloud
 | operator.leaderElection | object | (see details below) | Options to influence the operator's leader election |
 | operator.logging | object | (see details below) | Allows to override the operator's log4j configuration |
 | operator.maxWatchIdleTime | string | `"3600000"` | Configures the timeout in milliseconds when a watcher for either AppDefinitions, Workspaces, or Sessions is assumed to be not working. When this is detected the operator instance will stop and a new operator will set up fresh watchers. |
-| operator.oAuth2ProxyVersion | string | `"v7.12.0"` | The version to use of the quay.io/oauth2-proxy/oauth2-proxy image |
+| operator.oAuth2ProxyImage | string | `"quay.io/oauth2-proxy/oauth2-proxy"` | The image (without tag) to use for the oauth2-proxy container. Override this to pull from a private registry in air-gapped or corporate networks. |
+| operator.oAuth2ProxyVersion | string | `"v7.12.0"` | The version (image tag) to use of the oauth2-proxy image |
 | operator.replicas | int | `1` | Number of operator instances to create |
 | operator.requestedStorage | string | `"250Mi"` | The amount of requested storage for each persistent volume claim (PVC) for workspaces. This is directly passed to created PVCs and must be a valid Kubernetes quantity. See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/ |
 | operator.sessionsPerUser | string | `"1"` | Set the number of active sessions a single user can launch |
