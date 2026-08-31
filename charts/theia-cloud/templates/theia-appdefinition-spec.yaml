@@ -7,7 +7,9 @@ spec:
   name: theia-cloud-demo
   image: {{ tpl (.Values.demoApplication.name | toString) . }}
   imagePullPolicy: {{ if .Values.demoApplication.imagePullPolicy }}{{ tpl (.Values.demoApplication.imagePullPolicy | toString) . }}{{ else }}{{ tpl (.Values.imagePullPolicy | toString) . }}{{ end }}
-  pullSecret: {{ tpl (.Values.demoApplication.pullSecret | toString) . }}
+  {{- if .Values.demoApplication.pullSecret }}
+  pullSecret: {{ tpl (.Values.demoApplication.pullSecret | toString) . | quote }}
+  {{- end }}
   uid: 101
   port: 3000
   ingressname: {{ tpl (.Values.ingress.instances.name | toString) . }}

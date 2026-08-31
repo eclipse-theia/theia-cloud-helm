@@ -207,6 +207,15 @@ haproxy-ingress.github.io/config-backend: |
 {{- end -}}
 
 {{/*
+Validate that OpenShift cloudProvider is not used with usePaths
+*/}}
+{{- define "theiacloud.validateOpenShift" -}}
+{{- if and (eq .Values.operator.cloudProvider "OPENSHIFT") (.Values.hosts.usePaths) -}}
+{{- fail "OpenShift cloudProvider does not support hosts.usePaths: true. Set hosts.usePaths to false." -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Return cert-manager annotations if enabled
 Params:
   . - root context
