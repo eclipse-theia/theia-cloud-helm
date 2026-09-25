@@ -1,5 +1,5 @@
 {{- if .Values.landingPage.enabled }}
-{{- if .Values.hosts.usePaths }}
+{{- if and (.Values.hosts.usePaths) (ne .Values.operator.cloudProvider "OPENSHIFT") }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

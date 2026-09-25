@@ -1,0 +1,15 @@
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: theia-cloud-sessions-anyuid
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: theia-cloud-sessions
+  namespace: {{ .Release.Namespace }}
+{{- end }}

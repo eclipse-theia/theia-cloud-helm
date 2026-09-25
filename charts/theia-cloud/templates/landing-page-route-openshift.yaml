@@ -1,0 +1,26 @@
+{{- if .Values.landingPage.enabled }}
+{{- if eq .Values.operator.cloudProvider "OPENSHIFT" }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: landing-page-route
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- if .Values.ingress.landingPage.annotations }}
+    {{- .Values.ingress.landingPage.annotations | toYaml | nindent 4 }}
+    {{- end }}
+spec:
+  host: {{ tpl (.Values.hosts.configuration.landing | toString) . }}.{{ tpl (.Values.hosts.configuration.baseHost | toString) . }}
+  to:
+    kind: Service
+    name: landing-page-service
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+  {{- if .Values.ingress.tls }}
+  tls:
+    termination: edge
+  {{- end }}
+{{- end }}
+{{- end }}
