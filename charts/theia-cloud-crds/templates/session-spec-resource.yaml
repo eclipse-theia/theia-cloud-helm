@@ -30,6 +30,9 @@ spec:
                 name:
                   type: string
                   pattern: '^[a-z0-9A-Z-_]+$'
+                label:
+                  description: Free-text label for identifying the session in the session list.
+                  type: string
                 workspace:
                   type: string
                 appDefinition: # cached from workspace
@@ -91,6 +94,9 @@ spec:
                 name:
                   type: string
                   pattern: '^[a-z0-9A-Z-_]+$'
+                label:
+                  description: Free-text label for identifying the session in the session list.
+                  type: string
                 workspace:
                   type: string
                 appDefinition: # cached from workspace
@@ -148,6 +154,9 @@ spec:
                 name:
                   type: string
                   pattern: '^[a-z0-9A-Z-_]+$'
+                label:
+                  description: Free-text label for identifying the session in the session list.
+                  type: string
                 workspace:
                   type: string
                 appDefinition: # cached from workspace
