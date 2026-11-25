@@ -51,6 +51,14 @@ spec:
             status:
               type: object
               properties:
+                lastUsed:
+                  description: Time the operator last observed the workspace enter or leave use by a running session.
+                  type: string
+                  format: date-time
+                inUse:
+                  description: Whether a running session uses this workspace.
+                  type: boolean
+                  default: false
                 operatorStatus:
                   type: string
                 operatorMessage:
@@ -105,6 +113,14 @@ spec:
             status:
               type: object
               properties:
+                lastUsed:
+                  description: Time the operator last observed the workspace enter or leave use by a running session.
+                  type: string
+                  format: date-time
+                inUse:
+                  description: Whether a running session uses this workspace.
+                  type: boolean
+                  default: false
                 operatorStatus:
                   type: string
                 operatorMessage:
@@ -161,6 +177,14 @@ spec:
             status:
               type: object
               properties:
+                lastUsed:
+                  description: Time the operator last observed the workspace enter or leave use by a running session.
+                  type: string
+                  format: date-time
+                inUse:
+                  description: Whether a running session uses this workspace.
+                  type: boolean
+                  default: false
                 operatorStatus:
                   type: string
                 operatorMessage:
