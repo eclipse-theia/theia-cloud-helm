@@ -2,6 +2,7 @@
 
 ## [1.3.0] - unreleased
 
+- [theia-cloud-crds] Preserve the optional free-text session label across all served Session versions. [#378](https://github.com/eclipse-theia/theia-cloud/issues/378)
 - [theia-cloud] Add OpenShift support: Route resources for landing page, service, and session routing as an alternative to Ingress [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
 - [theia-cloud-base] Conditionally grant `route.openshift.io` RBAC permissions to the operator when `cloudProvider` is `OPENSHIFT` [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
 - [theia-cloud-base] Honor `issuerca.enable` for self-signed cert resources - CA certificate and ClusterIssuer are now skipped when disabled [#106](https://github.com/eclipse-theia/theia-cloud-helm/pull/106)
